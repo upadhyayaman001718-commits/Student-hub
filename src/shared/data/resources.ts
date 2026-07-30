@@ -1,4 +1,6 @@
 export interface Resource {
+    programSlug: string;
+    program: string;
     id: number;
     course: string;
     semester: number;
@@ -6,6 +8,7 @@ export interface Resource {
     title: string;
     type: "Notes" | "PYQ" | "Lab Manual";
     uploadedBy: string;
+    description: string;
 }
 
 export const resources: Resource[] = [
@@ -17,6 +20,9 @@ export const resources: Resource[] = [
         title: "Operating Systems Notes",
         type: "Notes",
         uploadedBy: "Aman",
+        description: "Complete handwritten notes covering Process Scheduling, Deadlocks, Memory Management and File Systems.",
+        program: 'Computer Science',
+        programSlug: 'computer-science',
     },
     {
         id: 2,
@@ -26,6 +32,9 @@ export const resources: Resource[] = [
         title: "DBMS PYQs",
         type: "PYQ",
         uploadedBy: "Rahul",
+        description: "Previous year questions from 2018-2024 with detailed explanations.",
+        program: 'Computer Science',
+        programSlug: 'computer-science',
     },
     {
         id: 3,
@@ -34,7 +43,10 @@ export const resources: Resource[] = [
         subject: "Introduction to AI",
         title: "AI",
         type: "Notes",
-        uploadedBy: "Adi"
+        uploadedBy: "Adi",
+        description: "Comprehensive coverage of AI fundamentals and latest trends.",
+        program: 'Computer Science',
+        programSlug: 'computer-science',
     }
 
 ];

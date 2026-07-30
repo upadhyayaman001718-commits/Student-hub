@@ -94,6 +94,22 @@ I began building the form layout inside `src/shared/components/UploadForm.tsx` t
 
 ---
 
+## Resource Details Page Development
+I built the dynamic route and components to support viewing details of specific study resources under the `/resources/[id]` path.
+
+*   **Dynamic Route Configuration (`/resources/[id]`)**: I set up a dynamic App Router path (`src/app/resources/[id]/page.tsx`) to grab the dynamic ID parameter, look up the resource from the mock dataset, and render a complete page containing the Navbar, Breadcrumbs, ResourceDetails, and Footer.
+*   **Visual Layout and Side Panels**: Inside `src/shared/components/ResourceDetails.tsx`, I built a two-column layout. The left column acts as a sticky panel showing the title, a description block, action buttons, metadata cards, and statistic displays. The right column shows a document preview.
+*   **Metadata and Metrics Displays**: 
+    *   I built `MetadataCard` (`src/shared/components/MetaData.tsx`) to show key fields like Subject, Semester, Type, and Uploader with neat hover state borders.
+    *   I built `ResourceStats` (`src/shared/components/ResourceStats.tsx`) to display numeric indicators for downloads, total page count, and ratings in a grid pattern.
+*   **PDF Simulation**: I implemented `PDFPreview` (`src/shared/components/PDFPreview.tsx`) and `PDFToolbar` (`src/shared/components/PdfToolbar.tsx`) to render a mock browser toolbar with Zoom, Maximize, and Download controls above a document placeholder.
+*   **Navigation & Discovery Connections**: 
+    *   I wrapped the existing `ResourceCard` inside a Next.js `Link` to redirect users to the details page on card click.
+    *   I built `Breadcrumbs` (`src/shared/components/Breadcrumbs.tsx`) to construct navigation paths and provide a quick "Back to Resources" link.
+    *   I created a `RelatedResources` component (`src/shared/components/RelatedResource.tsx`) to fetch other resource files in the same subject area.
+
+---
+
 ## Current Development State
 
 ### Completed
@@ -109,12 +125,19 @@ I began building the form layout inside `src/shared/components/UploadForm.tsx` t
 *   Upload route setup and form baseline:
     *   `/upload` page route linked and loading `UploadForm.tsx`.
     *   `UploadForm` state tracking and dependent program-course select filters.
+*   Resource details page (`/resources/[id]`):
+    *   Dynamic App Router route reading params and fetching mock items by ID.
+    *   Comprehensive card details container, download action, description, stats, metadata cards, and toolbar elements.
+    *   `ResourceCard` integration with dynamic Next.js `Link` wrapper.
+*   Structured layout components:
+    *   `Navbar` and `Footer` reusable widgets built and integrated.
+    *   `Breadcrumbs` navigation layout.
 
 ### In Progress
-*   **Multi-level dropdown dependencies:** Setting up the semester and subject options to dynamically render based on course selections.
+*   **Multi-level dropdown dependencies:** Setting up the semester and subject options to dynamically render based on course selections in the upload form.
+*   **Related resources widget integration:** Mounting the `RelatedResources` grid component onto the dynamic details page.
 
 ### Planned (Placeholders in Code)
-*   **Navbar & Footer Components:** Currently static placeholders in `src/app/page.tsx`. Reusable widgets need to be built and integrated.
 *   **Form Primitives:** Implement `FormInput.tsx` and `FormSelect.tsx` (currently empty files) to clean up form styling.
 *   **Upload Tips:** Mount `UploadTips.tsx` side-by-side with the form to guide students.
 *   **History sync:** Use a local storage state tracker to populate the "Recently Opened" homepage section.
@@ -130,12 +153,16 @@ I began building the form layout inside `src/shared/components/UploadForm.tsx` t
 *   [x] Mapped out popular courses and metrics lists
 *   [x] Wired client-side search filtering state
 *   [x] Built `/upload` route and mapped out the Program/Course dependent dropdowns
+*   [x] Built dynamic `/resources/[id]` page layout and navigation
+*   [x] Created `MetadataCard`, `ResourceStats`, `DownloadButton`, `Breadcrumbs`, and `PDFPreview` components
+*   [x] Linked `ResourceCard` items to navigate to dynamic detail pages
+*   [x] Built proper `Navbar` and `Footer` components
 
 ### In Progress
-*   [ ] Multi-level dropdown hierarchies (adding Semesters and Subjects dynamically)
+*   [ ] Multi-level dropdown hierarchies (adding Semesters and Subjects dynamically in `UploadForm`)
+*   [ ] Integrate `RelatedResources` layout on details page
 
 ### Planned (Placeholders in Code)
-*   [ ] Build proper `Navbar` and `Footer` components (currently just placeholder blocks in `page.tsx`)
 *   [ ] Build reusable `FormInput` and `FormSelect` components (currently empty files)
 *   [ ] Set up LocalStorage history tracking to populate the "Recently Opened" homepage section
 *   [ ] Connect PostgreSQL/Prisma (database), AWS S3 (file uploads), and user Auth

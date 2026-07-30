@@ -1,18 +1,18 @@
 "use client";
 
-import RecentlyUploadedCard from "@/shared/components/RecentlyUploadedCard";
-import ProgramCard from "@/shared/components/ProgramCard";
-import UploadResourceSection from "@/shared/components/UploadResourceSection";
+import RecentlyUploadedCard from "@/shared/components/programs/RecentlyUploadedCard";
+import ProgramCard from "@/shared/components/programs/ProgramCard";
+import UploadResourceSection from "@/shared/components/upload/UploadResourceSection";
 import stats from "@/features/browse/data/stats";
 import recentlyUploaded from "@/features/browse/data/recentlyUpload";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
-import SearchResults from "@/shared/components/SearchResults";
+import SearchResults from "@/shared/components/navigation/SearchResults";
 import { programs } from "@/shared/data/programs";
 import Link from "next/link";
 import { Search, Sparkles, Upload } from "lucide-react";
-import Navbar from "@/shared/components/Navbar";
-import Footer from "@/shared/components/Footer";
+import Navbar from "@/shared/components/layout/Navbar";
+import Footer from "@/shared/components/layout/Footer";
 
 export default function Home() {
   const [search, setSearch] = useState("");

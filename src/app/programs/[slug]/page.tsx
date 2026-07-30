@@ -3,13 +3,13 @@
 import React, { useState } from "react";
 import { resources } from "@/shared/data/resources";
 import { programs } from "@/shared/data/programs";
-import Navbar from "@/shared/components/Navbar";
-import Footer from "@/shared/components/Footer";
-import CourseHeader from "@/shared/components/CourseHeader";
-import SearchBar from "@/shared/components/SearchBar";
-import FilterBar from "@/shared/components/FilterBar";
-import ResourceGrid from "@/shared/components/ResourceGrid";
-import EmptyState from "@/shared/components/EmptyState";
+import Navbar from "@/shared/components/layout/Navbar";
+import Footer from "@/shared/components/layout/Footer";
+import CourseHeader from "@/shared/components/programs/CourseHeader";
+import SearchBar from "@/shared/components/navigation/SearchBar";
+import FilterBar from "@/shared/components/navigation/FilterBar";
+import ResourceGrid from "@/shared/components/resources/ResourceGrid";
+import EmptyState from "@/shared/components/programs/EmptyState";
 
 interface CoursePageProps {
   params: Promise<{

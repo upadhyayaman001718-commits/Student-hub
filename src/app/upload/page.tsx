@@ -1,7 +1,7 @@
-import UploadForm from "@/shared/components/UploadForm";
-import UploadTips from "@/shared/components/UploadTips";
-import Navbar from "@/shared/components/Navbar";
-import Footer from "@/shared/components/Footer";
+import UploadForm from "@/shared/components/upload/UploadForm";
+import UploadTips from "@/shared/components/upload/UploadTips";
+import Navbar from "@/shared/components/layout/Navbar";
+import Footer from "@/shared/components/layout/Footer";
 
 export default function UploadPage() {
   return (

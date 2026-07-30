@@ -1,7 +1,7 @@
 import { programs } from "@/shared/data/programs";
-import ProgramCard from "@/shared/components/ProgramCard";
-import Navbar from "@/shared/components/Navbar";
-import Footer from "@/shared/components/Footer";
+import ProgramCard from "@/shared/components/programs/ProgramCard";
+import Navbar from "@/shared/components/layout/Navbar";
+import Footer from "@/shared/components/layout/Footer";
 
 export default function ProgramsPage() {
   return (
