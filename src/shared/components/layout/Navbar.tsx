@@ -8,7 +8,22 @@ export default function Navbar() {
   const isHomeActive = pathname === "/";
   const isBrowseActive = pathname.startsWith("/programs");
   const isUploadActive = pathname === "/upload";
-  const navClass = (active: boolean) => `shrink-0 border-b-2 px-3 py-5 text-sm font-medium transition-colors ${active ? "border-primary text-foreground" : "border-transparent text-muted-foreground hover:text-foreground"}`;
 
-  return <header className="sticky top-0 z-50 border-b border-border/70 bg-background/95 backdrop-blur"><div className="mx-auto flex h-16 max-w-7xl items-center gap-6 px-5 sm:px-8 lg:px-10"><Link href="/" className="flex shrink-0 items-center gap-2.5"><span className="flex size-8 items-center justify-center rounded-lg bg-primary text-[11px] font-bold text-primary-foreground">SH</span><span className="text-base font-semibold tracking-tight text-foreground">Student Hub</span></Link><nav aria-label="Main navigation" className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto"><Link href="/" className={navClass(isHomeActive)}>Home</Link><Link href="/programs" className={navClass(isBrowseActive)}>Browse</Link><Link href="/upload" className={navClass(isUploadActive)}>Upload</Link><span className="shrink-0 border-b-2 border-transparent px-3 py-5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">About</span></nav><div className="flex shrink-0 items-center gap-3"><span className="hidden cursor-pointer text-sm font-medium text-muted-foreground hover:text-foreground sm:inline">Login</span><span className="inline-flex h-9 cursor-pointer items-center justify-center rounded-lg border border-border bg-card px-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:bg-muted sm:px-4">Signup</span></div></div></header>;
+  return (
+    <header className="sticky top-0 z-50 h-[72px] border-b border-white/8 bg-[#09090B]/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-full max-w-[1320px] items-center justify-between px-5 sm:px-8 lg:px-12">
+        <Link href="/" className="group flex items-center gap-3">
+          <span className="flex size-9 items-center justify-center rounded-xl bg-[#0EA5E9] text-xs font-black text-white shadow-lg shadow-[#0EA5E9]/20 transition-transform duration-300 group-hover:scale-105">SH</span>
+          <span className="text-lg font-bold tracking-tight text-white transition-colors group-hover:text-[#38BDF8]">Student Hub</span>
+        </Link>
+        <nav aria-label="Main navigation" className="hidden items-center gap-1 rounded-full border border-white/8 bg-white/[0.03] p-1 sm:flex">
+          <Link href="/" className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${isHomeActive ? "bg-white/10 text-white" : "text-zinc-400 hover:text-white"}`}>Home</Link>
+          <Link href="/programs" className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${isBrowseActive ? "bg-white/10 text-white" : "text-zinc-400 hover:text-white"}`}>Browse</Link>
+          <Link href="/upload" className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${isUploadActive ? "bg-white/10 text-white" : "text-zinc-400 hover:text-white"}`}>Upload</Link>
+          <span className="cursor-pointer rounded-full px-4 py-2 text-sm font-semibold text-zinc-400 transition-colors hover:text-white">About</span>
+        </nav>
+        <div className="flex items-center gap-3 sm:gap-5"><span className="hidden cursor-pointer text-sm font-semibold text-zinc-400 transition-colors hover:text-white sm:inline">Login</span><span className="inline-flex h-10 cursor-pointer items-center justify-center rounded-xl bg-white px-4 text-sm font-bold text-black transition-all hover:bg-zinc-200 sm:px-5">Signup</span></div>
+      </div>
+    </header>
+  );
 }
