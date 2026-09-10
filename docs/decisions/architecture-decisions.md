@@ -19,6 +19,7 @@
 | [ADR-007](#adr-007-standardized-layered-backend-architecture) | Standardized Layered Backend Architecture | Superseded | 2026-07-30 |
 | [ADR-008](#adr-008-feature-sliced-design-fsd-for-frontend) | Feature-Sliced Design (FSD) for Frontend | Accepted | 2026-07-29 |
 | [ADR-009](#adr-009-hybrid-feature-based-architecture-for-backend-service) | Hybrid Feature-Based Architecture for Backend Service | Accepted | 2026-07-30 |
+| [ADR-010](#adr-010-hands-on-incremental-backend-development-philosophy) | Hands-On Incremental Backend Development Philosophy | Accepted | 2026-08-02 |
 
 ---
 
@@ -68,7 +69,29 @@ Significantly improves onboarding speed, feature isolation, and code readability
 
 ---
 
+## ADR-010: Hands-On Incremental Backend Development Philosophy
+
+### Status
+Accepted
+
+### Context
+While the Hybrid Feature-Based Architecture established in ADR-009 accurately defines the target production layout for Student Hub's Express backend, pre-generating full placeholder code across all feature folders introduced premature complexity. Pre-built boilerplate obscures why specific files, abstractions, and design patterns exist.
+
+### Decision
+1. **Preserve Production Architecture Directory Structure**: Keep all feature folders (`auth`, `users`, `resources`, `uploads`, `bookmarks`, `search`), middleware folders, config folders, lib folders, and subfolders completely intact (including empty directories).
+2. **Purge Pre-Generated Implementation Files**: Remove all generated controllers, services, repositories, validators, DTOs, helper files, placeholder routes, error handlers, and SDK abstractions that were not intentionally built by hand.
+3. **Adopt Incremental Development**: Create backend files strictly when the corresponding concepts (e.g., Express Router, Controllers, Services, Prisma ORM, JWT authentication, Zod validation) are understood and required by the project.
+4. **Mandatory File Precondition**: Every future backend file must explicitly document the problem it solves and the justification for its creation before implementation.
+
+### Rationale & Benefits
+- **Educational Deep Learning**: Eliminates black-box magic; every line of code is written with clear comprehension.
+- **Enhanced Maintainability**: Zero unused boilerplate or dead code lingering in the codebase.
+- **Precise Debugging**: Reduces cognitive clutter, allowing engineers to trace bugs directly without sifting through stub implementations.
+- **Long-Term Scalability**: Build robust foundations step-by-step without structural refactoring debt.
+
+---
+
 ## Document Cross-References
 
-- **[evolution-log.md](./evolution-log.md)** — Architectural evolution timeline
-- **[engineering-journal.md](./engineering-journal.md)** — Principal Architect Engineering Journal
+- **[evolution-log.md](./evolution-log.md)** — Architectural evolution timeline (Record 005)
+- **[engineering-journal.md](./engineering-journal.md)** — Principal Architect Engineering Journal (Entry 004)

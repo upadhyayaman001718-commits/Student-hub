@@ -1,5 +1,9 @@
 "use client";
 
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Clock, User, ArrowUpRight } from "lucide-react";
+
 interface RecentlyUploadedCardProps {
   title: string;
   sub: string; // e.g. "Notes" | "PYQ" | "Lab Manual" | "Assignment"
@@ -18,52 +22,49 @@ export default function RecentlyUploadedCard({
   uploadedTime = "2h ago",
   author = "Student",
 }: RecentlyUploadedCardProps) {
-  // Select color config based on resource type
-  const getTypeBadgeStyles = (type: string) => {
+  const getTypeBadgeVariant = (type: string): "accent" | "default" | "secondary" | "orange" => {
     const normalized = type.toLowerCase();
-    if (normalized.includes("note")) {
-      return "bg-sky-500/10 text-sky-400 border-sky-500/20";
-    }
-    if (normalized.includes("pyq")) {
-      return "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
-    }
-    if (normalized.includes("lab") || normalized.includes("manual")) {
-      return "bg-amber-500/10 text-amber-400 border-amber-500/20";
-    }
-    // Default Assignment/Presentation style
-    return "bg-indigo-500/10 text-indigo-400 border-indigo-500/20";
+    if (normalized.includes("note")) return "accent";
+    if (normalized.includes("pyq")) return "default";
+    if (normalized.includes("lab") || normalized.includes("manual")) return "orange";
+    return "secondary";
   };
 
-  const badgeClass = getTypeBadgeStyles(sub);
+  const badgeVariant = getTypeBadgeVariant(sub);
 
   return (
-    <div className="group rounded-[16px] border border-white/8 bg-[#18181B]/60 p-[28px] flex flex-col justify-between h-full min-h-[180px] transition-all duration-300 hover:border-[#0EA5E9]/30 hover:bg-[#18181B] hover:-translate-y-[4px] hover:shadow-[0_8px_30px_rgb(0,0,0,0.5)] shadow-md relative overflow-hidden cursor-pointer">
-      {/* Subtle ambient hover glow */}
-      <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-[#0EA5E9]/3 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
+    <Card className="group relative flex flex-col justify-between h-full min-h-[210px] bg-white border border-[#E2E0DB] p-7 rounded-[28px] shadow-2xs transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-[#B15F2C]/40 cursor-pointer overflow-hidden">
       <div className="space-y-4">
-        {/* Top Badges */}
+        {/* Top Row: Format badge & Course code */}
         <div className="flex items-center justify-between gap-2">
-          <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold border ${badgeClass}`}>
+          <Badge variant={badgeVariant} className="font-extrabold tracking-wide uppercase text-[10px] px-3 py-1">
             {sub}
-          </span>
-          <span className="inline-flex items-center rounded-full bg-white/5 px-2.5 py-0.5 text-xs font-bold text-zinc-400 border border-white/5 uppercase tracking-wide">
+          </Badge>
+          <span className="inline-flex items-center rounded-full bg-[#F1F0EE] px-2.5 py-0.5 text-[10px] font-mono font-bold text-[#0A0A0A] border border-[#E2E0DB] uppercase">
             {filetype}
           </span>
         </div>
 
         {/* Title */}
-        <h4 className="text-[16px] font-bold text-white leading-snug line-clamp-2 group-hover:text-[#0EA5E9] transition-colors duration-200">
+        <h4 className="text-base font-bold text-[#0A0A0A] leading-snug line-clamp-2 group-hover:text-[#B15F2C] transition-colors duration-300">
           {title}
         </h4>
       </div>
 
-      {/* Bottom meta row */}
-      <div className="mt-6 pt-4 border-t border-white/5 flex items-center text-[13px] font-semibold text-zinc-500">
-        <span>by {author}</span>
-        <span className="mx-2">•</span>
-        <span>{uploadedTime}</span>
+      {/* Footer meta row */}
+      <div className="mt-8 pt-4 border-t border-[#F1F0EE] flex items-center justify-between text-xs text-[#666666] font-medium">
+        <div className="flex items-center gap-1.5 truncate">
+          <User className="h-3.5 w-3.5 text-[#666666]/70" />
+          <span className="truncate">{author}</span>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1 text-[#666666]/70">
+            <Clock className="h-3.5 w-3.5" />
+            <span>{uploadedTime}</span>
+          </div>
+          <ArrowUpRight className="h-4 w-4 text-[#B15F2C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+        </div>
       </div>
-    </div>
+    </Card>
   );
 }

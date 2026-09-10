@@ -1,24 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Onest } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { AuthProvider } from "@/shared/context/AuthContext";
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const onest = Onest({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-onest",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Student Hub",
+  title: "Student Hub — Academic Resource Platform",
   description:
-    "Browse, search, upload, and download academic resources — Notes, PYQs, Lab Manuals, and Assignments.",
+    "Centralized academic resource platform for Notes, PYQs, Lab Manuals, and Study Resources — organized by program and community-driven.",
 };
 
 export default function RootLayout({
@@ -29,9 +24,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
+      className={cn("h-full", "antialiased", onest.variable, "font-sans")}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col bg-[#F1F0EE] text-[#0A0A0A] font-sans selection:bg-[#B15F2C]/20 selection:text-[#B15F2C]">
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }
+

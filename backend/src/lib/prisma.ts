@@ -1,6 +1,13 @@
-// Singleton Prisma Client Instance Placeholder
-// To be initialized when @prisma/client is installed:
-// import { PrismaClient } from '@prisma/client';
-// export const prisma = new PrismaClient();
+import "dotenv/config";
+import { PrismaClient } from "../generated/prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-export const prisma = {} as any;
+const adapter = new PrismaPg({
+    connectionString: process.env.DATABASE_URL!,
+});
+
+const prisma = new PrismaClient({
+    adapter,
+});
+
+export default prisma;

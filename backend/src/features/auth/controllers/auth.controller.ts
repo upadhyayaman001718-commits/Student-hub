@@ -1,29 +1,42 @@
-import { Request, Response, NextFunction } from 'express';
-import { AuthService } from '../services/auth.service';
-import { successResponse } from '../../../shared/responses/api-response';
+import { Request, Response, NextFunction } from "express";
+import { registerUser, loginUser } from "../services/auth.service";
 
-export class AuthController {
-  private authService: AuthService;
-
-  constructor() {
-    this.authService = new AuthService();
-  }
-
-  login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export async function register(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
     try {
-      const result = await this.authService.login(req.body);
-      successResponse(res, result, 200);
-    } catch (error) {
-      next(error);
-    }
-  };
+        const { name, email, password } = req.body;
 
-  register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    try {
-      const result = await this.authService.register(req.body);
-      successResponse(res, result, 201);
+        const user = await registerUser(name, email, password);
+
+        return res.status(201).json({
+            success: true,
+            message: "User registered successfully",
+            data: user,
+        });
     } catch (error) {
-      next(error);
+        next(error);
     }
-  };
+}
+
+export async function login(
+    req: Request,
+    res: Response,
+    next: NextFunction
+) {
+    try {
+        const { email, password } = req.body;
+
+        const result = await loginUser(email, password);
+
+        return res.status(200).json({
+            success: true,
+            message: "Login successful",
+            data: result,
+        });
+    } catch (error) {
+        next(error);
+    }
 }

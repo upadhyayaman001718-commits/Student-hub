@@ -1,5 +1,7 @@
 "use client";
 
+import { Layers, FileText } from "lucide-react";
+
 interface FilterBarProps {
   selectedSemester: number | null;
   onSemesterChange: (semester: number | null) => void;
@@ -18,19 +20,20 @@ export default function FilterBar({
   availableTypes = ["Notes", "PYQ", "Lab Manual"],
 }: FilterBarProps) {
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-6 bg-white border border-[#E2E0DB] p-6 rounded-[28px] shadow-2xs">
       {/* Semester Filter */}
       <div className="space-y-3">
-        <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">
-          Semester
-        </label>
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none -mx-6 px-6 sm:mx-0 sm:px-0">
+        <div className="flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.15em] text-[#666666]">
+          <Layers className="h-3.5 w-3.5 text-[#B15F2C]" />
+          Semester Filter
+        </div>
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={() => onSemesterChange(null)}
-            className={`whitespace-nowrap rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-300 hover:scale-[1.02] cursor-pointer focus:outline-none ${
+            className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 cursor-pointer ${
               selectedSemester === null
-                ? "bg-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/15"
-                : "bg-[#18181B]/80 text-zinc-400 border border-white/5 hover:border-white/10 hover:text-white hover:bg-[#18181B]"
+                ? "bg-[#0A0A0A] text-white shadow-2xs"
+                : "bg-[#F1F0EE] text-[#0A0A0A]/70 border border-[#E2E0DB] hover:border-[#D4D1C9] hover:text-[#0A0A0A] hover:bg-[#EBE9E4]"
             }`}
           >
             All Semesters
@@ -39,10 +42,10 @@ export default function FilterBar({
             <button
               key={sem}
               onClick={() => onSemesterChange(sem)}
-              className={`whitespace-nowrap rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-300 hover:scale-[1.02] cursor-pointer focus:outline-none ${
+              className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 cursor-pointer ${
                 selectedSemester === sem
-                  ? "bg-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/15"
-                  : "bg-[#18181B]/80 text-zinc-400 border border-white/5 hover:border-white/10 hover:text-white hover:bg-[#18181B]"
+                  ? "bg-[#0A0A0A] text-white shadow-2xs"
+                  : "bg-[#F1F0EE] text-[#0A0A0A]/70 border border-[#E2E0DB] hover:border-[#D4D1C9] hover:text-[#0A0A0A] hover:bg-[#EBE9E4]"
               }`}
             >
               Sem {sem}
@@ -52,29 +55,30 @@ export default function FilterBar({
       </div>
 
       {/* Type Filter */}
-      <div className="space-y-3">
-        <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">
-          Resource Type
-        </label>
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none -mx-6 px-6 sm:mx-0 sm:px-0">
+      <div className="space-y-3 pt-5 border-t border-[#E2E0DB]">
+        <div className="flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.15em] text-[#666666]">
+          <FileText className="h-3.5 w-3.5 text-[#B15F2C]" />
+          Resource Format
+        </div>
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={() => onTypeChange(null)}
-            className={`whitespace-nowrap rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-300 hover:scale-[1.02] cursor-pointer focus:outline-none ${
+            className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 cursor-pointer ${
               selectedType === null
-                ? "bg-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/15"
-                : "bg-[#18181B]/80 text-zinc-400 border border-white/5 hover:border-white/10 hover:text-white hover:bg-[#18181B]"
+                ? "bg-[#B15F2C] text-white shadow-2xs"
+                : "bg-[#F1F0EE] text-[#0A0A0A]/70 border border-[#E2E0DB] hover:border-[#D4D1C9] hover:text-[#0A0A0A] hover:bg-[#EBE9E4]"
             }`}
           >
-            All Types
+            All Formats
           </button>
           {availableTypes.map((type) => (
             <button
               key={type}
               onClick={() => onTypeChange(type)}
-              className={`whitespace-nowrap rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-300 hover:scale-[1.02] cursor-pointer focus:outline-none ${
+              className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 cursor-pointer ${
                 selectedType === type
-                  ? "bg-[#0EA5E9] text-white shadow-lg shadow-[#0EA5E9]/15"
-                  : "bg-[#18181B]/80 text-zinc-400 border border-white/5 hover:border-white/10 hover:text-white hover:bg-[#18181B]"
+                  ? "bg-[#B15F2C] text-white shadow-2xs"
+                  : "bg-[#F1F0EE] text-[#0A0A0A]/70 border border-[#E2E0DB] hover:border-[#D4D1C9] hover:text-[#0A0A0A] hover:bg-[#EBE9E4]"
               }`}
             >
               {type === "PYQ" ? "PYQs" : type}
@@ -85,3 +89,4 @@ export default function FilterBar({
     </div>
   );
 }
+

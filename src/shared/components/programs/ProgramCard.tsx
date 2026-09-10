@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { Code, Cpu, Wrench, Briefcase, GraduationCap } from "lucide-react";
+import { Code, Cpu, Wrench, Briefcase, GraduationCap, ArrowRight } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 interface ProgramCardProps {
   course: string;
@@ -9,43 +11,32 @@ interface ProgramCardProps {
 }
 
 function ProgramCard({ course, program, slug, resourceCount = "0 resources" }: ProgramCardProps) {
-  // Select icon and color scheme based on course slug
   const getCourseConfig = (slug: string) => {
     switch (slug) {
       case "computer-science":
         return {
           icon: Code,
-          bg: "bg-[#0EA5E9]/10",
-          text: "text-[#0EA5E9]",
-          border: "border-[#0EA5E9]/20",
+          iconBg: "bg-[#0A0A0A] text-white border-black/10",
         };
       case "electronics-comm":
         return {
           icon: Cpu,
-          bg: "bg-[#22D3EE]/10",
-          text: "text-[#22D3EE]",
-          border: "border-[#22D3EE]/20",
+          iconBg: "bg-[#B15F2C]/10 text-[#B15F2C] border-[#B15F2C]/20",
         };
       case "mechanical-engg":
         return {
           icon: Wrench,
-          bg: "bg-[#3B82F6]/10",
-          text: "text-[#3B82F6]",
-          border: "border-[#3B82F6]/20",
+          iconBg: "bg-[#E7E5E0] text-[#0A0A0A] border-[#E2E0DB]",
         };
       case "business-admin":
         return {
           icon: Briefcase,
-          bg: "bg-[#0EA5E9]/10",
-          text: "text-[#0EA5E9]",
-          border: "border-[#0EA5E9]/20",
+          iconBg: "bg-amber-50 text-amber-800 border-amber-200",
         };
       default:
         return {
           icon: GraduationCap,
-          bg: "bg-zinc-500/10",
-          text: "text-zinc-400",
-          border: "border-zinc-500/20",
+          iconBg: "bg-[#F1F0EE] text-[#0A0A0A] border-[#E2E0DB]",
         };
     }
   };
@@ -54,34 +45,34 @@ function ProgramCard({ course, program, slug, resourceCount = "0 resources" }: P
   const Icon = config.icon;
 
   return (
-    <Link
-      href={`/programs/${slug}`}
-      className="group rounded-[16px] border border-white/8 bg-[#18181B]/60 p-[28px] flex flex-col justify-between h-full min-h-[220px] transition-all duration-300 hover:border-[#0EA5E9]/30 hover:bg-[#18181B] hover:-translate-y-[4px] hover:shadow-[0_8px_30px_rgb(0,0,0,0.5)] shadow-md relative overflow-hidden"
-    >
-      {/* Background ambient glow on hover */}
-      <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-[#0EA5E9]/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+    <Link href={`/programs/${slug}`} className="group block h-full">
+      <Card className="relative flex flex-col justify-between h-full min-h-[230px] bg-white border border-[#E2E0DB] rounded-[28px] p-7 shadow-2xs transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-[#B15F2C]/40">
+        <div className="space-y-5">
+          <div className="flex items-center justify-between">
+            <div className={`h-12 w-12 rounded-2xl border ${config.iconBg} flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform duration-300`}>
+              <Icon className="h-5.5 w-5.5" />
+            </div>
+            <Badge variant="outline" className="text-[10px] uppercase font-bold tracking-[0.15em] text-[#666666] border-[#E2E0DB]">
+              {program}
+            </Badge>
+          </div>
 
-      <div className="space-y-4">
-        {/* Top Icon */}
-        <div className={`h-10 w-10 rounded-xl ${config.bg} ${config.text} border ${config.border} flex items-center justify-center`}>
-          <Icon className="h-5 w-5" />
+          <div>
+            <h3 className="text-xl font-bold text-[#0A0A0A] tracking-tight leading-snug group-hover:text-[#B15F2C] transition-colors duration-300">
+              {course}
+            </h3>
+          </div>
         </div>
 
-        {/* Program tag & Course name */}
-        <div>
-          <span className="block text-[11px] font-bold text-zinc-500 uppercase tracking-widest mb-1.5">
-            {program}
+        <div className="mt-8 pt-4 border-t border-[#F1F0EE] flex items-center justify-between">
+          <span className="text-xs font-semibold text-[#666666] group-hover:text-[#0A0A0A] transition-colors">
+            {resourceCount}
           </span>
-          <h3 className="text-[22px] font-bold text-white tracking-tight leading-snug group-hover:text-[#0EA5E9] transition-colors duration-200">
-            {course}
-          </h3>
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#B15F2C] group-hover:translate-x-1 transition-transform duration-300">
+            Browse <ArrowRight className="h-3.5 w-3.5" />
+          </span>
         </div>
-      </div>
-
-      {/* Resource Count */}
-      <div className="mt-6 text-[15px] font-semibold text-zinc-500 group-hover:text-zinc-400 transition-colors duration-200">
-        {resourceCount}
-      </div>
+      </Card>
     </Link>
   );
 }

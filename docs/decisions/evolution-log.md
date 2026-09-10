@@ -13,6 +13,7 @@
 [Record 002] (2026-07-29) Local Disk File Storage ➔ AWS S3 Object Storage
 [Record 003] (2026-07-29) Header Mock Credentials ➔ Stateless JWT & bcrypt Authentication
 [Record 004] (2026-07-30) Flat Layered Architecture ➔ Hybrid Feature-Based Architecture
+[Record 005] (2026-08-02) Pre-Generated Boilerplate ➔ Hands-On Incremental Learning Philosophy
 ```
 
 ---
@@ -88,7 +89,60 @@ backend/src/
 
 ---
 
+## Evolution Record 005: Purge of Pre-Generated Implementation Files for Incremental Hands-On Learning
+
+- **Date**: 2026-08-02
+- **Architecture Version**: `v2.2.0`
+- **Category**: Engineering Methodology & Backend Philosophy
+
+### Architectural Shift
+
+```
+[PREVIOUS STATE - Pre-Generated Implementation Code]
+backend/src/
+├── config/ (cors, database, logger implementations)
+├── middleware/ (auth, error, notFound implementations)
+├── lib/ (prisma, s3 client implementations)
+├── shared/ (constants, responses, app-error implementations)
+└── features/ (pre-generated controllers, services, repos, validators across auth, users, resources, search, uploads, bookmarks)
+
+[CURRENT STATE - Incremental Hands-On Architecture]
+backend/src/
+├── app.ts            # Hand-built Express application
+├── server.ts         # Server entry listener
+├── config/
+│   └── env.config.ts # Hand-built environment config
+├── controllers/      # Preserved directory structure (empty)
+├── middleware/       # Preserved directory structure (empty)
+├── routes/           # Preserved directory structure (empty)
+├── services/         # Preserved directory structure (empty)
+├── shared/           # Preserved directory structure (empty)
+├── lib/              # Preserved directory structure (empty)
+├── types/            # Preserved directory structure (empty)
+├── utils/            # Preserved directory structure (empty)
+├── validators/       # Preserved directory structure (empty)
+└── features/         # Preserved domain feature directories (empty subfolders)
+    ├── auth/
+    ├── users/
+    ├── resources/
+    ├── bookmarks/
+    ├── search/
+    └── uploads/
+```
+
+### Rationale & Justification
+- Shifted strategy to build all backend implementation code manually while learning every concept step-by-step.
+- Preserved production folder architecture so that every future file created aligns directly with Student Hub's targeted modular design.
+- Established a strict precondition rule requiring explicit reasoning and problem statement documentation prior to creating any new backend file.
+
+### Affected Files & Directories
+- `backend/src/` (Purged all generated implementation files; preserved all folders & subfolders)
+- `docs/decisions/architecture-decisions.md` (Registered ADR-010)
+- `docs/decisions/engineering-journal.md` (Logged Entry 004)
+
+---
+
 ## Document Cross-References
 
-- **[architecture-decisions.md](./architecture-decisions.md)** — Architectural Decision Records (ADR-009)
-- **[engineering-journal.md](./engineering-journal.md)** — Principal Architect Engineering Journal (Entry 003)
+- **[architecture-decisions.md](./architecture-decisions.md)** — Architectural Decision Records (ADR-010)
+- **[engineering-journal.md](./engineering-journal.md)** — Principal Architect Engineering Journal (Entry 004)

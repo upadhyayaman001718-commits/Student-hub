@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Resource {
+  id           Int     @id @default(autoincrement())
+  title        String
+  subject      String
+  semester     Int
+  program      String?
+  course       String?
+  resourceType String?
+  fileName     String?
+  s3Key        String
+  fileType     String?
+  userId       Int
+  user         User    @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  name         String
+  email        String     @unique
+  passwordHash String
+  createdAt    DateTime   @default(now())
+  resources    Resource[]
+}

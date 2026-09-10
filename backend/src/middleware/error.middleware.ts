@@ -1,19 +1,25 @@
-import { Request, Response, NextFunction } from 'express';
-import { AppError } from '../shared/utils/app-error.utils';
-import { errorResponse } from '../shared/responses/api-response';
+import { Request, Response, NextFunction } from "express";
+import { Prisma } from "@prisma/client";
 
-export const errorHandler = (
-  err: Error | AppError,
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void => {
-  const statusCode = err instanceof AppError ? err.statusCode : 500;
-  const errorCode = err instanceof AppError ? err.errorCode : 'INTERNAL_SERVER_ERROR';
-  const message = err.message || 'Internal Server Error';
-  const details = err instanceof AppError ? err.details : null;
+export const errorMiddleware = (
+    err: any,
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    console.error(err);
 
-  console.error(`[Error] ${req.method} ${req.url} - Status: ${statusCode} - ${message}`);
+    if (err instanceof Prisma.PrismaClientKnownRequestError) {
+        if (err.code === "P2025") {
+            return res.status(404).json({
+                success: false,
+                message: "Resource not found",
+            });
+        }
+    }
 
-  errorResponse(res, message, statusCode, errorCode, details);
+    res.status(500).json({
+        success: false,
+        message: "Internal server error",
+    });
 };

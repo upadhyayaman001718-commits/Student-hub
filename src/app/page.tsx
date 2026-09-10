@@ -1,219 +1,330 @@
 "use client";
 
-import RecentlyUploadedCard from "@/shared/components/programs/RecentlyUploadedCard";
-import ProgramCard from "@/shared/components/programs/ProgramCard";
-import UploadResourceSection from "@/shared/components/upload/UploadResourceSection";
-import stats from "@/features/browse/data/stats";
-import recentlyUploaded from "@/features/browse/data/recentlyUpload";
-import { Card, CardContent } from "@/components/ui/card";
-import { useState } from "react";
-import SearchResults from "@/shared/components/navigation/SearchResults";
-import { programs } from "@/shared/data/programs";
 import Link from "next/link";
-import { Search, Sparkles, Upload } from "lucide-react";
+import {
+  Search,
+  Upload,
+  ArrowRight,
+  BookOpen,
+  Layers,
+  FileText,
+  HelpCircle,
+  FolderArchive,
+  BookMarked,
+  Sparkles,
+  ArrowUpRight,
+} from "lucide-react";
 import Navbar from "@/shared/components/layout/Navbar";
 import Footer from "@/shared/components/layout/Footer";
+import SearchBar from "@/shared/components/navigation/SearchBar";
+import ProgramCard from "@/shared/components/programs/ProgramCard";
+import RecentlyUploadedCard from "@/shared/components/programs/RecentlyUploadedCard";
+import UploadResourceSection from "@/shared/components/upload/UploadResourceSection";
+import stats from "@/features/browse/data/stats";
+import { programs } from "@/shared/data/programs";
+import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "motion/react";
+import { getResources } from "@/lib/api";
+import RecentlyUploadedSection from "@/shared/components/home/RecentlyUploadedSection";
+import HomeClient from "@/shared/components/home/homeClient";
 
-export default function Home() {
-  const [search, setSearch] = useState("");
+export default async function Home() {
+  const response = await getResources();
+  const resources = response.data;
 
-  const filteredResources = recentlyUploaded.filter((resource) =>
-    resource.title.toLowerCase().includes(search.toLowerCase())
-  );
+
+  const discoveryCategories = [
+    {
+      num: "01",
+      title: "Lecture Notes",
+      count: "4,200+ files",
+      desc: "Classroom notes, chapter summaries & handwritten sheets",
+      icon: FileText,
+      tag: "Notes",
+      href: "/programs",
+    },
+    {
+      num: "02",
+      title: "Previous Year Questions",
+      count: "3,800+ papers",
+      desc: "University exam papers, answer keys & mid-term PYQs",
+      icon: HelpCircle,
+      tag: "PYQ",
+      href: "/programs",
+    },
+    {
+      num: "03",
+      title: "Lab Manuals & Code",
+      count: "2,400+ manuals",
+      desc: "Practical manuals, experiment setups & code repositories",
+      icon: FolderArchive,
+      tag: "Lab Manual",
+      href: "/programs",
+    },
+    {
+      num: "04",
+      title: "Study Material & Guides",
+      count: "2,000+ resources",
+      desc: "Formula sheets, reference books & syllabus roadmaps",
+      icon: BookMarked,
+      tag: "Study Material",
+      href: "/programs",
+    },
+  ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#09090B] text-white overflow-hidden relative selection:bg-[#0EA5E9]/30 selection:text-white">
-      {/* Visual background decorations - ambient glows */}
-      <div className="absolute top-0 left-1/4 -translate-x-1/2 w-[500px] h-[500px] bg-[#0EA5E9]/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-[600px] right-0 w-[400px] h-[400px] bg-[#3B82F6]/5 rounded-full blur-[120px] pointer-events-none" />
-
-      {/* Sticky Premium Navbar */}
+    <div className="min-h-screen flex flex-col bg-[#F1F0EE] text-[#0A0A0A] overflow-x-hidden selection:bg-[#B15F2C]/20 selection:text-[#B15F2C] relative">
+      {/* Sticky Top Navbar */}
       <Navbar />
 
-      <main className="mx-auto w-full max-w-[1280px] flex-1 px-6 sm:px-12 lg:px-20 relative z-10">
-        {/* Hero Section */}
+      <main className="mx-auto w-full max-w-[1280px] flex-1 px-6 sm:px-10 lg:px-12 relative z-10">
+        {/* ================================================== */}
+        {/* HERO SECTION - LUMORA EDITORIAL DESIGN */}
+        {/* ================================================== */}
         <section
           aria-labelledby="hero-heading"
-          className="flex flex-col items-center justify-center min-h-[85vh] py-24 text-center max-w-[1100px] mx-auto"
+          className="flex flex-col items-center justify-center pt-16 sm:pt-24 pb-20 text-center max-w-[1020px] mx-auto relative"
         >
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#18181B] border border-white/8 px-4 py-1.5 text-xs font-semibold tracking-wide text-zinc-300 mb-6">
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            Built by students, for students
-          </div>
+          {/* Eyebrow Label */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="inline-flex items-center gap-2.5 rounded-full bg-white border border-[#E2E0DB] px-4 py-1.5 text-[11px] font-extrabold tracking-[0.2em] uppercase text-[#0A0A0A] mb-8 shadow-2xs"
+          >
+            <span className="h-2 w-2 rounded-full bg-[#B15F2C] animate-pulse" />
+            Academic Resource Platform
+          </motion.div>
 
-          <h1 id="hero-heading" className="text-5xl md:text-[64px] font-extrabold tracking-tight text-white leading-[1.15] mb-8">
-            Every resource,{" "}
-            <span className="text-[#0EA5E9]">
-              one hub.
-            </span>
-          </h1>
+          {/* Hero Headline */}
+          <motion.h1
+            id="hero-heading"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-[#0A0A0A] leading-[1.02] mb-8"
+          >
+            Everything you need <br />
+            <span className="text-[#B15F2C]">to study better.</span>
+          </motion.h1>
 
-          <p className="max-w-[720px] text-[18px] text-zinc-400 leading-relaxed mx-auto mb-10">
-            Your one-stop platform for Notes, PYQs, Lab Manuals, Assignments and study resources &mdash; organized by program and always up to date.
-          </p>
+          {/* Hero Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="max-w-[760px] text-lg sm:text-2xl text-[#666666] leading-relaxed mx-auto mb-12 font-normal"
+          >
+            Discover verified Notes, PYQs, Lab Manuals, and Study Material — organized by program and curated by top engineering & degree students.
+          </motion.p>
 
-          {/* Core Call to Action Buttons - 40px spacing from Description */}
-          <div className="flex flex-wrap items-center justify-center gap-6 mb-14">
+          {/* Action CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-wrap items-center justify-center gap-4 mb-14"
+          >
             <Link
               href="/programs"
-              className="flex h-12 items-center justify-center gap-2 bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white font-bold rounded-[12px] px-6 text-sm transition-all duration-250 hover:scale-[1.02] shadow-lg shadow-[#0EA5E9]/15"
+              className="flex h-14 items-center justify-center gap-2.5 bg-[#B15F2C] hover:bg-[#9E5324] text-white font-extrabold tracking-wide uppercase text-xs rounded-full px-8 transition-all duration-300 hover:scale-[1.02] shadow-md"
             >
-              <Search className="h-4.5 w-4.5" />
-              Browse resources
+              <Search className="h-4 w-4" />
+              Explore Resources
             </Link>
             <Link
               href="/upload"
-              className="flex h-12 items-center justify-center gap-2 border border-white/8 bg-white/5 hover:bg-white/10 text-white font-bold rounded-[12px] px-6 text-sm transition-all duration-250 hover:scale-[1.02]"
+              className="flex h-14 items-center justify-center gap-2.5 border border-[#E2E0DB] bg-white hover:bg-[#F1F0EE] text-[#0A0A0A] font-extrabold tracking-wide uppercase text-xs rounded-full px-8 transition-all duration-300 hover:scale-[1.02] shadow-2xs"
             >
-              <Upload className="h-4.5 w-4.5" />
-              Upload material
+              <Upload className="h-4 w-4 text-[#B15F2C]" />
+              Upload Resource
             </Link>
-          </div>
+          </motion.div>
 
-          {/* Large Premium Search Bar - 56px spacing from Buttons */}
-          <div className="relative w-full max-w-[720px] mx-auto group mb-16">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-6 pointer-events-none text-zinc-500 group-focus-within:text-[#0EA5E9] transition-colors duration-200">
-              <Search className="h-6 w-6" />
-            </span>
-            <input
-              type="text"
-              placeholder="Search study resources, notes, subjects, courses..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full h-14 bg-[#18181B]/70 border border-white/8 text-white placeholder-zinc-500 pl-16 pr-6 rounded-[16px] focus:outline-none focus:border-[#0EA5E9] focus:ring-4 focus:ring-[#0EA5E9]/10 transition-all duration-300 shadow-2xl text-base font-normal"
-            />
-          </div>
-
-          {search.trim() !== "" && (
-            <div className="w-full mt-8 animate-fade-in">
-              <SearchResults resources={filteredResources} />
-            </div>
-          )}
+          {/* Large Pill Search Bar */}
+          <HomeClient resources={resources} />
         </section>
 
-        {/* Stats Grid - 64px from Search Bar, 128px to Popular Courses section below */}
-        <div className="py-24 grid grid-cols-2 gap-6 md:grid-cols-4 border-y border-white/5 mb-32">
-          {stats.map((stat) => {
-            const Icon = stat.icon;
-
-            return (
-              <Card
-                key={stat.subtitle}
-                className="border border-white/8 bg-[#18181B]/40 transition-all duration-300 hover:-translate-y-[4px] hover:border-[#0EA5E9]/30 hover:bg-[#18181B] hover:shadow-[0_8px_30px_rgb(0,0,0,0.5)] rounded-[16px] h-full relative overflow-hidden"
+        {/* ================================================== */}
+        {/* DISCOVERY / RESOURCE TYPES SECTION */}
+        {/* ================================================== */}
+        <section aria-labelledby="discovery-heading" className="py-16 border-t border-[#E2E0DB]">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+              <div className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#B15F2C] mb-2 flex items-center gap-2">
+                <span className="text-[#0A0A0A] font-mono">[01]</span>
+                Discovery Categories
+              </div>
+              <h2
+                id="discovery-heading"
+                className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0A0A0A] leading-tight"
               >
-                <CardContent className="flex flex-col items-center justify-center p-[28px] h-full text-center">
-                  <div className="h-12 w-12 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-zinc-400 mb-4">
-                    <Icon className="h-6 w-6 text-[#0EA5E9]" />
+                Resource Types
+              </h2>
+            </div>
+            <p className="text-[#666666] text-base max-w-md">
+              Find exactly what you need for exam preparation, class assignments, and lab work.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {discoveryCategories.map((cat) => {
+              const Icon = cat.icon;
+              return (
+                <Link key={cat.title} href={cat.href} className="group block h-full">
+                  <div className="bg-white border border-[#E2E0DB] rounded-[28px] p-7 flex flex-col justify-between h-full min-h-[260px] shadow-2xs transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-[#B15F2C]/40">
+                    <div>
+                      <div className="flex items-center justify-between mb-6">
+                        <span className="text-xs font-mono font-extrabold text-[#666666] group-hover:text-[#B15F2C] transition-colors">
+                          {cat.num}
+                        </span>
+                        <div className="h-10 w-10 rounded-full bg-[#F1F0EE] border border-[#E2E0DB] flex items-center justify-center text-[#0A0A0A] group-hover:bg-[#B15F2C] group-hover:text-white transition-all duration-300">
+                          <Icon className="h-4.5 w-4.5" />
+                        </div>
+                      </div>
+
+                      <h3 className="text-xl font-extrabold text-[#0A0A0A] tracking-tight group-hover:text-[#B15F2C] transition-colors mb-2">
+                        {cat.title}
+                      </h3>
+                      <p className="text-xs text-[#666666] font-normal leading-relaxed">
+                        {cat.desc}
+                      </p>
+                    </div>
+
+                    <div className="mt-8 pt-4 border-t border-[#F1F0EE] flex items-center justify-between text-xs font-bold text-[#0A0A0A]">
+                      <span className="text-[#666666]">{cat.count}</span>
+                      <ArrowUpRight className="h-4 w-4 text-[#B15F2C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </div>
                   </div>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
 
-                  <h3 className="text-3xl font-extrabold text-white tracking-tight">
-                    {stat.title}
-                  </h3>
+        {/* ================================================== */}
+        {/* EDITORIAL STATS GRID */}
+        {/* ================================================== */}
+        <section aria-label="Platform Statistics" className="py-16 border-y border-[#E2E0DB] my-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {stats.map((stat, idx) => (
+              <div
+                key={stat.subtitle}
+                className="bg-white border border-[#E2E0DB] rounded-[28px] p-8 text-center flex flex-col items-center justify-center shadow-2xs hover:border-[#B15F2C]/30 transition-all duration-300"
+              >
+                <span className="text-xs font-mono text-[#B15F2C] font-extrabold mb-2">
+                  0{idx + 1}
+                </span>
+                <h3 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#0A0A0A]">
+                  {stat.title}
+                </h3>
+                <p className="mt-2 text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#666666]">
+                  {stat.subtitle}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
 
-                  <p className="mt-2 text-[13px] font-bold uppercase tracking-widest text-zinc-500">
-                    {stat.subtitle}
-                  </p>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-
-        {/* Popular Courses Section - py-24 (96px) */}
+        {/* ================================================== */}
+        {/* FEATURED PROGRAMS / POPULAR COURSES SECTION */}
+        {/* ================================================== */}
         <section
           aria-labelledby="popular-courses-heading"
-          className="border-b border-white/5 py-24"
+          className="py-16 border-b border-[#E2E0DB]"
         >
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
+              <div className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#B15F2C] mb-2 flex items-center gap-2">
+                <span className="text-[#0A0A0A] font-mono">[02]</span>
+                Featured Catalog
+              </div>
               <h2
                 id="popular-courses-heading"
-                className="text-[40px] font-extrabold tracking-tight text-white leading-[1.2]"
+                className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0A0A0A] leading-tight"
               >
                 Popular Courses
               </h2>
-              <p className="mt-2 text-zinc-400 max-w-2xl text-[18px] font-medium leading-relaxed">
-                Quick access to academic programs and courses that other students search for and view most often.
+              <p className="mt-3 text-[#666666] max-w-2xl text-base font-normal leading-relaxed">
+                Direct access to core academic programs and branches searched most frequently by students.
               </p>
             </div>
             <Link
               href="/programs"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0EA5E9] hover:underline"
+              className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#0A0A0A] hover:text-[#B15F2C] transition-colors group"
             >
-              All Programs &rarr;
+              All Programs <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 text-[#B15F2C]" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto mt-12">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {programs.map((program) => (
               <ProgramCard key={program.course} {...program} />
             ))}
 
             {/* Explore All Card */}
-            <Link href="/programs" className="block h-full">
-              <div className="rounded-[16px] border border-dashed border-white/10 bg-[#18181B]/25 p-[28px] transition-all duration-300 hover:border-[#0EA5E9] hover:-translate-y-[4px] hover:bg-[#18181B]/35 hover:shadow-lg flex flex-col justify-between text-center h-full min-h-[240px]">
+            <Link href="/programs" className="block h-full group">
+              <div className="rounded-[28px] border border-dashed border-[#E2E0DB] bg-white p-7 transition-all duration-300 hover:border-[#B15F2C] hover:-translate-y-1.5 hover:shadow-xl flex flex-col justify-between text-center h-full min-h-[230px]">
                 <div className="flex flex-col items-center pt-4">
-                  <h3 className="text-[22px] font-bold text-white tracking-tight">View All Courses</h3>
-                  <p className="mt-3 text-[15px] text-zinc-400 font-medium leading-relaxed">
-                    Browse every course available in Student Hub.
+                  <div className="h-12 w-12 rounded-full bg-[#F1F0EE] border border-[#E2E0DB] flex items-center justify-center text-[#B15F2C] mb-4">
+                    <Layers className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-xl font-extrabold text-[#0A0A0A] tracking-tight group-hover:text-[#B15F2C] transition-colors">
+                    View All Courses
+                  </h3>
+                  <p className="mt-2 text-xs text-[#666666] font-normal leading-relaxed">
+                    Browse every branch and semester available in Student Hub.
                   </p>
                 </div>
 
-                <span className="inline-flex h-12 items-center justify-center bg-[#0EA5E9] hover:bg-[#0EA5E9]/90 text-white rounded-[12px] px-6 text-sm font-bold transition-all duration-300 hover:scale-[1.02] mt-6 w-full cursor-pointer">
-                  Explore Courses &rarr;
+                <span className="inline-flex h-12 items-center justify-center bg-[#0A0A0A] group-hover:bg-[#B15F2C] text-white rounded-full px-6 text-xs font-extrabold uppercase tracking-wider transition-all duration-300 mt-6 w-full cursor-pointer shadow-2xs">
+                  Explore Catalog &rarr;
                 </span>
               </div>
             </Link>
           </div>
         </section>
 
-        {/* Upload Promotional Section */}
+        {/* ================================================== */}
+        {/* UPLOAD PROMOTIONAL BANNER SECTION */}
+        {/* ================================================== */}
         <UploadResourceSection />
 
-        {/* Recently Uploaded Section */}
-        <section
-          aria-labelledby="recently-uploaded-heading"
-          className="border-b border-white/5 py-24"
-        >
-          <div className="mb-8">
-            <h2
-              id="recently-uploaded-heading"
-              className="text-[40px] font-extrabold tracking-tight text-white leading-[1.2]"
-            >
-              Recently Uploaded
-            </h2>
-            <p className="mt-2 text-zinc-400 max-w-2xl text-[18px] font-medium leading-relaxed">
-              Explore fresh study resources uploaded by our student community members.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-12">
-            {recentlyUploaded.map((resource) => (
-              <RecentlyUploadedCard key={resource.title} {...resource} />
-            ))}
-          </div>
-        </section>
+        {/* ================================================== */}
+        {/* RECENTLY UPLOADED SECTION */}
+        {/* ================================================== */}
+        <RecentlyUploadedSection resources={resources} />
 
-        {/* Recently Opened Section */}
-        <section aria-labelledby="recently-opened-heading" className="py-24">
+        {/* ================================================== */}
+        {/* RECENTLY OPENED SECTION */}
+        {/* ================================================== */}
+        <section aria-labelledby="recently-opened-heading" className="py-16">
           <div className="mb-8">
+            <div className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#B15F2C] mb-2 flex items-center gap-2">
+              <span className="text-[#0A0A0A] font-mono">[04]</span>
+              Personal Workspace
+            </div>
             <h2
               id="recently-opened-heading"
-              className="text-[40px] font-extrabold tracking-tight text-white leading-[1.2]"
+              className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0A0A0A] leading-tight"
             >
               Recently Opened
             </h2>
-            <p className="mt-2 text-zinc-400 max-w-2xl text-[18px] font-medium leading-relaxed">
-              Quick access to the study resources you opened and reviewed recently.
+            <p className="mt-2 text-[#666666] max-w-2xl text-base font-normal leading-relaxed">
+              Quick access to study materials and documents you reviewed recently.
             </p>
           </div>
-          <div className="rounded-[16px] border border-dashed border-white/8 bg-[#18181B]/20 p-12 text-center mt-12">
-            <p className="text-zinc-500 font-semibold text-sm">No recently opened items yet.</p>
+          <div className="rounded-[28px] border border-dashed border-[#E2E0DB] bg-white p-12 text-center shadow-2xs">
+            <p className="text-[#666666] font-bold text-sm">
+              No recently opened items in your active session yet.
+            </p>
           </div>
         </section>
       </main>
 
-      {/* Premium Minimal Footer */}
+      {/* Footer */}
       <Footer />
     </div>
   );
 }
+

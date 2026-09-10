@@ -2,6 +2,7 @@
 
 import { FileX2, RotateCcw, UploadCloud } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 interface EmptyStateProps {
   title?: string;
@@ -19,40 +20,41 @@ export default function EmptyState({
   actionHref,
 }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-[16px] border border-dashed border-white/8 bg-[#18181B]/30 p-12 text-center shadow-lg relative overflow-hidden">
-      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#0EA5E9]/10 border border-[#0EA5E9]/20 text-[#0EA5E9] shadow-md transition-transform duration-300 hover:rotate-6">
+    <div className="flex flex-col items-center justify-center rounded-[28px] border border-dashed border-[#E2E0DB] bg-white p-12 text-center shadow-2xs">
+      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#F1F0EE] border border-[#E2E0DB] text-[#B15F2C] shadow-2xs">
         <FileX2 className="h-8 w-8" />
       </div>
 
-      <h3 className="mt-6 text-xl font-bold tracking-tight text-white">
+      <h3 className="mt-6 text-2xl font-extrabold tracking-tight text-[#0A0A0A]">
         {title}
       </h3>
 
-      <p className="mt-2 max-w-sm text-sm font-medium text-zinc-400 leading-relaxed">
+      <p className="mt-2 max-w-md text-sm font-normal text-[#666666] leading-relaxed">
         {description}
       </p>
 
       <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
         {onReset && (
-          <button
+          <Button
             onClick={onReset}
-            className="flex h-12 items-center justify-center gap-2 rounded-[12px] border border-white/8 bg-[#18181B] px-6 text-sm font-semibold text-zinc-300 hover:text-white hover:border-white/20 hover:bg-[#18181B]/80 shadow-md transition-all duration-300 hover:scale-[1.02] cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/10"
+            variant="outline"
+            className="h-11 border-[#E2E0DB] bg-white hover:bg-[#F1F0EE] text-[#0A0A0A] rounded-full gap-2 px-6"
           >
-            <RotateCcw className="h-4 w-4" />
+            <RotateCcw className="h-4 w-4 text-[#B15F2C]" />
             Reset Filters
-          </button>
+          </Button>
         )}
 
         {actionLabel && actionHref && (
-          <Link
-            href={actionHref}
-            className="flex h-12 items-center justify-center gap-2 rounded-[12px] bg-[#0EA5E9] px-6 text-sm font-semibold text-white hover:bg-[#0EA5E9]/90 shadow-lg shadow-[#0EA5E9]/15 transition-all duration-300 hover:scale-[1.02] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]/20"
-          >
-            <UploadCloud className="h-4 w-4" />
-            {actionLabel}
+          <Link href={actionHref}>
+            <Button variant="accent" className="h-11 bg-[#B15F2C] hover:bg-[#9E5324] text-white font-bold rounded-full px-6 shadow-2xs gap-2">
+              <UploadCloud className="h-4 w-4" />
+              {actionLabel}
+            </Button>
           </Link>
         )}
       </div>
     </div>
   );
 }
+

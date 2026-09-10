@@ -1,34 +1,69 @@
-import { AuthRepository } from '../repositories/auth.repository';
-import { LoginInput, RegisterInput, AuthResult } from '../types/auth.types';
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import {
+    createUser,
+    findUserByEmail,
+} from "../repositories/user.respository";
 
-export class AuthService {
-  private authRepository: AuthRepository;
 
-  constructor() {
-    this.authRepository = new AuthRepository();
-  }
+export async function registerUser(
+    name: string,
+    email: string,
+    password: string
+) {
+    const existingUser = await findUserByEmail(email);
 
-  async login(input: LoginInput): Promise<AuthResult> {
+    if (existingUser) {
+        throw new Error("User already exists");
+    }
+
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    const user = await createUser(name, email, passwordHash);
+
     return {
-      token: 'placeholder-jwt-token',
-      user: {
-        id: 'usr_placeholder',
-        email: input.email,
-        fullName: 'Placeholder User',
-        role: 'STUDENT',
-      },
+        id: user.id,
+        name: user.name,
+        email: user.email,
     };
-  }
+}
 
-  async register(input: RegisterInput): Promise<AuthResult> {
+export async function loginUser(
+    email: string,
+    password: string
+) {
+    const user = await findUserByEmail(email);
+
+    if (!user) {
+        throw new Error("Invalid email or password");
+    }
+
+    const passwordMatches = await bcrypt.compare(
+        password,
+        user.passwordHash
+    );
+
+    if (!passwordMatches) {
+        throw new Error("Invalid email or password");
+    }
+
+    const token = jwt.sign(
+        {
+            userId: user.id,
+            email: user.email,
+        },
+        process.env.JWT_SECRET as string,
+        {
+            expiresIn: "1d",
+        }
+    );
+
     return {
-      token: 'placeholder-jwt-token',
-      user: {
-        id: 'usr_placeholder',
-        email: input.email,
-        fullName: input.fullName,
-        role: 'STUDENT',
-      },
+        user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+        },
+        token,
     };
-  }
 }

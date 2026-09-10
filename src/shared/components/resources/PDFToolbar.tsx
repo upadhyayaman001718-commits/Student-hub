@@ -1,31 +1,81 @@
-import { Download, Maximize2, ZoomIn, ZoomOut } from "lucide-react";
+"use client";
 
-export default function PDFToolbar() {
-    return (
-        <div className="flex items-center justify-between border-b border-white/10 bg-[#18181B] px-4 py-3">
-            <div className="flex items-center gap-3">
-                <button className="rounded-lg p-2 hover:bg-white/10 transition">
-                    <ZoomOut className="h-4 w-4" />
-                </button>
+import { Minus, Plus, RefreshCw, Download, Maximize } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-                <span className="text-sm text-zinc-400">
-                    100%
-                </span>
+interface PDFToolbarProps {
+  zoom: number;
+  onZoomIn: () => void;
+  onZoomOut: () => void;
+  onRefresh: () => void;
+  onDownload: () => void;
+  onFullscreen: () => void;
+}
 
-                <button className="rounded-lg p-2 hover:bg-white/10 transition">
-                    <ZoomIn className="h-4 w-4" />
-                </button>
-            </div>
+export default function PDFToolbar({
+  zoom,
+  onZoomIn,
+  onZoomOut,
+  onRefresh,
+  onDownload,
+  onFullscreen,
+}: PDFToolbarProps) {
+  return (
+    <div className="h-14 border-b border-[#E2E0DB] bg-white flex items-center justify-between px-4">
 
-            <div className="flex items-center gap-3">
-                <button className="rounded-lg p-2 hover:bg-white/10 transition">
-                    <Download className="h-4 w-4" />
-                </button>
+      {/* Zoom controls */}
+      <div className="flex items-center gap-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={onZoomOut}
+          disabled={zoom <= 50}
+        >
+          <Minus className="h-4 w-4" />
+        </Button>
 
-                <button className="rounded-lg p-2 hover:bg-white/10 transition">
-                    <Maximize2 className="h-4 w-4" />
-                </button>
-            </div>
-        </div>
-    );
+        <span className="text-sm font-bold min-w-[50px] text-center">
+          {zoom}%
+        </span>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={onZoomIn}
+          disabled={zoom >= 200}
+        >
+          <Plus className="h-4 w-4" />
+        </Button>
+      </div>
+
+      {/* Other controls */}
+      <div className="flex items-center gap-2">
+
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={onRefresh}
+        >
+          <RefreshCw className="h-4 w-4" />
+        </Button>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={onDownload}
+        >
+          <Download className="h-4 w-4" />
+        </Button>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={onFullscreen}
+        >
+          <Maximize className="h-4 w-4" />
+        </Button>
+
+      </div>
+    </div>
+  );
 }

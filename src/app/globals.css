@@ -12,37 +12,40 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #09090B;
+  background-color: #F1F0EE;
+  color: #0A0A0A;
 }
 
 body {
-  background-color: #09090B;
-  color: #FFFFFF;
-  font-family: var(--font-sans), ui-sans-serif, system-ui;
+  background-color: #F1F0EE;
+  color: #0A0A0A;
+  font-family: var(--font-onest), var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar to match Dark SaaS layout */
+/* Lumora Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090B;
+  background: #F1F0EE;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 999px;
+  background: #D4D1C9;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: #B15F2C;
 }
 
 @theme inline {
-  --font-heading: var(--font-space-grotesk);
-  --font-sans: var(--font-inter);
+  --font-heading: var(--font-onest);
+  --font-sans: var(--font-onest);
   
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -61,65 +64,48 @@ body {
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+
+  --color-burnt-orange: #B15F2C;
+  --color-near-black: #0A0A0A;
+  --color-surface-light: #F1F0EE;
   
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem; /* 16px */
-  --radius-2xl: 1.5rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+  --radius-3xl: 2rem;
 }
 
-/* Set dark theme variables globally */
+/* Lumora Light & Dark Theme Design Tokens */
 :root {
-  --background: #09090B;
-  --foreground: #FFFFFF;
-  --card: #18181B;
-  --card-foreground: #FFFFFF;
-  --popover: #09090B;
-  --popover-foreground: #FFFFFF;
-  --primary: #0EA5E9;
+  --background: #F1F0EE;
+  --foreground: #0A0A0A;
+  --card: #FFFFFF;
+  --card-foreground: #0A0A0A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0A0A0A;
+  --primary: #0A0A0A;
   --primary-foreground: #FFFFFF;
-  --secondary: #111827;
-  --secondary-foreground: #FFFFFF;
-  --muted: #111827;
-  --muted-foreground: #A1A1AA;
-  --accent: #22D3EE;
+  --secondary: #E7E5E0;
+  --secondary-foreground: #0A0A0A;
+  --muted: #EBE9E4;
+  --muted-foreground: #666666;
+  --accent: #B15F2C;
   --accent-foreground: #FFFFFF;
   --destructive: #EF4444;
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.08);
-  --ring: rgba(14, 165, 233, 0.3);
-  --radius: 1rem;
-}
-
-.dark {
-  --background: #09090B;
-  --foreground: #FFFFFF;
-  --card: #18181B;
-  --card-foreground: #FFFFFF;
-  --popover: #09090B;
-  --popover-foreground: #FFFFFF;
-  --primary: #0EA5E9;
-  --primary-foreground: #FFFFFF;
-  --secondary: #111827;
-  --secondary-foreground: #FFFFFF;
-  --muted: #111827;
-  --muted-foreground: #A1A1AA;
-  --accent: #22D3EE;
-  --accent-foreground: #FFFFFF;
-  --destructive: #EF4444;
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.08);
-  --ring: rgba(14, 165, 233, 0.3);
-  --radius: 1rem;
+  --border: #E2E0DB;
+  --input: #E2E0DB;
+  --ring: rgba(177, 95, 44, 0.3);
+  --radius: 1.75rem;
 }
 
 @layer base {
   * {
-    @apply border-border/80 outline-ring/50;
+    @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased selection:bg-[#B15F2C]/20 selection:text-[#B15F2C];
   }
   html {
     @apply font-sans;

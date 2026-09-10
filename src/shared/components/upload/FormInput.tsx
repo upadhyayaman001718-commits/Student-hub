@@ -15,19 +15,20 @@ export default function FormInput({
 }: FormInputProps) {
   return (
     <div className="w-full space-y-2">
-      <label className="block text-sm font-semibold text-zinc-300 transition-colors duration-200">
+      <label className="block text-xs font-extrabold uppercase tracking-wider text-[#0A0A0A] transition-colors duration-200">
         {label}
-        {props.required && <span className="text-red-500 ml-1">*</span>}
+        {props.required && <span className="text-[#B15F2C] ml-1">*</span>}
       </label>
       <input
-        className={`w-full bg-[#18181B]/80 text-white placeholder-zinc-500 border border-white/8 rounded-2xl px-5 py-4 text-base transition-all duration-300 focus:outline-none focus:border-[#0EA5E9] focus:ring-4 focus:ring-[#0EA5E9]/10 shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)] disabled:opacity-50 disabled:cursor-not-allowed ${
-          error ? "border-red-500/80 focus:ring-red-500/10 focus:border-red-500" : ""
+        className={`w-full bg-white text-[#0A0A0A] placeholder:text-[#666666]/60 border border-[#E2E0DB] rounded-full px-5 py-3.5 text-sm transition-all duration-300 focus:outline-none focus:border-[#B15F2C] focus:ring-4 focus:ring-[#B15F2C]/15 shadow-2xs disabled:opacity-50 disabled:cursor-not-allowed ${
+          error ? "border-rose-500 focus:ring-rose-500/10 focus:border-rose-500" : ""
         } ${className}`}
         {...props}
       />
       {error && (
-        <p className="text-sm font-medium text-red-400 mt-1">{error}</p>
+        <p className="text-xs font-semibold text-rose-500 mt-1">{error}</p>
       )}
     </div>
   );
 }
+

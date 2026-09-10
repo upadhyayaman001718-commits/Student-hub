@@ -1,14 +1,18 @@
 export interface Resource {
-    programSlug: string;
-    program: string;
     id: number;
-    course: string;
-    semester: number;
-    subject: string;
     title: string;
-    type: "Notes" | "PYQ" | "Lab Manual";
-    uploadedBy: string;
-    description: string;
+    subject: string;
+    semester: number;
+    program?: string | null;
+    course?: string | null;
+    resourceType?: string | null;
+    fileName?: string | null;
+    s3Key?: string;
+    fileType?: string | null;
+    type?: "Notes" | "PYQ" | "Lab Manual" | string;
+    uploadedBy?: string;
+    description?: string | null;
+    programSlug?: string;
 }
 
 export const resources: Resource[] = [
