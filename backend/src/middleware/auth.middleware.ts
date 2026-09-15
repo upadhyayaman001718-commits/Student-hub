@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import { config } from "../config/env.config";
 
 export interface JwtUserPayload {
-  userId: string;
+  userId: string | number;
   email: string;
 }
 
@@ -37,16 +38,8 @@ export const authenticateToken = (
     });
   }
 
-  const secret = process.env.JWT_SECRET;
-  if (!secret) {
-    return res.status(401).json({
-      success: false,
-      message: "JWT secret is not configured",
-    });
-  }
-
   try {
-    const decoded = jwt.verify(token, secret) as JwtUserPayload;
+    const decoded = jwt.verify(token, config.jwtSecret) as JwtUserPayload;
     req.user = decoded;
     next();
   } catch (error) {

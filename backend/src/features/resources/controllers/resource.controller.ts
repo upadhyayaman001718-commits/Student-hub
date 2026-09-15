@@ -20,27 +20,38 @@ export const getResources = async (req: Request, res: Response) => {
   });
 };
 
-export const getResourceById = async (req: Request, res: Response) => {
-  const id = Number(req.params.id);
+eexport const getResourceById = async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id);
 
-  const resource = await findResourceById(id);
+    console.log("RESOURCE DEBUG - ID:", id);
 
-  if (!resource) {
-    return res.status(404).json({
+    const resource = await findResourceById(id);
+
+    console.log("RESOURCE DEBUG - RESULT:", resource);
+
+    if (!resource) {
+      return res.status(404).json({
+        success: false,
+        message: "Resource not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: `Resource ${id} fetched successfully`,
+      data: resource,
+    });
+  } catch (error: any) {
+    console.error("🔥 RESOURCE BY ID ACTUAL ERROR:", error);
+
+    return res.status(500).json({
       success: false,
-      message: "Resource not found",
+      message: error?.message || "Resource lookup failed",
+      error: String(error),
     });
   }
-
-
-
-  res.status(200).json({
-    success: true,
-    message: `Resource ${id} fetched successfully`,
-    data: resource,
-  });
 };
-
 export const createResource = async (req: Request, res: Response) => {
   const { title, subject, semester, s3Key, fileName, fileType, program, course, resourceType, userId } = req.body;
 
