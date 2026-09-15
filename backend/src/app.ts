@@ -4,6 +4,7 @@ import routes from "./routes";
 import { config } from "./config/env.config";
 import { notFoundMiddleware } from "./middleware/not-found404.middleware";
 import { errorMiddleware } from "./middleware/error.middleware";
+import prisma from "./lib/prisma";
 
 const app = express();
 
@@ -40,6 +41,27 @@ app.get("/health", (req, res) => {
   });
 });
 
+app.get("/api/debug-new", async (req, res) => {
+  try {
+    const result = await prisma.$queryRaw`SELECT 1 AS test`;
+
+    return res.status(200).json({
+      success: true,
+      message: "DATABASE CONNECTION WORKS",
+      result,
+    });
+  } catch (error: any) {
+    console.error("🔥 ACTUAL DATABASE ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      error: error?.message,
+      name: error?.name,
+      code: error?.code,
+      meta: error?.meta,
+    });
+  }
+});
 // Central API router
 app.use("/api", routes);
 
