@@ -20,7 +20,7 @@ export const getResources = async (req: Request, res: Response) => {
   });
 };
 
-eexport const getResourceById = async (req: Request, res: Response) => {
+export const getResourceById = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
 
