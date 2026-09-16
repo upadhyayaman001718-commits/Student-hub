@@ -1,0 +1,202 @@
+warning: in the working copy of 'backend/package-lock.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'backend/package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'backend/src/app.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/decisions/architecture-decisions.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/decisions/engineering-journal.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/decisions/evolution-log.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/globals.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/login/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/programs/[slug]/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/programs/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/resources/[id]/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/upload/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/ui/button.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/ui/card.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/ui/input.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/auth/AuthCard.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/auth/AuthHeader.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/auth/AuthLayout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/auth/AuthVideo.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/auth/Divider.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/auth/LoginForm.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/auth/PasswordInput.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/auth/SocialLoginButton.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/layout/Footer.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/layout/Navbar.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/navigation/Breadcrumb.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/navigation/FilterBar.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/navigation/SearchBar.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/navigation/SearchResults.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/programs/CourseHeader.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/programs/EmptyState.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/programs/ProgramCard.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/programs/RecentlyUploadedCard.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/resources/DownloadButton.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/resources/MetadataCard.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/resources/PDFPreview.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/resources/PDFToolbar.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/resources/RelatedResources.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/resources/ResourceCard.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/resources/ResourceDetails.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/resources/ResourceGrid.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/resources/ResourceStats.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/upload/FormInput.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/upload/FormSelect.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/upload/UploadForm.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/upload/UploadResourceSection.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/shared/components/upload/UploadTips.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tsconfig.json', LF will be replaced by CRLF the next time Git touches it
+ backend/package-lock.json                          | 2388 [32m+++++++++++++++++++[m[31m-[m
+ backend/package.json                               |   10 [32m+[m
+ backend/src/app.ts                                 |   26 [32m+[m[31m-[m
+ backend/src/config/cors.config.ts                  |    8 [31m-[m
+ backend/src/config/database.config.ts              |    7 [31m-[m
+ backend/src/config/logger.config.ts                |    4 [31m-[m
+ backend/src/controllers/.gitkeep                   |    1 [31m-[m
+ backend/src/features/auth/auth.controller.ts       |   29 [31m-[m
+ backend/src/features/auth/auth.repository.ts       |   14 [31m-[m
+ backend/src/features/auth/auth.routes.ts           |   10 [31m-[m
+ backend/src/features/auth/auth.service.ts          |   36 [31m-[m
+ backend/src/features/auth/auth.types.ts            |   20 [31m-[m
+ backend/src/features/auth/auth.validation.ts       |   10 [31m-[m
+ .../features/auth/controllers/auth.controller.ts   |   29 [31m-[m
+ backend/src/features/auth/index.ts                 |    5 [31m-[m
+ .../features/auth/repositories/auth.repository.ts  |   12 [31m-[m
+ backend/src/features/auth/routes/auth.routes.ts    |   10 [31m-[m
+ backend/src/features/auth/services/auth.service.ts |   34 [31m-[m
+ backend/src/features/auth/types/auth.types.ts      |   20 [31m-[m
+ .../src/features/auth/validators/auth.validator.ts |   10 [31m-[m
+ .../src/features/bookmarks/bookmarks.controller.ts |   20 [31m-[m
+ .../src/features/bookmarks/bookmarks.repository.ts |    5 [31m-[m
+ backend/src/features/bookmarks/bookmarks.routes.ts |    9 [31m-[m
+ .../src/features/bookmarks/bookmarks.service.ts    |   14 [31m-[m
+ backend/src/features/bookmarks/bookmarks.types.ts  |    6 [31m-[m
+ .../src/features/bookmarks/bookmarks.validation.ts |    3 [31m-[m
+ .../bookmarks/controllers/bookmarks.controller.ts  |   20 [31m-[m
+ backend/src/features/bookmarks/index.ts            |    5 [31m-[m
+ .../bookmarks/repositories/bookmarks.repository.ts |    7 [31m-[m
+ .../features/bookmarks/routes/bookmarks.routes.ts  |    9 [31m-[m
+ .../bookmarks/services/bookmarks.service.ts        |   14 [31m-[m
+ .../features/bookmarks/types/bookmarks.types.ts    |    6 [31m-[m
+ .../bookmarks/validators/bookmarks.validator.ts    |    3 [31m-[m
+ .../resources/controllers/resources.controller.ts  |   20 [31m-[m
+ backend/src/features/resources/index.ts            |    5 [31m-[m
+ .../resources/repositories/resources.repository.ts |    5 [31m-[m
+ .../src/features/resources/resources.controller.ts |   20 [31m-[m
+ .../src/features/resources/resources.repository.ts |    5 [31m-[m
+ backend/src/features/resources/resources.routes.ts |    9 [31m-[m
+ .../src/features/resources/resources.service.ts    |   22 [31m-[m
+ backend/src/features/resources/resources.types.ts  |    8 [31m-[m
+ .../src/features/resources/resources.validation.ts |    5 [31m-[m
+ .../features/resources/routes/resources.routes.ts  |    9 [31m-[m
+ .../resources/services/resources.service.ts        |   22 [31m-[m
+ .../features/resources/types/resources.types.ts    |    8 [31m-[m
+ .../resources/validators/resources.validator.ts    |    5 [31m-[m
+ .../search/controllers/search.controller.ts        |   21 [31m-[m
+ backend/src/features/search/index.ts               |    5 [31m-[m
+ .../search/repositories/search.repository.ts       |    7 [31m-[m
+ backend/src/features/search/search.controller.ts   |   21 [31m-[m
+ backend/src/features/search/search.repository.ts   |    5 [31m-[m
+ backend/src/features/search/search.routes.ts       |    9 [31m-[m
+ backend/src/features/search/search.service.ts      |   17 [31m-[m
+ backend/src/features/search/search.types.ts        |   10 [31m-[m
+ backend/src/features/search/search.validation.ts   |    3 [31m-[m
+ .../src/features/search/services/search.service.ts |   17 [31m-[m
+ backend/src/features/search/types/search.types.ts  |   10 [31m-[m
+ .../features/search/validators/search.validator.ts |    3 [31m-[m
+ .../uploads/controllers/uploads.controller.ts      |   20 [31m-[m
+ backend/src/features/uploads/index.ts              |    5 [31m-[m
+ .../uploads/repositories/uploads.repository.ts     |    7 [31m-[m
+ .../src/features/uploads/routes/uploads.routes.ts  |    9 [31m-[m
+ .../features/uploads/services/uploads.service.ts   |   17 [31m-[m
+ .../src/features/uploads/types/uploads.types.ts    |    4 [31m-[m
+ backend/src/features/uploads/uploads.controller.ts |   20 [31m-[m
+ backend/src/features/uploads/uploads.repository.ts |    7 [31m-[m
+ backend/src/features/uploads/uploads.routes.ts     |    9 [31m-[m
+ backend/src/features/uploads/uploads.service.ts    |   17 [31m-[m
+ backend/src/features/uploads/uploads.types.ts      |    4 [31m-[m
+ backend/src/features/uploads/uploads.validation.ts |    4 [31m-[m
+ .../uploads/validators/uploads.validator.ts        |    4 [31m-[m
+ .../features/users/controllers/users.controller.ts |   20 [31m-[m
+ backend/src/features/users/index.ts                |    5 [31m-[m
+ .../users/repositories/users.repository.ts         |    7 [31m-[m
+ backend/src/features/users/routes/users.routes.ts  |    9 [31m-[m
+ .../src/features/users/services/users.service.ts   |   19 [31m-[m
+ backend/src/features/users/types/users.types.ts    |    6 [31m-[m
+ backend/src/features/users/users.controller.ts     |   20 [31m-[m
+ backend/src/features/users/users.repository.ts     |    5 [31m-[m
+ backend/src/features/users/users.routes.ts         |    9 [31m-[m
+ backend/src/features/users/users.service.ts        |   19 [31m-[m
+ backend/src/features/users/users.types.ts          |    6 [31m-[m
+ backend/src/features/users/users.validation.ts     |    3 [31m-[m
+ .../features/users/validators/users.validator.ts   |    3 [31m-[m
+ backend/src/lib/.gitkeep                           |    1 [31m-[m
+ backend/src/lib/prisma.ts                          |   17 [32m+[m[31m-[m
+ backend/src/lib/s3.ts                              |    6 [31m-[m
+ backend/src/middleware/auth.middleware.ts          |   13 [31m-[m
+ backend/src/middleware/error.middleware.ts         |   38 [32m+[m[31m-[m
+ backend/src/middleware/notFound.middleware.ts      |    6 [31m-[m
+ backend/src/routes/index.routes.ts                 |    1 [31m-[m
+ backend/src/routes/index.ts                        |   30 [32m+[m[31m-[m
+ backend/src/services/.gitkeep                      |    1 [31m-[m
+ backend/src/shared/constants/index.ts              |   16 [31m-[m
+ backend/src/shared/interfaces/index.ts             |    5 [31m-[m
+ backend/src/shared/responses/api-response.ts       |   56 [31m-[m
+ backend/src/shared/responses/index.ts              |    1 [31m-[m
+ backend/src/shared/types/index.ts                  |    7 [31m-[m
+ backend/src/shared/utils/app-error.utils.ts        |   38 [31m-[m
+ backend/src/shared/utils/index.ts                  |    1 [31m-[m
+ backend/src/shared/validators/index.ts             |    5 [31m-[m
+ backend/src/types/index.ts                         |   22 [31m-[m
+ backend/src/utils/app-error.ts                     |   38 [31m-[m
+ backend/src/validators/.gitkeep                    |    1 [31m-[m
+ docs/decisions/architecture-decisions.md           |   27 [32m+[m[31m-[m
+ docs/decisions/engineering-journal.md              |   54 [32m+[m[31m-[m
+ docs/decisions/evolution-log.md                    |   58 [32m+[m[31m-[m
+ src/app/globals.css                                |  100 [32m+[m[31m-[m
+ src/app/layout.tsx                                 |   25 [32m+[m[31m-[m
+ src/app/login/page.tsx                             |   22 [32m+[m[31m-[m
+ src/app/page.tsx                                   |  391 [32m+++[m[31m-[m
+ src/app/programs/[slug]/page.tsx                   |   11 [32m+[m[31m-[m
+ src/app/programs/page.tsx                          |   24 [32m+[m[31m-[m
+ src/app/resources/[id]/page.tsx                    |   68 [32m+[m[31m-[m
+ src/app/upload/page.tsx                            |   24 [32m+[m[31m-[m
+ src/components/ui/button.tsx                       |   34 [32m+[m[31m-[m
+ src/components/ui/card.tsx                         |   15 [32m+[m[31m-[m
+ src/components/ui/input.tsx                        |    3 [32m+[m[31m-[m
+ src/shared/components/auth/AuthCard.tsx            |   39 [32m+[m[31m-[m
+ src/shared/components/auth/AuthHeader.tsx          |   28 [32m+[m[31m-[m
+ src/shared/components/auth/AuthLayout.tsx          |   36 [32m+[m[31m-[m
+ src/shared/components/auth/AuthVideo.tsx           |   59 [32m+[m[31m-[m
+ src/shared/components/auth/Divider.tsx             |   22 [32m+[m[31m-[m
+ src/shared/components/auth/LoginForm.tsx           |  181 [32m+[m[31m-[m
+ src/shared/components/auth/PasswordInput.tsx       |  113 [32m+[m[31m-[m
+ src/shared/components/auth/SocialLoginButton.tsx   |  118 [32m+[m[31m-[m
+ src/shared/components/layout/Footer.tsx            |  117 [32m+[m[31m-[m
+ src/shared/components/layout/Navbar.tsx            |  192 [32m+[m[31m-[m
+ src/shared/components/navigation/Breadcrumb.tsx    |   79 [32m+[m[31m-[m
+ src/shared/components/navigation/FilterBar.tsx     |   51 [32m+[m[31m-[m
+ src/shared/components/navigation/SearchBar.tsx     |   53 [32m+[m[31m-[m
+ src/shared/components/navigation/SearchResults.tsx |   20 [32m+[m[31m-[m
+ src/shared/components/programs/CourseHeader.tsx    |   47 [32m+[m[31m-[m
+ src/shared/components/programs/EmptyState.tsx      |   30 [32m+[m[31m-[m
+ src/shared/components/programs/ProgramCard.tsx     |   71 [32m+[m[31m-[m
+ .../components/programs/RecentlyUploadedCard.tsx   |   59 [32m+[m[31m-[m
+ src/shared/components/resources/DownloadButton.tsx |   15 [32m+[m[31m-[m
+ src/shared/components/resources/MetadataCard.tsx   |   49 [32m+[m[31m-[m
+ src/shared/components/resources/PDFPreview.tsx     |   53 [32m+[m[31m-[m
+ src/shared/components/resources/PDFToolbar.tsx     |   53 [32m+[m[31m-[m
+ .../components/resources/RelatedResources.tsx      |   59 [32m+[m[31m-[m
+ src/shared/components/resources/ResourceCard.tsx   |   80 [32m+[m[31m-[m
+ .../components/resources/ResourceDetails.tsx       |  141 [32m+[m[31m-[m
+ src/shared/components/resources/ResourceGrid.tsx   |    2 [32m+[m[31m-[m
+ src/shared/components/resources/ResourceStats.tsx  |  102 [32m+[m[31m-[m
+ src/shared/components/upload/FormInput.tsx         |   11 [32m+[m[31m-[m
+ src/shared/components/upload/FormSelect.tsx        |   19 [32m+[m[31m-[m
+ src/shared/components/upload/UploadForm.tsx        |   40 [32m+[m[31m-[m
+ .../components/upload/UploadResourceSection.tsx    |   41 [32m+[m[31m-[m
+ src/shared/components/upload/UploadTips.tsx        |   35 [32m+[m[31m-[m
+ tsconfig.json                                      |    3 [32m+[m[31m-[m
+ 151 files changed, 4080 insertions(+), 2430 deletions(-)
