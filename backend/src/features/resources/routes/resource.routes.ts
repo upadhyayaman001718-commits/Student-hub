@@ -6,6 +6,7 @@ import { authenticateToken } from "../../../middleware/auth.middleware";
 import { createResourceScheme, updateResourceScheme } from "../../../validators/resource.schema";
 import {
   getResources,
+  getMyResources,
   getResourceById,
   createResource,
   updateResource,
@@ -22,6 +23,8 @@ const router = Router();
 
 router.get("/", getResources);
 
+router.get("/my", authenticateToken, getMyResources);
+
 router.get("/:id/file", getResourceFile);
 
 router.get("/:id/download", getResourceDownload);
@@ -31,10 +34,10 @@ router.get("/:id", getResourceById);
 router.post("/", validate(createResourceScheme),
   createResource);
 
-router.patch("/:id", validate(updateResourceScheme),
+router.patch("/:id", authenticateToken, validate(updateResourceScheme),
   updateResource);
 
-router.delete("/:id", deleteResource);
+router.delete("/:id", authenticateToken, deleteResource);
 
 router.post(
   "/upload",

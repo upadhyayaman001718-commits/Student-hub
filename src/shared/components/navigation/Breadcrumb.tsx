@@ -5,18 +5,21 @@ interface BreadcrumbProps {
   program: string;
   resourceTitle: string;
   programSlug: string;
+  backHref?: string;
 }
 
 export default function Breadcrumb({
   program,
   resourceTitle,
   programSlug,
+  backHref = "/resources",
 }: BreadcrumbProps) {
   return (
     <div className="mb-8 flex flex-col gap-4">
       <Link
-        href={`/programs/${programSlug}`}
+        href={backHref}
         className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#666666] hover:text-[#B15F2C] transition-all hover:-translate-x-1 w-fit group cursor-pointer"
+        aria-label="Back to Resources"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1 text-[#B15F2C]" />
         Back to Resources
@@ -30,15 +33,18 @@ export default function Breadcrumb({
 
         <ChevronRight className="h-3.5 w-3.5 text-[#E2E0DB]" />
 
-        <Link href="/programs" className="hover:text-[#0A0A0A] transition font-medium">
-          <span>Programs</span>
+        <Link href="/resources" className="hover:text-[#0A0A0A] transition font-medium">
+          <span>Resources</span>
         </Link>
 
-        <ChevronRight className="h-3.5 w-3.5 text-[#E2E0DB]" />
-
-        <Link href={`/programs/${programSlug}`} className="hover:text-[#0A0A0A] transition font-medium">
-          <span>{program}</span>
-        </Link>
+        {program && (
+          <>
+            <ChevronRight className="h-3.5 w-3.5 text-[#E2E0DB]" />
+            <Link href={`/programs/${programSlug || "computer-science"}`} className="hover:text-[#0A0A0A] transition font-medium">
+              <span>{program}</span>
+            </Link>
+          </>
+        )}
 
         <ChevronRight className="h-3.5 w-3.5 text-[#E2E0DB]" />
 

@@ -13,6 +13,7 @@ export interface Resource {
     uploadedBy?: string;
     description?: string | null;
     programSlug?: string;
+    userId?: number;
 }
 
 export const resources: Resource[] = [

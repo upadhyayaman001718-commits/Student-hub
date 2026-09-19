@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Mail, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PasswordInput from "./PasswordInput";
@@ -11,6 +12,7 @@ import { loginUser } from "@/lib/api";
 import { useAuth } from "@/shared/context/AuthContext";
 
 export default function LoginForm() {
+  const router = useRouter();
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,9 +28,9 @@ export default function LoginForm() {
 
     try {
       const response = await loginUser(email, password);
-      console.log("Login response:", response);
       if (response.success && response.data?.token && response.data?.user) {
         login(response.data.token, response.data.user);
+        router.push("/dashboard");
       }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Login failed. Please check your credentials.";

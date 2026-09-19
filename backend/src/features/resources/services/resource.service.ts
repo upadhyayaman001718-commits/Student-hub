@@ -4,6 +4,8 @@ import {
   getDownloadUrl,
 } from "../../../services/s3.services";
 
+import { findResourcesByUserId } from "../repositories/resource.repository";
+
 export const createResource = async (
   title: string,
   subject: string,
@@ -38,6 +40,10 @@ export const getAllResources = async () => {
   const resources = await prisma.resource.findMany();
 
   return resources;
+};
+
+export const getUserResources = async (userId: number) => {
+  return await findResourcesByUserId(userId);
 };
 
 export const getResourceById = async (id: number) => {

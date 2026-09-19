@@ -2,7 +2,7 @@ import { Resource } from "@/shared/data/resources";
 
 export type { Resource };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 const TOKEN_KEY = "student_hub_token";
 
 export interface AuthUser {
@@ -68,9 +68,27 @@ export const getResources = async () => {
     return handleResponse<{ success: boolean; data: Resource[] }>(response);
 };
 
+export const getMyResources = async () => {
+    const headers = getAuthHeaders();
+    const response = await fetch(`${API_URL}/resources/my`, {
+        headers,
+    });
+    return handleResponse<{ success: boolean; data: Resource[] }>(response);
+};
+
 export const getResourceById = async (id: string | number) => {
     const response = await fetch(`${API_URL}/resources/${id}`);
     return handleResponse<{ success: boolean; data: Resource }>(response);
+};
+
+export const getResourceFileUrl = async (id: string | number) => {
+    const response = await fetch(`${API_URL}/resources/${id}/file`);
+    return handleResponse<{ success: boolean; data: { url: string } }>(response);
+};
+
+export const getResourceDownloadUrl = async (id: string | number) => {
+    const response = await fetch(`${API_URL}/resources/${id}/download`);
+    return handleResponse<{ success: boolean; data: { url: string } }>(response);
 };
 
 export const loginUser = async (email: string, password: string): Promise<LoginResponse> => {

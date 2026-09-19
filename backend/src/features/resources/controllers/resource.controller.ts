@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   getAllResources,
+  getUserResources,
   getResourceById as findResourceById,
   createResource as createResourceService,
   updateResource as updateResourceService,
@@ -18,6 +19,32 @@ export const getResources = async (req: Request, res: Response) => {
     message: "Resources fetched successfully",
     data: resources,
   });
+};
+
+export const getMyResources = async (req: Request, res: Response) => {
+  try {
+    const userId = Number(req.user?.userId);
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized",
+      });
+    }
+
+    const resources = await getUserResources(userId);
+
+    return res.status(200).json({
+      success: true,
+      message: "User resources fetched successfully",
+      data: resources,
+    });
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: error?.message || "Failed to fetch user resources",
+    });
+  }
 };
 
 export const getResourceById = async (req: Request, res: Response) => {
@@ -78,38 +105,73 @@ export const createResource = async (req: Request, res: Response) => {
 export const updateResource = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
+    const userId = Number(req.user?.userId);
 
-    const { title, subject, semester } = req.body;
+    const existing = await findResourceById(id);
+    if (!existing) {
+      return res.status(404).json({
+        success: false,
+        message: "Resource not found",
+      });
+    }
+
+    if (userId && existing.userId !== userId) {
+      return res.status(403).json({
+        success: false,
+        message: "You can only edit your own resources",
+      });
+    }
 
     const resource = await updateResourceService(
       id,
       req.body
     );
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: `Resource ${id} updated successfully`,
       data: resource,
     });
-  } catch (error) {
-    return error;
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: error?.message || "Failed to update resource",
+    });
   }
 };
 
 export const deleteResource = async (req: Request, res: Response) => {
   try {
-
     const id = Number(req.params.id);
+    const userId = Number(req.user?.userId);
+
+    const existing = await findResourceById(id);
+    if (!existing) {
+      return res.status(404).json({
+        success: false,
+        message: "Resource not found",
+      });
+    }
+
+    if (userId && existing.userId !== userId) {
+      return res.status(403).json({
+        success: false,
+        message: "You can only delete your own resources",
+      });
+    }
 
     const resource = await deleteResourceService(id);
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: `Resource ${id} deleted successfully`,
       data: resource,
     });
-  } catch (error) {
-    return error;
+  } catch (error: any) {
+    return res.status(500).json({
+      success: false,
+      message: error?.message || "Failed to delete resource",
+    });
   }
 };
 

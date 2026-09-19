@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, Upload, Home, LogIn, LogOut, User, Menu, X, GraduationCap, ArrowUpRight } from "lucide-react";
+import { BookOpen, Upload, Home, LogIn, LogOut, User, Menu, X, GraduationCap, ArrowUpRight, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "motion/react";
 import { useAuth } from "@/shared/context/AuthContext";
@@ -14,13 +14,15 @@ export default function Navbar() {
   const { isAuthenticated, user, logout } = useAuth();
 
   const isHomeActive = pathname === "/";
-  const isBrowseActive = pathname.startsWith("/programs");
+  const isBrowseActive = pathname.startsWith("/programs") || pathname.startsWith("/resources");
   const isUploadActive = pathname === "/upload";
+  const isDashboardActive = pathname === "/dashboard";
 
   const navLinks = [
     { name: "Home", href: "/", active: isHomeActive, icon: Home },
     { name: "Browse", href: "/programs", active: isBrowseActive, icon: BookOpen },
     { name: "Upload", href: "/upload", active: isUploadActive, icon: Upload },
+    ...(isAuthenticated ? [{ name: "Dashboard", href: "/dashboard", active: isDashboardActive, icon: LayoutDashboard }] : []),
   ];
 
   return (
@@ -72,10 +74,10 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 md:flex">
           {isAuthenticated ? (
             <>
-              <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EBE9E4] text-[#0A0A0A] text-xs font-bold">
+              <Link href="/dashboard" className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EBE9E4] hover:bg-[#E2E0DB] text-[#0A0A0A] text-xs font-bold transition-colors">
                 <User className="h-3.5 w-3.5 text-[#B15F2C]" />
                 <span className="max-w-[120px] truncate">{user?.name || "Student"}</span>
-              </div>
+              </Link>
               <Button
                 variant="ghost"
                 size="sm"
