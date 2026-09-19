@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Mail, AlertCircle } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Mail, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PasswordInput from "./PasswordInput";
 import Divider from "./Divider";
@@ -11,8 +11,10 @@ import SocialLoginButton from "./SocialLoginButton";
 import { loginUser } from "@/lib/api";
 import { useAuth } from "@/shared/context/AuthContext";
 
-export default function LoginForm() {
+function LoginFormContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isJustRegistered = searchParams.get("registered") === "true";
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,6 +44,12 @@ export default function LoginForm() {
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
+      {isJustRegistered && !error && (
+        <div className="flex items-center gap-2 p-3 text-sm text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-xl animate-in fade-in">
+          <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
+          <span>Account created successfully! Please sign in with your password.</span>
+        </div>
+      )}
       {error && (
         <div className="flex items-center gap-2 p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl">
           <AlertCircle className="h-4 w-4 shrink-0 text-red-600" />
@@ -132,5 +140,13 @@ export default function LoginForm() {
         </Link>
       </p>
     </form>
+  );
+}
+
+export default function LoginForm() {
+  return (
+    <Suspense fallback={<div className="text-center py-6 text-xs text-[#666666]">Loading login form...</div>}>
+      <LoginFormContent />
+    </Suspense>
   );
 }

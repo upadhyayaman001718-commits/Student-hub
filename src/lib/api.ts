@@ -103,6 +103,24 @@ export const loginUser = async (email: string, password: string): Promise<LoginR
     return handleResponse<LoginResponse>(response);
 };
 
+export interface RegisterResponse {
+  success: boolean;
+  message: string;
+  data: AuthUser;
+}
+
+export const registerUser = async (name: string, email: string, password: string): Promise<RegisterResponse> => {
+    const response = await fetch(`${API_URL}/auth/register`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+    });
+
+    return handleResponse<RegisterResponse>(response);
+};
+
 export const uploadResource = async (formData: FormData) => {
     const headers = getAuthHeaders();
     const response = await fetch(`${API_URL}/resources/upload`, {
