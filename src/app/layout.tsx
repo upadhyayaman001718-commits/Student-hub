@@ -24,6 +24,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cn("h-full", "antialiased", onest.variable, "font-sans")}
     >
       <body className="flex min-h-full flex-col bg-[#07080D] text-slate-100 font-sans selection:bg-indigo-500/30 selection:text-indigo-300 antialiased">
