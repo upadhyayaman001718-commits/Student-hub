@@ -89,18 +89,19 @@ export default function ResourceDetails({
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
       {/* Left Column: Information Panel & Primary Actions */}
-      <div className="lg:col-span-1 lg:sticky lg:top-24 h-fit rounded-[28px] border border-[#E2E0DB] bg-white p-6 sm:p-8 shadow-2xs space-y-6">
+      <div className="lg:col-span-1 lg:sticky lg:top-24 h-fit rounded-3xl border border-white/10 bg-[#0F121E]/80 backdrop-blur-xl p-6 sm:p-8 shadow-2xl space-y-6">
         {/* Title & Badge */}
         <div className="space-y-3">
-          <Badge variant="accent" className="px-3.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.15em] w-fit">
-            <Sparkles className="h-3 w-3 mr-1 text-white inline" />
+          <Badge className="px-3.5 py-1 text-[10px] font-mono font-extrabold uppercase tracking-[0.15em] w-fit bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 shadow-none">
+            <Sparkles className="h-3 w-3 mr-1.5 text-indigo-400 inline" />
             {displayType}
           </Badge>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0A0A0A] tracking-tight leading-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
             {resource.title}
           </h1>
           {resource.subject && (
-            <p className="text-sm font-semibold text-[#B15F2C]">
+            <p className="text-sm font-semibold text-indigo-400/90 flex items-center gap-1.5">
+              <BookOpen className="h-3.5 w-3.5" />
               {resource.subject}
             </p>
           )}
@@ -125,11 +126,11 @@ export default function ResourceDetails({
 
         {/* Optional Description */}
         {resource.description && (
-          <div className="border-t border-[#F1F0EE] pt-6 space-y-2">
-            <h2 className="text-xs font-extrabold text-[#0A0A0A] uppercase tracking-[0.15em]">
+          <div className="border-t border-white/10 pt-6 space-y-2">
+            <h2 className="text-xs font-mono font-extrabold text-indigo-400 uppercase tracking-[0.15em]">
               Description
             </h2>
-            <p className="text-sm leading-relaxed text-[#666666] font-normal">
+            <p className="text-sm leading-relaxed text-slate-300/90 font-normal bg-[#161A29]/40 border border-white/5 p-4 rounded-2xl">
               {resource.description}
             </p>
           </div>
@@ -142,11 +143,12 @@ export default function ResourceDetails({
       {/* Right Column: Embedded PDF Viewer */}
       <div className="lg:col-span-2 space-y-6">
         <div className="flex items-center justify-between px-2">
-          <h2 className="text-lg font-extrabold text-[#0A0A0A]">
+          <h2 className="text-lg font-extrabold text-white flex items-center gap-2">
+            <FileText className="h-5 w-5 text-indigo-400" />
             Document Viewer
           </h2>
-          <span className="text-xs font-mono font-semibold text-[#666666] bg-[#F1F0EE] px-3 py-1 rounded-full border border-[#E2E0DB]">
-            {resource.fileType || "PDF"}
+          <span className="text-xs font-mono font-extrabold text-indigo-400 bg-[#161A29] px-3.5 py-1 rounded-full border border-white/10 shadow-inner">
+            {(resource.fileType || "PDF").toUpperCase()}
           </span>
         </div>
         <PDFPreview resourceId={resourceId} fileName={resource.fileName} />

@@ -14,15 +14,15 @@ export default function RelatedResources({
   }
 
   return (
-    <section className="mt-20 border-t border-[#E2E0DB] pt-16">
+    <section className="mt-20 border-t border-white/10 pt-16">
       <div className="flex items-center gap-2 mb-2">
-        <Sparkles className="h-5 w-5 text-[#B15F2C]" />
-        <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#0A0A0A]">
+        <Sparkles className="h-5 w-5 text-indigo-400" />
+        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
           Related Resources
         </h2>
       </div>
 
-      <p className="text-[#666666] text-base max-w-xl font-normal">
+      <p className="text-slate-400 text-sm sm:text-base max-w-xl font-normal">
         Explore more notes, PYQs, and study materials from the same subject.
       </p>
 

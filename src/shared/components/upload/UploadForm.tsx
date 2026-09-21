@@ -132,25 +132,25 @@ export default function UploadForm() {
   if (uploadedResource) {
     return (
       <div className="flex flex-col items-center justify-center p-8 sm:p-12 text-center space-y-6 animate-in fade-in duration-300">
-        <div className="h-16 w-16 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shadow-sm">
-          <CheckCircle2 className="h-8 w-8" />
+        <div className="h-16 w-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shadow-inner">
+          <CheckCircle2 className="h-8 w-8 text-emerald-400" />
         </div>
 
         <div className="space-y-2">
-          <span className="text-xs font-mono uppercase font-bold tracking-widest text-[#B15F2C]">
+          <span className="text-xs font-mono uppercase font-bold tracking-widest text-indigo-400">
             Upload Successful
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A0A0A] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Resource Shared with Community!
           </h2>
-          <p className="text-sm text-[#666666] max-w-md mx-auto leading-relaxed">
-            &quot;<span className="font-bold text-[#0A0A0A]">{uploadedResource.title}</span>&quot; has been processed and is now live in the repository.
+          <p className="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+            &quot;<span className="font-bold text-white">{uploadedResource.title}</span>&quot; has been processed and is now live in the repository.
           </p>
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md pt-4">
           <Link href={`/resources/${uploadedResource.id}`} className="w-full">
-            <Button variant="accent" className="w-full h-12 bg-[#B15F2C] hover:bg-[#9E5324] text-white rounded-full font-bold text-xs uppercase tracking-wider gap-2">
+            <Button className="w-full h-12 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 hover:from-indigo-500 hover:to-purple-500 text-white rounded-full font-extrabold text-xs uppercase tracking-wider gap-2 shadow-lg shadow-indigo-500/25 border border-indigo-400/30">
               <ExternalLink className="h-4 w-4" />
               View Uploaded Resource
             </Button>
@@ -158,9 +158,9 @@ export default function UploadForm() {
           <Button
             variant="outline"
             onClick={handleResetForm}
-            className="w-full h-12 border-[#E2E0DB] bg-white hover:bg-[#F1F0EE] text-[#0A0A0A] rounded-full font-bold text-xs uppercase tracking-wider gap-2"
+            className="w-full h-12 border-white/10 bg-[#161A29] hover:bg-[#1E2235] text-slate-200 rounded-full font-extrabold text-xs uppercase tracking-wider gap-2 cursor-pointer transition-colors"
           >
-            <RotateCcw className="h-4 w-4 text-[#B15F2C]" />
+            <RotateCcw className="h-4 w-4 text-indigo-400" />
             Upload Another Resource
           </Button>
         </div>
@@ -172,14 +172,14 @@ export default function UploadForm() {
     <div className="space-y-6">
       {/* Authentication Alert if user is not logged in */}
       {!isAuthenticated && (
-        <div className="flex items-center justify-between gap-4 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold">
+        <div className="flex items-center justify-between gap-4 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-200 text-xs font-semibold backdrop-blur-md">
           <div className="flex items-center gap-2.5">
-            <AlertCircle className="h-4 w-4 text-amber-700 shrink-0" />
+            <AlertCircle className="h-4 w-4 text-amber-400 shrink-0" />
             <span>You must be logged in to share study resources.</span>
           </div>
           <Link href="/login">
-            <Button size="sm" variant="outline" className="h-8 rounded-full border-amber-300 text-amber-900 font-bold gap-1 text-[11px]">
-              <LogIn className="h-3.5 w-3.5 text-[#B15F2C]" />
+            <Button size="sm" variant="outline" className="h-8 rounded-full border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-200 font-bold gap-1 text-[11px] cursor-pointer">
+              <LogIn className="h-3.5 w-3.5 text-amber-300" />
               Log In
             </Button>
           </Link>
@@ -188,14 +188,14 @@ export default function UploadForm() {
 
       {/* Submit Error Banner */}
       {submitError && (
-        <div className="flex items-center justify-between gap-3 p-4 rounded-2xl bg-red-50 border border-red-200 text-red-900 text-xs font-semibold">
+        <div className="flex items-center justify-between gap-3 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-200 text-xs font-semibold backdrop-blur-md">
           <div className="flex items-center gap-2">
-            <AlertCircle className="h-4 w-4 text-red-600 shrink-0" />
+            <AlertCircle className="h-4 w-4 text-rose-400 shrink-0" />
             <span>{submitError}</span>
           </div>
           <button
             onClick={() => setSubmitError(null)}
-            className="text-red-700 hover:text-red-950 p-1 cursor-pointer"
+            className="text-rose-400 hover:text-white p-1 cursor-pointer transition-colors"
             aria-label="Dismiss error"
           >
             <X className="h-4 w-4" />
@@ -336,8 +336,8 @@ export default function UploadForm() {
 
         {/* Description Textarea */}
         <div className="w-full space-y-2">
-          <label className="block text-xs font-extrabold uppercase tracking-wider text-[#0A0A0A]">
-            Description <span className="text-[#666666] text-[10px] font-normal lowercase">(optional)</span>
+          <label className="block text-xs font-mono font-extrabold uppercase tracking-[0.12em] text-slate-300">
+            Description <span className="text-slate-500 text-[10px] font-normal lowercase">(optional)</span>
           </label>
           <textarea
             value={description}
@@ -345,7 +345,7 @@ export default function UploadForm() {
             disabled={uploading}
             placeholder="Write a short description about topics covered in this file..."
             rows={3}
-            className="w-full bg-white text-[#0A0A0A] placeholder:text-[#666666]/60 border border-[#E2E0DB] rounded-[24px] px-5 py-3.5 text-sm transition-all duration-300 focus:outline-none focus:border-[#B15F2C] focus:ring-4 focus:ring-[#B15F2C]/15 shadow-2xs resize-none disabled:opacity-50"
+            className="w-full bg-[#161A29] text-slate-100 placeholder:text-slate-500 border border-white/10 rounded-2xl px-5 py-3.5 text-sm transition-all duration-300 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 resize-none disabled:opacity-40"
           />
         </div>
 
@@ -358,16 +358,16 @@ export default function UploadForm() {
           placeholder="Select Resource Format"
           required
         >
-          <option value="Notes">Notes (Classroom & Handwritten)</option>
-          <option value="PYQ">Previous Year Question Paper (PYQ)</option>
-          <option value="Lab Manual">Lab Manual & Code Reference</option>
-          <option value="Study Material">Study Guide & Syllabus Roadmap</option>
+          <option value="Notes" className="bg-[#0F121E] text-slate-100">Notes (Classroom & Handwritten)</option>
+          <option value="PYQ" className="bg-[#0F121E] text-slate-100">Previous Year Question Paper (PYQ)</option>
+          <option value="Lab Manual" className="bg-[#0F121E] text-slate-100">Lab Manual & Code Reference</option>
+          <option value="Study Material" className="bg-[#0F121E] text-slate-100">Study Guide & Syllabus Roadmap</option>
         </FormSelect>
 
         {/* Drag and Drop File Upload Area */}
         <div className="w-full space-y-2">
-          <label className="block text-xs font-extrabold uppercase tracking-wider text-[#0A0A0A]">
-            Upload Document File <span className="text-[#B15F2C] ml-0.5">*</span>
+          <label className="block text-xs font-mono font-extrabold uppercase tracking-[0.12em] text-slate-300">
+            Upload Document File <span className="text-indigo-400 ml-0.5">*</span>
           </label>
 
           <div
@@ -375,12 +375,12 @@ export default function UploadForm() {
             onDragLeave={handleDrag}
             onDragOver={handleDrag}
             onDrop={handleDrop}
-            className={`relative flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-[28px] transition-all duration-300 cursor-pointer overflow-hidden ${
+            className={`relative flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-3xl transition-all duration-300 cursor-pointer overflow-hidden ${
               dragActive
-                ? "border-[#B15F2C] bg-[#B15F2C]/10"
+                ? "border-indigo-500 bg-indigo-500/10 shadow-lg shadow-indigo-500/10"
                 : fileError
-                ? "border-rose-400 bg-rose-50/50"
-                : "border-[#E2E0DB] bg-[#F1F0EE]/60 hover:bg-[#F1F0EE] hover:border-[#B15F2C]"
+                ? "border-rose-500/50 bg-rose-500/10"
+                : "border-white/10 bg-[#161A29]/50 hover:bg-[#161A29] hover:border-indigo-500/40"
             }`}
           >
             <input
@@ -392,29 +392,29 @@ export default function UploadForm() {
                 }
               }}
               disabled={uploading}
-              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed"
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed z-10"
               required
             />
             <div className="flex flex-col items-center justify-center text-center px-4 pointer-events-none">
               {file ? (
                 <>
-                  <div className="h-12 w-12 rounded-full bg-[#B15F2C]/10 border border-[#B15F2C]/20 flex items-center justify-center text-[#B15F2C] mb-2 shadow-2xs">
+                  <div className="h-12 w-12 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-2 shadow-inner">
                     <FileCheck className="h-6 w-6" />
                   </div>
-                  <p className="text-sm font-extrabold text-[#0A0A0A] mb-1 truncate max-w-xs">{file.name}</p>
-                  <p className="text-xs text-[#666666]">
+                  <p className="text-sm font-extrabold text-white mb-1 truncate max-w-xs">{file.name}</p>
+                  <p className="text-xs text-slate-400 font-mono">
                     {(file.size / (1024 * 1024)).toFixed(2)} MB • Click or drag to replace
                   </p>
                 </>
               ) : (
                 <>
-                  <div className="h-12 w-12 rounded-full bg-[#0A0A0A] flex items-center justify-center text-white mb-2 shadow-2xs">
-                    <UploadCloud className="h-6 w-6 text-[#B15F2C]" />
+                  <div className="h-12 w-12 rounded-full bg-[#161A29] border border-white/10 flex items-center justify-center text-indigo-400 mb-2 shadow-md">
+                    <UploadCloud className="h-6 w-6 text-indigo-400" />
                   </div>
-                  <p className="text-sm font-extrabold text-[#0A0A0A] mb-1">
+                  <p className="text-sm font-extrabold text-white mb-1">
                     Click to browse or drag file here
                   </p>
-                  <p className="text-xs text-[#666666]">
+                  <p className="text-xs text-slate-400">
                     Supports PDF, DOC, DOCX, PPT, PPTX (Up to 50MB)
                   </p>
                 </>
@@ -423,7 +423,7 @@ export default function UploadForm() {
           </div>
 
           {fileError && (
-            <p className="text-xs font-semibold text-rose-600 mt-1 flex items-center gap-1">
+            <p className="text-xs font-semibold text-rose-400 mt-1 flex items-center gap-1">
               <AlertCircle className="h-3.5 w-3.5 shrink-0" />
               {fileError}
             </p>
@@ -434,9 +434,8 @@ export default function UploadForm() {
         <Button
           type="submit"
           disabled={!isFormValid || uploading || !isAuthenticated}
-          variant="accent"
           aria-label="Submit and Share Resource"
-          className="w-full h-14 flex items-center justify-center gap-2.5 mt-8 bg-[#B15F2C] hover:bg-[#9E5324] disabled:opacity-40 text-white rounded-full px-8 text-xs font-extrabold uppercase tracking-wider transition-all duration-300 shadow-md cursor-pointer disabled:cursor-not-allowed"
+          className="w-full h-14 flex items-center justify-center gap-2.5 mt-8 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 hover:from-indigo-500 hover:via-purple-500 hover:to-indigo-400 disabled:opacity-40 text-white rounded-full px-8 text-xs font-extrabold uppercase tracking-wider transition-all duration-300 shadow-lg shadow-indigo-500/25 border border-indigo-400/30 cursor-pointer disabled:cursor-not-allowed hover:scale-[1.01] active:scale-[0.99]"
         >
           {uploading ? (
             <>

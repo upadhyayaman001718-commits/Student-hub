@@ -48,13 +48,12 @@ export default function DownloadButton({
   };
 
   return (
-    <div className="w-full space-y-2">
+    <div className="w-full space-y-3">
       <Button
-        variant="accent"
         onClick={handleDownload}
         disabled={downloading}
         aria-label="Download PDF Resource"
-        className="w-full h-13 rounded-full bg-[#B15F2C] hover:bg-[#9E5324] font-extrabold tracking-wide uppercase text-xs text-white shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-70"
+        className="w-full h-13 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 hover:from-indigo-500 hover:via-purple-500 hover:to-indigo-400 font-extrabold tracking-wider uppercase text-xs text-white shadow-lg shadow-indigo-500/25 border border-indigo-400/30 transition-all duration-300 flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.01] active:scale-[0.99]"
       >
         {downloading ? (
           <>
@@ -70,8 +69,8 @@ export default function DownloadButton({
       </Button>
 
       {error && (
-        <div className="flex items-center gap-1.5 text-xs text-red-600 bg-red-50 p-2.5 rounded-xl border border-red-200">
-          <AlertCircle className="h-4 w-4 shrink-0" />
+        <div className="flex items-center gap-2.5 text-xs text-rose-300 bg-rose-500/10 p-3.5 rounded-2xl border border-rose-500/20 backdrop-blur-md">
+          <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
           <span>{error}</span>
         </div>
       )}

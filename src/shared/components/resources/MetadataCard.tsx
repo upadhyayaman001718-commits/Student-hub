@@ -12,15 +12,15 @@ export default function MetadataCard({
   value,
 }: MetadataCardProps) {
   return (
-    <div className="rounded-2xl border border-[#E2E0DB] bg-[#F1F0EE] p-4 transition-all duration-200 hover:border-[#B15F2C]/30">
-      <div className="flex items-center gap-1.5 text-[#B15F2C]">
-        <Icon className="h-4 w-4" />
-        <span className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-[#666666]">
+    <div className="rounded-2xl border border-white/10 bg-[#161A29]/80 backdrop-blur-sm p-3.5 transition-all duration-300 hover:border-indigo-500/40 hover:bg-[#1E2235]/90 hover:shadow-lg hover:shadow-indigo-500/10 group">
+      <div className="flex items-center gap-1.5 text-indigo-400">
+        <Icon className="h-3.5 w-3.5 text-indigo-400 shrink-0 group-hover:scale-110 transition-transform" />
+        <span className="text-[10px] font-mono font-extrabold uppercase tracking-[0.12em] text-slate-400 truncate">
           {label}
         </span>
       </div>
 
-      <p className="mt-1.5 font-extrabold text-[#0A0A0A] text-sm truncate">
+      <p className="mt-1.5 font-extrabold text-white text-xs sm:text-sm truncate tracking-tight" title={value}>
         {value}
       </p>
     </div>

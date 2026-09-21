@@ -77,7 +77,7 @@ export default function PDFPreview({
   return (
     <div
       ref={pdfContainerRef}
-      className="rounded-[28px] border border-[#E2E0DB] bg-white overflow-hidden shadow-2xs flex flex-col"
+      className="rounded-3xl border border-white/10 bg-[#0F121E]/90 backdrop-blur-xl overflow-hidden shadow-2xl flex flex-col"
     >
       <PDFToolbar
         zoom={zoom}
@@ -88,35 +88,35 @@ export default function PDFPreview({
         onFullscreen={handleFullscreen}
       />
 
-      <div className="min-h-[500px] sm:min-h-[640px] bg-[#F1F0EE]/60 relative flex flex-col items-center justify-center overflow-hidden">
+      <div className="min-h-[500px] sm:min-h-[640px] bg-[#07080D]/90 relative flex flex-col items-center justify-center overflow-hidden">
         {loading && (
-          <div className="h-[500px] sm:h-[640px] flex flex-col items-center justify-center gap-3 text-[#666666]">
-            <Loader2 className="h-8 w-8 animate-spin text-[#B15F2C]" />
-            <p className="text-sm font-bold text-[#0A0A0A]">Loading PDF Document...</p>
-            <p className="text-xs text-[#666666]">Fetching secure preview stream</p>
+          <div className="h-[500px] sm:h-[640px] flex flex-col items-center justify-center gap-3 text-slate-400">
+            <Loader2 className="h-8 w-8 animate-spin text-indigo-400" />
+            <p className="text-sm font-extrabold text-white">Loading Document Preview...</p>
+            <p className="text-xs text-slate-400 font-mono">Fetching secure preview stream</p>
           </div>
         )}
 
         {!loading && error && (
           <div className="h-[500px] sm:h-[640px] flex flex-col items-center justify-center gap-4 p-8 text-center max-w-md">
-            <div className="h-14 w-14 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-[#B15F2C]">
+            <div className="h-14 w-14 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 shadow-inner">
               <AlertCircle className="h-7 w-7" />
             </div>
             <div>
-              <h4 className="text-lg font-extrabold text-[#0A0A0A]">
+              <h4 className="text-lg font-extrabold text-white">
                 Unable to load inline preview
               </h4>
-              <p className="mt-1 text-xs text-[#666666] leading-relaxed">
-                We couldn&apos;t generate the inline document viewer. You can retry loading or download the file directly.
+              <p className="mt-1 text-xs text-slate-400 leading-relaxed">
+                We couldn&apos;t generate the inline document viewer. You can retry loading or download the file directly using the download button.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
               <Button
                 variant="outline"
                 onClick={handleRefresh}
-                className="rounded-full border-[#E2E0DB] bg-white hover:bg-[#F1F0EE] text-xs font-bold gap-2"
+                className="rounded-full border-white/10 bg-[#161A29] hover:bg-indigo-500/10 hover:border-indigo-500/30 text-white text-xs font-bold gap-2 cursor-pointer transition-colors"
               >
-                <RotateCcw className="h-3.5 w-3.5 text-[#B15F2C]" />
+                <RotateCcw className="h-3.5 w-3.5 text-indigo-400" />
                 Retry Preview
               </Button>
             </div>
@@ -130,7 +130,7 @@ export default function PDFPreview({
           >
             <iframe
               src={pdfUrl}
-              className="w-full h-full border-0"
+              className="w-full h-full border-0 bg-white"
               title={fileName ? `PDF Preview - ${fileName}` : "Resource Document Viewer"}
             />
           </div>
