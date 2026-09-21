@@ -26,7 +26,7 @@ export default function RootLayout({
       lang="en"
       className={cn("h-full", "antialiased", onest.variable, "font-sans")}
     >
-      <body className="flex min-h-full flex-col bg-[#F1F0EE] text-[#0A0A0A] font-sans selection:bg-[#B15F2C]/20 selection:text-[#B15F2C]">
+      <body className="flex min-h-full flex-col bg-[#07080D] text-slate-100 font-sans selection:bg-indigo-500/30 selection:text-indigo-300 antialiased">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

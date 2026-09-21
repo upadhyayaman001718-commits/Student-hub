@@ -26,27 +26,27 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 py-4 px-4 sm:px-8 bg-[#F1F0EE]/80 backdrop-blur-xl border-b border-[#E2E0DB]/60 transition-all duration-300">
+    <header className="sticky top-0 z-50 py-4 px-4 sm:px-8 bg-[#07080D]/80 backdrop-blur-xl border-b border-white/10 transition-all duration-300">
       <div className="mx-auto max-w-[1280px] flex items-center justify-between">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group cursor-pointer">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0A0A0A] text-white shadow-sm group-hover:bg-[#B15F2C] transition-all duration-300">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 via-purple-600 to-cyan-500 text-white shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-all duration-300">
             <GraduationCap className="h-5 w-5 text-white" />
           </div>
           <div className="flex flex-col">
-            <span className="text-xl font-extrabold tracking-tight text-[#0A0A0A] group-hover:text-[#B15F2C] transition-colors">
-              Student<span className="text-[#B15F2C]">Hub</span>
+            <span className="text-xl font-extrabold tracking-tight text-white group-hover:text-indigo-400 transition-colors">
+              Student<span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Hub</span>
             </span>
-            <span className="text-[10px] uppercase font-bold tracking-widest text-[#666666] -mt-1">
+            <span className="text-[10px] uppercase font-mono tracking-widest text-slate-400 -mt-1">
               Academic Platform
             </span>
           </div>
         </Link>
 
-        {/* Desktop Navigation - Lumora Pill Floating System */}
+        {/* Desktop Navigation - Ascend Floating Pill System */}
         <nav
           aria-label="Main navigation"
-          className="hidden items-center gap-1.5 md:flex bg-[#0A0A0A]/90 p-1.5 rounded-full border border-white/10 shadow-lg text-white"
+          className="hidden items-center gap-1.5 md:flex bg-[#0F121E]/90 p-1.5 rounded-full border border-white/10 shadow-xl shadow-indigo-950/20 text-white"
         >
           {navLinks.map((link) => {
             const Icon = link.icon;
@@ -54,16 +54,16 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`relative flex items-center gap-2 px-5 py-2 text-xs font-bold tracking-wide uppercase rounded-full transition-all duration-300 ${
+                className={`relative flex items-center gap-2 px-5 py-2 text-xs font-bold tracking-wider uppercase rounded-full transition-all duration-300 ${
                   link.active
-                    ? "bg-[#B15F2C] text-white shadow-sm"
-                    : "text-neutral-300 hover:text-white hover:bg-white/10"
+                    ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/25"
+                    : "text-slate-400 hover:text-white hover:bg-white/5"
                 }`}
               >
-                <Icon className={`h-3.5 w-3.5 ${link.active ? "text-white" : "text-neutral-400"}`} />
+                <Icon className={`h-3.5 w-3.5 ${link.active ? "text-white" : "text-slate-400"}`} />
                 {link.name}
                 {link.active && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse ml-0.5" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse ml-0.5" />
                 )}
               </Link>
             );
@@ -74,17 +74,17 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 md:flex">
           {isAuthenticated ? (
             <>
-              <Link href="/dashboard" className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EBE9E4] hover:bg-[#E2E0DB] text-[#0A0A0A] text-xs font-bold transition-colors">
-                <User className="h-3.5 w-3.5 text-[#B15F2C]" />
+              <Link href="/dashboard" className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#161A29] hover:bg-[#1E2235] text-slate-200 border border-white/10 text-xs font-bold transition-all">
+                <User className="h-3.5 w-3.5 text-indigo-400" />
                 <span className="max-w-[120px] truncate">{user?.name || "Student"}</span>
               </Link>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={logout}
-                className="text-[#0A0A0A] hover:bg-[#EBE9E4] font-bold rounded-full gap-2 text-xs uppercase tracking-wider cursor-pointer"
+                className="text-slate-300 hover:bg-white/10 hover:text-white font-bold rounded-full gap-2 text-xs uppercase tracking-wider cursor-pointer"
               >
-                <LogOut className="h-4 w-4 text-[#B15F2C]" />
+                <LogOut className="h-4 w-4 text-indigo-400" />
                 Logout
               </Button>
             </>
@@ -93,18 +93,17 @@ export default function Navbar() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-[#0A0A0A] hover:bg-[#EBE9E4] font-bold rounded-full gap-2 text-xs uppercase tracking-wider"
+                className="text-slate-300 hover:bg-white/10 hover:text-white font-bold rounded-full gap-2 text-xs uppercase tracking-wider"
               >
-                <LogIn className="h-4 w-4 text-[#B15F2C]" />
+                <LogIn className="h-4 w-4 text-indigo-400" />
                 Login
               </Button>
             </Link>
           )}
           <Link href="/upload">
             <Button
-              variant="accent"
               size="sm"
-              className="bg-[#B15F2C] hover:bg-[#9E5324] text-white font-bold rounded-full px-5 text-xs uppercase tracking-wider gap-2 shadow-sm"
+              className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 hover:opacity-95 text-white font-extrabold rounded-full px-5 text-xs uppercase tracking-wider gap-2 shadow-lg shadow-indigo-500/20 border border-indigo-400/30 cursor-pointer"
             >
               Upload Material
               <ArrowUpRight className="h-3.5 w-3.5" />
@@ -115,10 +114,10 @@ export default function Navbar() {
         {/* Mobile Menu Toggle Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E2E0DB] bg-white text-[#0A0A0A] hover:bg-[#F1F0EE] md:hidden shadow-xs cursor-pointer"
+          className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-[#0F121E] text-white hover:bg-[#161A29] md:hidden shadow-md cursor-pointer"
           aria-label="Toggle Navigation Menu"
         >
-          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {mobileMenuOpen ? <X className="h-5 w-5 text-indigo-400" /> : <Menu className="h-5 w-5 text-slate-200" />}
         </button>
       </div>
 
@@ -130,11 +129,11 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="md:hidden fixed inset-x-0 top-[76px] z-50 bg-[#0A0A0A] text-white px-6 py-8 flex flex-col justify-between border-b border-white/10 shadow-2xl min-h-[calc(100vh-76px)]"
+            className="md:hidden fixed inset-x-0 top-[76px] z-50 bg-[#07080D]/95 backdrop-blur-2xl text-white px-6 py-8 flex flex-col justify-between border-b border-white/10 shadow-2xl min-h-[calc(100vh-76px)]"
           >
             <div className="flex flex-col gap-6">
-              <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B15F2C] flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#B15F2C]" />
+              <div className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-indigo-400 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
                 Navigation Menu
               </div>
 
@@ -146,10 +145,10 @@ export default function Navbar() {
                       key={link.name}
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className={`flex items-center justify-between px-6 py-4 rounded-2xl text-lg font-bold transition-all ${
+                      className={`flex items-center justify-between px-6 py-4 rounded-2xl text-lg font-bold transition-all border ${
                         link.active
-                          ? "bg-[#B15F2C] text-white"
-                          : "bg-neutral-900/80 text-neutral-300 hover:bg-neutral-800 hover:text-white"
+                          ? "bg-gradient-to-r from-indigo-600 to-purple-600 border-indigo-400/40 text-white shadow-lg shadow-indigo-500/25"
+                          : "bg-[#0F121E] border-white/5 text-slate-300 hover:bg-[#161A29] hover:text-white"
                       }`}
                     >
                       <div className="flex items-center gap-3">
@@ -163,7 +162,7 @@ export default function Navbar() {
               </nav>
             </div>
 
-            <div className="pt-8 border-t border-neutral-800 flex flex-col gap-3">
+            <div className="pt-8 border-t border-white/10 flex flex-col gap-3">
               {isAuthenticated ? (
                 <Button
                   variant="outline"
@@ -171,31 +170,30 @@ export default function Navbar() {
                     logout();
                     setMobileMenuOpen(false);
                   }}
-                  className="w-full justify-center rounded-full border-neutral-700 bg-neutral-900 text-white hover:bg-neutral-800 h-12"
+                  className="w-full justify-center rounded-xl border-white/10 bg-[#0F121E] text-white hover:bg-[#161A29] h-12 font-bold"
                 >
-                  <LogOut className="h-4 w-4 mr-2 text-[#B15F2C]" />
+                  <LogOut className="h-4 w-4 mr-2 text-indigo-400" />
                   Logout ({user?.name || "Student"})
                 </Button>
               ) : (
                 <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
                   <Button
                     variant="outline"
-                    className="w-full justify-center rounded-full border-neutral-700 bg-neutral-900 text-white hover:bg-neutral-800 h-12"
+                    className="w-full justify-center rounded-xl border-white/10 bg-[#0F121E] text-white hover:bg-[#161A29] h-12 font-bold"
                   >
-                    <LogIn className="h-4 w-4 mr-2 text-[#B15F2C]" />
+                    <LogIn className="h-4 w-4 mr-2 text-indigo-400" />
                     Log In / Sign Up
                   </Button>
                 </Link>
               )}
               <Link href="/upload" onClick={() => setMobileMenuOpen(false)}>
                 <Button
-                  variant="accent"
-                  className="w-full justify-center rounded-full bg-[#B15F2C] hover:bg-[#9E5324] text-white font-bold h-12"
+                  className="w-full justify-center rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-extrabold h-12 shadow-lg shadow-indigo-500/25"
                 >
                   Upload Resource &rarr;
                 </Button>
               </Link>
-              <p className="text-center text-xs text-neutral-500 mt-4">
+              <p className="text-center text-xs text-slate-500 mt-4 font-mono">
                 Student Hub &copy; {new Date().getFullYear()} — Academic Platform
               </p>
             </div>
@@ -205,4 +203,5 @@ export default function Navbar() {
     </header>
   );
 }
+
 

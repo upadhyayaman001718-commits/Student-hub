@@ -15,40 +15,40 @@ export default function Breadcrumb({
   backHref = "/resources",
 }: BreadcrumbProps) {
   return (
-    <div className="mb-8 flex flex-col gap-4">
+    <div className="mb-8 flex flex-col gap-4 text-left">
       <Link
         href={backHref}
-        className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#666666] hover:text-[#B15F2C] transition-all hover:-translate-x-1 w-fit group cursor-pointer"
+        className="inline-flex items-center gap-2 text-xs font-mono font-extrabold uppercase tracking-wider text-slate-400 hover:text-indigo-400 transition-all hover:-translate-x-1 w-fit group cursor-pointer"
         aria-label="Back to Resources"
       >
-        <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1 text-[#B15F2C]" />
+        <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1 text-indigo-400" />
         Back to Resources
       </Link>
 
-      <div className="flex flex-wrap items-center gap-2 text-xs text-[#666666] bg-white border border-[#E2E0DB] px-4 py-2.5 rounded-full w-fit shadow-2xs">
-        <Link href="/" className="hover:text-[#0A0A0A] transition flex items-center gap-1">
-          <Home className="h-3.5 w-3.5 text-[#B15F2C]" />
+      <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400 bg-[#0F121E]/80 border border-white/10 px-4 py-2.5 rounded-full w-fit shadow-xl backdrop-blur-md">
+        <Link href="/" className="hover:text-white transition flex items-center gap-1">
+          <Home className="h-3.5 w-3.5 text-indigo-400" />
           <span>Home</span>
         </Link>
 
-        <ChevronRight className="h-3.5 w-3.5 text-[#E2E0DB]" />
+        <ChevronRight className="h-3.5 w-3.5 text-slate-600" />
 
-        <Link href="/resources" className="hover:text-[#0A0A0A] transition font-medium">
+        <Link href="/resources" className="hover:text-white transition font-medium">
           <span>Resources</span>
         </Link>
 
         {program && (
           <>
-            <ChevronRight className="h-3.5 w-3.5 text-[#E2E0DB]" />
-            <Link href={`/programs/${programSlug || "computer-science"}`} className="hover:text-[#0A0A0A] transition font-medium">
+            <ChevronRight className="h-3.5 w-3.5 text-slate-600" />
+            <Link href={`/programs/${programSlug || "computer-science"}`} className="hover:text-white transition font-medium">
               <span>{program}</span>
             </Link>
           </>
         )}
 
-        <ChevronRight className="h-3.5 w-3.5 text-[#E2E0DB]" />
+        <ChevronRight className="h-3.5 w-3.5 text-slate-600" />
 
-        <span className="text-[#0A0A0A] font-extrabold truncate max-w-[200px] sm:max-w-[300px]">
+        <span className="text-white font-extrabold truncate max-w-[200px] sm:max-w-[300px]">
           {resourceTitle}
         </span>
       </div>

@@ -69,34 +69,34 @@ export default async function Home() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F1F0EE] text-[#0A0A0A] overflow-x-hidden selection:bg-[#B15F2C]/20 selection:text-[#B15F2C] relative">
+    <div className="min-h-screen flex flex-col bg-[#07080D] text-slate-100 overflow-x-hidden selection:bg-indigo-500/30 selection:text-indigo-300 relative">
       {/* Sticky Top Navbar */}
       <Navbar />
 
       <main className="mx-auto w-full max-w-[1280px] flex-1 px-6 sm:px-10 lg:px-12 relative z-10">
         {/* ================================================== */}
-        {/* HERO SECTION - LUMORA EDITORIAL DESIGN */}
+        {/* HERO SECTION - ASCEND SAAS DESIGN */}
         {/* ================================================== */}
         <HomeHero resources={resources} />
 
         {/* ================================================== */}
         {/* DISCOVERY / RESOURCE TYPES SECTION */}
         {/* ================================================== */}
-        <section aria-labelledby="discovery-heading" className="py-16 border-t border-[#E2E0DB]">
+        <section aria-labelledby="discovery-heading" className="py-16 border-t border-white/10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
-              <div className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#B15F2C] mb-2 flex items-center gap-2">
-                <span className="text-[#0A0A0A] font-mono">[01]</span>
+              <div className="text-[11px] font-mono font-extrabold uppercase tracking-[0.2em] text-indigo-400 mb-2 flex items-center gap-2">
+                <span className="text-slate-400 font-mono">[01]</span>
                 Discovery Categories
               </div>
               <h2
                 id="discovery-heading"
-                className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0A0A0A] leading-tight"
+                className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight"
               >
                 Resource Types
               </h2>
             </div>
-            <p className="text-[#666666] text-base max-w-md">
+            <p className="text-slate-400 text-base max-w-md">
               Find exactly what you need for exam preparation, class assignments, and lab work.
             </p>
           </div>
@@ -106,28 +106,28 @@ export default async function Home() {
               const Icon = cat.icon;
               return (
                 <Link key={cat.title} href={cat.href} className="group block h-full">
-                  <div className="bg-white border border-[#E2E0DB] rounded-[28px] p-7 flex flex-col justify-between h-full min-h-[260px] shadow-2xs transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-[#B15F2C]/40">
+                  <div className="bg-[#0F121E]/80 backdrop-blur-md border border-white/10 rounded-[28px] p-7 flex flex-col justify-between h-full min-h-[260px] shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-indigo-950/40 hover:border-indigo-500/40">
                     <div>
                       <div className="flex items-center justify-between mb-6">
-                        <span className="text-xs font-mono font-extrabold text-[#666666] group-hover:text-[#B15F2C] transition-colors">
+                        <span className="text-xs font-mono font-extrabold text-slate-400 group-hover:text-indigo-400 transition-colors">
                           {cat.num}
                         </span>
-                        <div className="h-10 w-10 rounded-full bg-[#F1F0EE] border border-[#E2E0DB] flex items-center justify-center text-[#0A0A0A] group-hover:bg-[#B15F2C] group-hover:text-white transition-all duration-300">
+                        <div className="h-10 w-10 rounded-xl bg-[#161A29] border border-white/10 flex items-center justify-center text-indigo-400 group-hover:bg-gradient-to-r group-hover:from-indigo-600 group-hover:to-purple-600 group-hover:text-white transition-all duration-300">
                           <Icon className="h-4.5 w-4.5" />
                         </div>
                       </div>
 
-                      <h3 className="text-xl font-extrabold text-[#0A0A0A] tracking-tight group-hover:text-[#B15F2C] transition-colors mb-2">
+                      <h3 className="text-xl font-extrabold text-white tracking-tight group-hover:text-indigo-300 transition-colors mb-2">
                         {cat.title}
                       </h3>
-                      <p className="text-xs text-[#666666] font-normal leading-relaxed">
+                      <p className="text-xs text-slate-400 font-normal leading-relaxed">
                         {cat.desc}
                       </p>
                     </div>
 
-                    <div className="mt-8 pt-4 border-t border-[#F1F0EE] flex items-center justify-between text-xs font-bold text-[#0A0A0A]">
-                      <span className="text-[#666666]">{cat.count}</span>
-                      <ArrowUpRight className="h-4 w-4 text-[#B15F2C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-bold text-white">
+                      <span className="text-slate-400 font-mono">{cat.count}</span>
+                      <ArrowUpRight className="h-4 w-4 text-indigo-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </div>
                   </div>
                 </Link>
@@ -137,22 +137,22 @@ export default async function Home() {
         </section>
 
         {/* ================================================== */}
-        {/* EDITORIAL STATS GRID */}
+        {/* ASCEND STATS GRID */}
         {/* ================================================== */}
-        <section aria-label="Platform Statistics" className="py-16 border-y border-[#E2E0DB] my-12">
+        <section aria-label="Platform Statistics" className="py-16 border-y border-white/10 my-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, idx) => (
               <div
                 key={stat.subtitle}
-                className="bg-white border border-[#E2E0DB] rounded-[28px] p-8 text-center flex flex-col items-center justify-center shadow-2xs hover:border-[#B15F2C]/30 transition-all duration-300"
+                className="bg-[#0F121E]/80 border border-white/10 rounded-[28px] p-8 text-center flex flex-col items-center justify-center shadow-xl backdrop-blur-md hover:border-indigo-500/30 transition-all duration-300"
               >
-                <span className="text-xs font-mono text-[#B15F2C] font-extrabold mb-2">
+                <span className="text-xs font-mono text-indigo-400 font-extrabold mb-2">
                   0{idx + 1}
                 </span>
-                <h3 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#0A0A0A]">
+                <h3 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
                   {stat.title}
                 </h3>
-                <p className="mt-2 text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#666666]">
+                <p className="mt-2 text-[11px] font-mono font-extrabold uppercase tracking-[0.2em] text-slate-400">
                   {stat.subtitle}
                 </p>
               </div>
@@ -165,29 +165,29 @@ export default async function Home() {
         {/* ================================================== */}
         <section
           aria-labelledby="popular-courses-heading"
-          className="py-16 border-b border-[#E2E0DB]"
+          className="py-16 border-b border-white/10"
         >
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
-              <div className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#B15F2C] mb-2 flex items-center gap-2">
-                <span className="text-[#0A0A0A] font-mono">[02]</span>
+              <div className="text-[11px] font-mono font-extrabold uppercase tracking-[0.2em] text-indigo-400 mb-2 flex items-center gap-2">
+                <span className="text-slate-400 font-mono">[02]</span>
                 Featured Catalog
               </div>
               <h2
                 id="popular-courses-heading"
-                className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0A0A0A] leading-tight"
+                className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight"
               >
                 Popular Courses
               </h2>
-              <p className="mt-3 text-[#666666] max-w-2xl text-base font-normal leading-relaxed">
+              <p className="mt-3 text-slate-400 max-w-2xl text-base font-normal leading-relaxed">
                 Direct access to core academic programs and branches searched most frequently by students.
               </p>
             </div>
             <Link
               href="/programs"
-              className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#0A0A0A] hover:text-[#B15F2C] transition-colors group"
+              className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-slate-300 hover:text-indigo-400 transition-colors group"
             >
-              All Programs <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 text-[#B15F2C]" />
+              All Programs <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 text-indigo-400" />
             </Link>
           </div>
 
@@ -198,20 +198,20 @@ export default async function Home() {
 
             {/* Explore All Card */}
             <Link href="/programs" className="block h-full group">
-              <div className="rounded-[28px] border border-dashed border-[#E2E0DB] bg-white p-7 transition-all duration-300 hover:border-[#B15F2C] hover:-translate-y-1.5 hover:shadow-xl flex flex-col justify-between text-center h-full min-h-[230px]">
+              <div className="rounded-[28px] border border-dashed border-white/10 bg-[#0F121E]/60 p-7 transition-all duration-300 hover:border-indigo-500 hover:-translate-y-1.5 hover:shadow-xl flex flex-col justify-between text-center h-full min-h-[230px]">
                 <div className="flex flex-col items-center pt-4">
-                  <div className="h-12 w-12 rounded-full bg-[#F1F0EE] border border-[#E2E0DB] flex items-center justify-center text-[#B15F2C] mb-4">
+                  <div className="h-12 w-12 rounded-xl bg-[#161A29] border border-white/10 flex items-center justify-center text-indigo-400 mb-4">
                     <Layers className="h-5 w-5" />
                   </div>
-                  <h3 className="text-xl font-extrabold text-[#0A0A0A] tracking-tight group-hover:text-[#B15F2C] transition-colors">
+                  <h3 className="text-xl font-extrabold text-white tracking-tight group-hover:text-indigo-300 transition-colors">
                     View All Courses
                   </h3>
-                  <p className="mt-2 text-xs text-[#666666] font-normal leading-relaxed">
+                  <p className="mt-2 text-xs text-slate-400 font-normal leading-relaxed">
                     Browse every branch and semester available in Student Hub.
                   </p>
                 </div>
 
-                <span className="inline-flex h-12 items-center justify-center bg-[#0A0A0A] group-hover:bg-[#B15F2C] text-white rounded-full px-6 text-xs font-extrabold uppercase tracking-wider transition-all duration-300 mt-6 w-full cursor-pointer shadow-2xs">
+                <span className="inline-flex h-12 items-center justify-center bg-gradient-to-r from-indigo-600 to-purple-600 hover:opacity-95 text-white rounded-full px-6 text-xs font-extrabold uppercase tracking-wider transition-all duration-300 mt-6 w-full cursor-pointer shadow-lg shadow-indigo-500/20">
                   Explore Catalog &rarr;
                 </span>
               </div>
@@ -234,22 +234,22 @@ export default async function Home() {
         {/* ================================================== */}
         <section aria-labelledby="recently-opened-heading" className="py-16">
           <div className="mb-8">
-            <div className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#B15F2C] mb-2 flex items-center gap-2">
-              <span className="text-[#0A0A0A] font-mono">[04]</span>
+            <div className="text-[11px] font-mono font-extrabold uppercase tracking-[0.2em] text-indigo-400 mb-2 flex items-center gap-2">
+              <span className="text-slate-400 font-mono">[04]</span>
               Personal Workspace
             </div>
             <h2
               id="recently-opened-heading"
-              className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#0A0A0A] leading-tight"
+              className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight"
             >
               Recently Opened
             </h2>
-            <p className="mt-2 text-[#666666] max-w-2xl text-base font-normal leading-relaxed">
+            <p className="mt-2 text-slate-400 max-w-2xl text-base font-normal leading-relaxed">
               Quick access to study materials and documents you reviewed recently.
             </p>
           </div>
-          <div className="rounded-[28px] border border-dashed border-[#E2E0DB] bg-white p-12 text-center shadow-2xs">
-            <p className="text-[#666666] font-bold text-sm">
+          <div className="rounded-[28px] border border-dashed border-white/10 bg-[#0F121E]/60 p-12 text-center shadow-xl">
+            <p className="text-slate-400 font-bold text-sm">
               No recently opened items in your active session yet.
             </p>
           </div>
@@ -261,4 +261,5 @@ export default async function Home() {
     </div>
   );
 }
+
 
