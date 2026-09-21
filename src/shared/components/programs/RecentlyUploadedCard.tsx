@@ -33,8 +33,8 @@ export default function RecentlyUploadedCard({
   const badgeStyle = getTypeBadgeStyle(sub);
 
   return (
-    <Card className="group relative flex flex-col justify-between h-full min-h-[210px] bg-[#0F121E]/80 backdrop-blur-md border border-white/10 p-7 rounded-[28px] shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo-500/40 hover:shadow-indigo-950/40 cursor-pointer overflow-hidden">
-      <div className="space-y-4">
+    <Card className="group relative flex flex-col justify-between h-full min-h-[170px] bg-[#0F121E]/80 backdrop-blur-md border border-white/10 p-6 rounded-[28px] shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo-500/40 hover:shadow-indigo-950/40 cursor-pointer overflow-hidden">
+      <div className="space-y-3">
         {/* Top Row: Format badge & Course code */}
         <div className="flex items-center justify-between gap-2">
           <Badge className={`font-mono font-extrabold tracking-wider uppercase text-[10px] px-3 py-1 border ${badgeStyle}`}>
@@ -52,7 +52,7 @@ export default function RecentlyUploadedCard({
       </div>
 
       {/* Footer meta row */}
-      <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-400 font-medium">
+      <div className="mt-5 pt-3.5 border-t border-white/10 flex items-center justify-between text-xs text-slate-400 font-medium">
         <div className="flex items-center gap-1.5 truncate">
           <User className="h-3.5 w-3.5 text-slate-400" />
           <span className="truncate">{author}</span>

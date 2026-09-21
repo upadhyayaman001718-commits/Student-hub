@@ -58,13 +58,13 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
 
   return (
     <Link href={`/resources/${resource.id}`} className="block group h-full text-left">
-      <Card className="relative flex flex-col justify-between h-full min-h-[290px] bg-[#0F121E]/80 backdrop-blur-md border border-white/10 p-6 sm:p-7 rounded-[28px] shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo-500/40 hover:shadow-indigo-950/40 overflow-hidden">
-        <div className="space-y-4">
+      <Card className="relative flex flex-col justify-between h-full min-h-[240px] bg-[#0F121E]/80 backdrop-blur-md border border-white/10 p-5 sm:p-6 rounded-[28px] shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo-500/40 hover:shadow-indigo-950/40 overflow-hidden">
+        <div className="space-y-3">
           {/* Top Header */}
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className={`rounded-2xl p-3 border ${config.iconBg} shadow-inner group-hover:scale-105 transition-transform duration-300 shrink-0`}>
-                <Icon className="h-5 w-5" />
+              <div className={`rounded-2xl p-2.5 border ${config.iconBg} shadow-inner group-hover:scale-105 transition-transform duration-300 shrink-0`}>
+                <Icon className="h-4.5 w-4.5" />
               </div>
 
               <div>
@@ -83,7 +83,7 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
           </div>
 
           {/* Details List */}
-          <div className="space-y-2 border-t border-white/10 pt-4 text-xs font-medium text-slate-400">
+          <div className="space-y-1.5 border-t border-white/10 pt-3 text-xs font-medium text-slate-400">
             {/* Program */}
             {resource.program && (
               <div className="flex justify-between items-center">
@@ -127,8 +127,8 @@ export default function ResourceCard({ resource }: ResourceCardProps) {
         </div>
 
         {/* Action Button */}
-        <Button className="mt-6 w-full h-11 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 hover:opacity-95 text-white font-extrabold tracking-wider uppercase text-xs rounded-full shadow-lg shadow-indigo-500/20 border border-indigo-400/30 transition-all duration-300 gap-2 cursor-pointer">
-          <ExternalLink className="h-4 w-4" />
+        <Button className="mt-4 w-full h-10 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 hover:opacity-95 text-white font-extrabold tracking-wider uppercase text-xs rounded-full shadow-lg shadow-indigo-500/20 border border-indigo-400/30 transition-all duration-300 gap-2 cursor-pointer">
+          <ExternalLink className="h-3.5 w-3.5" />
           View Resource
           <ArrowRight className="h-3.5 w-3.5 opacity-80 group-hover:translate-x-1 transition-transform ml-auto" />
         </Button>

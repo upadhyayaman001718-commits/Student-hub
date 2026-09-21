@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button";
 
 export default function UploadResourceSection() {
   return (
-    <section className="bg-[#0F121E]/90 border border-white/10 rounded-[32px] p-8 sm:p-12 md:p-16 my-24 relative overflow-hidden shadow-2xl text-white">
+    <section className="bg-[#0F121E]/90 border border-white/10 rounded-[32px] p-6 sm:p-8 md:p-10 my-10 md:my-14 relative overflow-hidden shadow-2xl text-white">
       {/* Decorative ambient background accent */}
       <div className="absolute -right-20 -top-20 w-96 h-96 bg-gradient-to-tr from-indigo-600/20 to-purple-600/20 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 relative z-10">
-        <div className="space-y-4 max-w-2xl text-left">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 relative z-10">
+        <div className="space-y-3 max-w-2xl text-left">
           <div className="inline-flex items-center gap-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 px-3.5 py-1 text-[11px] font-mono font-bold tracking-[0.2em] text-indigo-400 uppercase">
             <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
             Community Knowledge

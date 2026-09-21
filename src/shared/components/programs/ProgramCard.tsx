@@ -46,11 +46,11 @@ function ProgramCard({ course, program, slug, resourceCount = "0 resources" }: P
 
   return (
     <Link href={`/programs/${slug}`} className="group block h-full">
-      <Card className="relative flex flex-col justify-between h-full min-h-[230px] bg-[#0F121E]/80 backdrop-blur-md border border-white/10 rounded-[28px] p-7 shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo-500/40 hover:shadow-indigo-950/40">
-        <div className="space-y-5">
+      <Card className="relative flex flex-col justify-between h-full min-h-[190px] bg-[#0F121E]/80 backdrop-blur-md border border-white/10 rounded-[28px] p-6 shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo-500/40 hover:shadow-indigo-950/40">
+        <div className="space-y-3.5">
           <div className="flex items-center justify-between">
-            <div className={`h-12 w-12 rounded-2xl border ${config.iconBg} flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform duration-300`}>
-              <Icon className="h-5.5 w-5.5" />
+            <div className={`h-11 w-11 rounded-2xl border ${config.iconBg} flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform duration-300`}>
+              <Icon className="h-5 w-5" />
             </div>
             <Badge variant="outline" className="text-[10px] uppercase font-mono font-bold tracking-[0.15em] text-slate-400 border-white/10 bg-[#161A29]">
               {program}
@@ -64,7 +64,7 @@ function ProgramCard({ course, program, slug, resourceCount = "0 resources" }: P
           </div>
         </div>
 
-        <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between">
+        <div className="mt-6 pt-3.5 border-t border-white/10 flex items-center justify-between">
           <span className="text-xs font-semibold text-slate-400 group-hover:text-slate-200 transition-colors">
             {resourceCount}
           </span>

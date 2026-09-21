@@ -5,10 +5,10 @@ import { GraduationCap, Heart, ArrowUpRight, Radio } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#07080D] text-slate-100 pt-20 pb-12 mt-auto relative z-10 w-full border-t border-white/10">
-      <div className="mx-auto max-w-[1280px] px-6 sm:px-10 lg:px-12 flex flex-col gap-16">
+    <footer className="bg-[#07080D] text-slate-100 pt-12 md:pt-14 pb-8 mt-auto relative z-10 w-full border-t border-white/10">
+      <div className="mx-auto max-w-[1280px] px-6 sm:px-10 lg:px-12 flex flex-col gap-10 md:gap-12">
         {/* Top Hero Footer Row */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-12 border-b border-white/10">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-8 border-b border-white/10">
           <div className="space-y-4 max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 px-3.5 py-1 text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-indigo-400">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
 
         {/* Content Navigation Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Column */}
           <div className="md:col-span-2 flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-3 group w-fit">

@@ -14,7 +14,7 @@ export default function HomeHero({ resources }: HomeHeroProps) {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="flex flex-col items-center justify-center pt-16 sm:pt-24 pb-20 text-center max-w-[1020px] mx-auto relative"
+      className="flex flex-col items-center justify-center pt-10 sm:pt-14 md:pt-16 pb-10 md:pb-12 text-center max-w-[1020px] mx-auto relative"
     >
       {/* Background Radial Glow Mesh Effect */}
       <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-indigo-600/20 via-purple-600/15 to-transparent blur-3xl pointer-events-none rounded-full" />
@@ -24,7 +24,7 @@ export default function HomeHero({ resources }: HomeHeroProps) {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="inline-flex items-center gap-2.5 rounded-full bg-[#0F121E] border border-white/10 px-4 py-1.5 text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-indigo-400 mb-8 shadow-xl shadow-indigo-950/20"
+        className="inline-flex items-center gap-2.5 rounded-full bg-[#0F121E] border border-white/10 px-4 py-1.5 text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-indigo-400 mb-4 sm:mb-5 shadow-xl shadow-indigo-950/20"
       >
         <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
         <Sparkles className="h-3 w-3 text-indigo-400" />
@@ -37,7 +37,7 @@ export default function HomeHero({ resources }: HomeHeroProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-white leading-[1.02] mb-8"
+        className="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-white leading-[1.02] mb-5 sm:mb-6"
       >
         Everything you need <br />
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-400">
@@ -50,7 +50,7 @@ export default function HomeHero({ resources }: HomeHeroProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="max-w-[760px] text-lg sm:text-2xl text-slate-400 leading-relaxed mx-auto mb-12 font-normal"
+        className="max-w-[760px] text-lg sm:text-2xl text-slate-400 leading-relaxed mx-auto mb-6 sm:mb-8 font-normal"
       >
         Discover verified Notes, PYQs, Lab Manuals, and Study Material — organized by program and curated by top engineering & degree students.
       </motion.p>
@@ -60,7 +60,7 @@ export default function HomeHero({ resources }: HomeHeroProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="flex flex-wrap items-center justify-center gap-4 mb-14"
+        className="flex flex-wrap items-center justify-center gap-4 mb-8 md:mb-10"
       >
         <Link
           href="/resources"
