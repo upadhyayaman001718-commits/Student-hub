@@ -2,7 +2,11 @@ import { Resource } from "@/shared/data/resources";
 
 export type { Resource };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+if (!API_URL) {
+  throw new Error("NEXT_PUBLIC_API_URL is not configured");
+}
 const TOKEN_KEY = "student_hub_token";
 
 export interface AuthUser {
@@ -64,43 +68,43 @@ const handleResponse = async <T>(response: Response): Promise<T> => {
 };
 
 export const getResources = async () => {
-    const response = await fetch(`${API_URL}/resources`);
-    return handleResponse<{ success: boolean; data: Resource[] }>(response);
+  const response = await fetch(`${API_URL}/resources`);
+  return handleResponse<{ success: boolean; data: Resource[] }>(response);
 };
 
 export const getMyResources = async () => {
-    const headers = getAuthHeaders();
-    const response = await fetch(`${API_URL}/resources/my`, {
-        headers,
-    });
-    return handleResponse<{ success: boolean; data: Resource[] }>(response);
+  const headers = getAuthHeaders();
+  const response = await fetch(`${API_URL}/resources/my`, {
+    headers,
+  });
+  return handleResponse<{ success: boolean; data: Resource[] }>(response);
 };
 
 export const getResourceById = async (id: string | number) => {
-    const response = await fetch(`${API_URL}/resources/${id}`);
-    return handleResponse<{ success: boolean; data: Resource }>(response);
+  const response = await fetch(`${API_URL}/resources/${id}`);
+  return handleResponse<{ success: boolean; data: Resource }>(response);
 };
 
 export const getResourceFileUrl = async (id: string | number) => {
-    const response = await fetch(`${API_URL}/resources/${id}/file`);
-    return handleResponse<{ success: boolean; data: { url: string } }>(response);
+  const response = await fetch(`${API_URL}/resources/${id}/file`);
+  return handleResponse<{ success: boolean; data: { url: string } }>(response);
 };
 
 export const getResourceDownloadUrl = async (id: string | number) => {
-    const response = await fetch(`${API_URL}/resources/${id}/download`);
-    return handleResponse<{ success: boolean; data: { url: string } }>(response);
+  const response = await fetch(`${API_URL}/resources/${id}/download`);
+  return handleResponse<{ success: boolean; data: { url: string } }>(response);
 };
 
 export const loginUser = async (email: string, password: string): Promise<LoginResponse> => {
-    const response = await fetch(`${API_URL}/auth/login`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-    });
+  const response = await fetch(`${API_URL}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  });
 
-    return handleResponse<LoginResponse>(response);
+  return handleResponse<LoginResponse>(response);
 };
 
 export interface RegisterResponse {
@@ -110,48 +114,48 @@ export interface RegisterResponse {
 }
 
 export const registerUser = async (name: string, email: string, password: string): Promise<RegisterResponse> => {
-    const response = await fetch(`${API_URL}/auth/register`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, password }),
-    });
+  const response = await fetch(`${API_URL}/auth/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, email, password }),
+  });
 
-    return handleResponse<RegisterResponse>(response);
+  return handleResponse<RegisterResponse>(response);
 };
 
 export const uploadResource = async (formData: FormData) => {
-    const headers = getAuthHeaders();
-    const response = await fetch(`${API_URL}/resources/upload`, {
-        method: "POST",
-        headers,
-        body: formData,
-    });
+  const headers = getAuthHeaders();
+  const response = await fetch(`${API_URL}/resources/upload`, {
+    method: "POST",
+    headers,
+    body: formData,
+  });
 
-    return handleResponse<{ success: boolean; message: string; data: Resource }>(response);
+  return handleResponse<{ success: boolean; message: string; data: Resource }>(response);
 };
 
 export const updateResource = async (id: string | number, data: UpdateResourceInput) => {
-    const headers = {
-        ...getAuthHeaders(),
-        "Content-Type": "application/json",
-    };
-    const response = await fetch(`${API_URL}/resources/${id}`, {
-        method: "PATCH",
-        headers,
-        body: JSON.stringify(data),
-    });
+  const headers = {
+    ...getAuthHeaders(),
+    "Content-Type": "application/json",
+  };
+  const response = await fetch(`${API_URL}/resources/${id}`, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(data),
+  });
 
-    return handleResponse<{ success: boolean; message: string; data: Resource }>(response);
+  return handleResponse<{ success: boolean; message: string; data: Resource }>(response);
 };
 
 export const deleteResource = async (id: string | number) => {
-    const headers = getAuthHeaders();
-    const response = await fetch(`${API_URL}/resources/${id}`, {
-        method: "DELETE",
-        headers,
-    });
+  const headers = getAuthHeaders();
+  const response = await fetch(`${API_URL}/resources/${id}`, {
+    method: "DELETE",
+    headers,
+  });
 
-    return handleResponse<{ success: boolean; message: string; data: Resource }>(response);
+  return handleResponse<{ success: boolean; message: string; data: Resource }>(response);
 };
