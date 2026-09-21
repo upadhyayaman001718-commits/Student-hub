@@ -168,12 +168,12 @@ export default function ResourceDiscovery({
         <div className="lg:col-span-3 space-y-6 w-full">
           {/* Active Filter Summary / Status */}
           <div className="flex items-center justify-between px-2">
-            <div className="flex items-center gap-2 text-sm font-bold text-[#0A0A0A]">
-              <Layers className="h-4 w-4 text-[#B15F2C]" />
+            <div className="flex items-center gap-2 text-sm font-extrabold text-white">
+              <Layers className="h-4 w-4 text-indigo-400" />
               Showing {filteredResources.length} of {resources.length} resources
             </div>
             {activeFilterCount > 0 && (
-              <span className="text-xs font-semibold text-[#B15F2C]">
+              <span className="text-xs font-mono font-extrabold text-indigo-400">
                 {activeFilterCount} {activeFilterCount === 1 ? "filter" : "filters"} applied
               </span>
             )}

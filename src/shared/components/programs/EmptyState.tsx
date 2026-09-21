@@ -20,16 +20,16 @@ export default function EmptyState({
   actionHref,
 }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-[28px] border border-dashed border-[#E2E0DB] bg-white p-12 text-center shadow-2xs">
-      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#F1F0EE] border border-[#E2E0DB] text-[#B15F2C] shadow-2xs">
+    <div className="flex flex-col items-center justify-center rounded-3xl border border-dashed border-white/10 bg-[#0F121E]/80 backdrop-blur-xl p-12 text-center shadow-2xl">
+      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#161A29] border border-white/10 text-indigo-400 shadow-inner">
         <FileX2 className="h-8 w-8" />
       </div>
 
-      <h3 className="mt-6 text-2xl font-extrabold tracking-tight text-[#0A0A0A]">
+      <h3 className="mt-6 text-2xl font-extrabold tracking-tight text-white">
         {title}
       </h3>
 
-      <p className="mt-2 max-w-md text-sm font-normal text-[#666666] leading-relaxed">
+      <p className="mt-2 max-w-md text-sm font-normal text-slate-400 leading-relaxed">
         {description}
       </p>
 
@@ -38,16 +38,16 @@ export default function EmptyState({
           <Button
             onClick={onReset}
             variant="outline"
-            className="h-11 border-[#E2E0DB] bg-white hover:bg-[#F1F0EE] text-[#0A0A0A] rounded-full gap-2 px-6"
+            className="h-11 border-white/10 bg-[#161A29] hover:bg-[#1E2235] hover:border-indigo-500/30 text-slate-200 rounded-full gap-2 px-6 cursor-pointer"
           >
-            <RotateCcw className="h-4 w-4 text-[#B15F2C]" />
+            <RotateCcw className="h-4 w-4 text-indigo-400" />
             Reset Filters
           </Button>
         )}
 
         {actionLabel && actionHref && (
           <Link href={actionHref}>
-            <Button variant="accent" className="h-11 bg-[#B15F2C] hover:bg-[#9E5324] text-white font-bold rounded-full px-6 shadow-2xs gap-2">
+            <Button className="h-11 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 hover:from-indigo-500 hover:via-purple-500 hover:to-indigo-400 text-white font-extrabold rounded-full px-6 shadow-lg shadow-indigo-500/25 border border-indigo-400/30 gap-2 cursor-pointer">
               <UploadCloud className="h-4 w-4" />
               {actionLabel}
             </Button>

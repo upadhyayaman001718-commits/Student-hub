@@ -79,8 +79,8 @@ export default function RegisterForm() {
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
       {error && (
-        <div className="flex items-center gap-2 p-3 text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl animate-in fade-in">
-          <AlertCircle className="h-4 w-4 shrink-0 text-red-600" />
+        <div className="flex items-center gap-2.5 p-3.5 text-xs font-semibold text-rose-300 bg-rose-500/10 border border-rose-500/20 rounded-2xl animate-in fade-in backdrop-blur-md">
+          <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
           <span>{error}</span>
         </div>
       )}
@@ -89,13 +89,13 @@ export default function RegisterForm() {
       <div className="space-y-2 text-left">
         <label
           htmlFor="name"
-          className="block text-xs font-extrabold uppercase tracking-wider text-[#0A0A0A] mb-2"
+          className="block text-xs font-mono font-extrabold uppercase tracking-[0.12em] text-slate-300 mb-2"
         >
           Full Name
         </label>
 
         <div className="relative group">
-          <User className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-[#666666] transition-colors duration-200 group-focus-within:text-[#B15F2C] pointer-events-none" />
+          <User className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500 transition-colors duration-200 group-focus-within:text-indigo-400 pointer-events-none" />
 
           <input
             id="name"
@@ -105,7 +105,7 @@ export default function RegisterForm() {
             onChange={(e) => setName(e.target.value)}
             disabled={loading}
             required
-            className="w-full h-13 rounded-full border border-[#E2E0DB] bg-white pl-13 pr-5 text-sm text-[#0A0A0A] placeholder:text-[#666666]/60 font-medium outline-none transition-all duration-300 hover:border-[#D4D1C9] focus:border-[#B15F2C] focus:ring-4 focus:ring-[#B15F2C]/15 shadow-2xs disabled:opacity-60"
+            className="w-full h-13 rounded-full border border-white/10 bg-[#161A29] pl-12 pr-5 text-sm text-slate-100 placeholder:text-slate-500 font-medium outline-none transition-all duration-300 hover:border-white/20 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 disabled:opacity-60"
           />
         </div>
       </div>
@@ -114,13 +114,13 @@ export default function RegisterForm() {
       <div className="space-y-2 text-left">
         <label
           htmlFor="email"
-          className="block text-xs font-extrabold uppercase tracking-wider text-[#0A0A0A] mb-2"
+          className="block text-xs font-mono font-extrabold uppercase tracking-[0.12em] text-slate-300 mb-2"
         >
           Email Address
         </label>
 
         <div className="relative group">
-          <Mail className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-[#666666] transition-colors duration-200 group-focus-within:text-[#B15F2C] pointer-events-none" />
+          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500 transition-colors duration-200 group-focus-within:text-indigo-400 pointer-events-none" />
 
           <input
             id="email"
@@ -130,7 +130,7 @@ export default function RegisterForm() {
             onChange={(e) => setEmail(e.target.value)}
             disabled={loading}
             required
-            className="w-full h-13 rounded-full border border-[#E2E0DB] bg-white pl-13 pr-5 text-sm text-[#0A0A0A] placeholder:text-[#666666]/60 font-medium outline-none transition-all duration-300 hover:border-[#D4D1C9] focus:border-[#B15F2C] focus:ring-4 focus:ring-[#B15F2C]/15 shadow-2xs disabled:opacity-60"
+            className="w-full h-13 rounded-full border border-white/10 bg-[#161A29] pl-12 pr-5 text-sm text-slate-100 placeholder:text-slate-500 font-medium outline-none transition-all duration-300 hover:border-white/20 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 disabled:opacity-60"
           />
         </div>
       </div>
@@ -148,9 +148,8 @@ export default function RegisterForm() {
       {/* Primary Create Account Button */}
       <Button
         type="submit"
-        variant="accent"
         disabled={loading || !isFormValid}
-        className="w-full h-13 rounded-full bg-[#B15F2C] hover:bg-[#9E5324] text-white font-extrabold uppercase text-xs tracking-wider shadow-md transition-all duration-300 cursor-pointer mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full h-13 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 hover:from-indigo-500 hover:via-purple-500 hover:to-indigo-400 text-white font-extrabold uppercase text-xs tracking-wider shadow-lg shadow-indigo-500/25 border border-indigo-400/30 transition-all duration-300 cursor-pointer mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? (
           <div className="flex items-center gap-2">
@@ -172,11 +171,11 @@ export default function RegisterForm() {
       </div>
 
       {/* Login Footer Link */}
-      <p className="pt-3 text-center text-sm text-[#666666] font-medium">
+      <p className="pt-3 text-center text-xs sm:text-sm text-slate-400 font-medium">
         Already have an account?{" "}
         <Link
           href="/login"
-          className="font-extrabold text-[#B15F2C] hover:underline transition-all"
+          className="font-extrabold text-indigo-400 hover:text-indigo-300 hover:underline transition-all"
         >
           Sign In
         </Link>

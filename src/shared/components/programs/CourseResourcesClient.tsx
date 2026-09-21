@@ -57,17 +57,21 @@ export default function CourseResourcesClient({
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F1F0EE] text-[#0A0A0A] selection:bg-[#B15F2C]/20 selection:text-[#B15F2C] relative overflow-hidden">
+    <div className="min-h-screen flex flex-col bg-[#07080D] text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-300 relative overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] glow-mesh opacity-50 pointer-events-none -z-0" />
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none -z-0" />
+
       <Navbar />
 
-      <main className="flex-grow max-w-[1280px] mx-auto px-6 sm:px-10 lg:px-12 py-12 sm:py-20 w-full relative z-10">
+      <main className="flex-grow max-w-[1280px] mx-auto px-6 sm:px-10 lg:px-12 py-10 sm:py-16 w-full relative z-10">
         <CourseHeader
           courseName={courseName}
           programName={programName}
           resourceCount={courseResources.length}
         />
 
-        <div className="mt-10 grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
           {/* Left panel: Filters */}
           <div className="lg:col-span-1">
             <FilterBar

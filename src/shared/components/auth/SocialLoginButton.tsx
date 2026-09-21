@@ -55,7 +55,7 @@ export default function SocialLoginButton({
     <Button
       type="button"
       variant="outline"
-      className="w-full h-12 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 font-semibold text-sm transition-all duration-200 hover:-translate-y-0.5 cursor-pointer gap-3 shadow-2xs"
+      className="w-full h-12 rounded-full border border-white/10 bg-[#161A29] hover:bg-[#1E2235] hover:border-indigo-500/30 text-slate-200 font-semibold text-xs tracking-wider uppercase transition-all duration-300 hover:-translate-y-0.5 cursor-pointer gap-3 shadow-inner"
     >
       <Icon className="h-5 w-5 shrink-0" />
       <span>Continue with {provider}</span>
