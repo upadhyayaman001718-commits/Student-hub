@@ -3,8 +3,15 @@
 import Link from "next/link";
 import { Search, Upload, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
+import dynamic from "next/dynamic";
 import HomeClient from "@/shared/components/home/homeClient";
 import { Resource } from "@/shared/data/resources";
+
+// Lazy-load the 3D scene so it never blocks SSR
+const HeroScene = dynamic(() => import("./HeroScene"), {
+  ssr: false,
+  loading: () => null,
+});
 
 interface HomeHeroProps {
   resources: Resource[];
@@ -14,73 +21,102 @@ export default function HomeHero({ resources }: HomeHeroProps) {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="flex flex-col items-center justify-center pt-10 sm:pt-14 md:pt-16 pb-10 md:pb-12 text-center max-w-[1020px] mx-auto relative"
+      className="relative flex flex-col items-center justify-center
+                 pt-16 sm:pt-20 md:pt-24
+                 pb-12 sm:pb-16 md:pb-20
+                 text-center overflow-visible"
     >
-      {/* Background Radial Glow Mesh Effect */}
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-indigo-600/20 via-purple-600/15 to-transparent blur-3xl pointer-events-none rounded-full" />
+      {/* ── 3D Floating Scene (behind text) ── */}
+      <HeroScene />
 
-      {/* Eyebrow Label */}
+      {/* ── Radial glow behind headline ── */}
+      <div
+        aria-hidden="true"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                   w-[700px] h-[400px] pointer-events-none
+                   bg-gradient-radial from-indigo-600/20 via-purple-600/10 to-transparent
+                   blur-3xl rounded-full -z-10"
+      />
+
+      {/* ── Eyebrow chip ── */}
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="inline-flex items-center gap-2.5 rounded-full bg-[#0F121E] border border-white/10 px-4 py-1.5 text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-indigo-400 mb-4 sm:mb-5 shadow-xl shadow-indigo-950/20"
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 inline-flex items-center gap-2 mb-6
+                   rounded-full bg-[#0C0F1C] border border-white/8
+                   px-4 py-1.5 shadow-lg shadow-indigo-950/30"
       >
-        <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
+        <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 dot-pulse" />
         <Sparkles className="h-3 w-3 text-indigo-400" />
-        Academic Resource Platform
+        <span className="label-mono text-indigo-400">Academic Resource Platform</span>
       </motion.div>
 
-      {/* Hero Headline */}
+      {/* ── Headline ── */}
       <motion.h1
         id="hero-heading"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-white leading-[1.02] mb-5 sm:mb-6"
+        transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 text-5xl sm:text-6xl md:text-7xl lg:text-8xl
+                   font-extrabold tracking-tight leading-[1.02]
+                   text-white max-w-4xl mx-auto mb-5"
       >
-        Everything you need <br />
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-400">
-          to study better.
-        </span>
+        Everything you need{" "}
+        <br className="hidden sm:block" />
+        <span className="text-gradient-vivid">to study better.</span>
       </motion.h1>
 
-      {/* Hero Subtitle */}
+      {/* ── Subtitle ── */}
       <motion.p
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="max-w-[760px] text-lg sm:text-2xl text-slate-400 leading-relaxed mx-auto mb-6 sm:mb-8 font-normal"
+        transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 max-w-2xl text-base sm:text-lg text-slate-400
+                   leading-relaxed mx-auto mb-8 font-normal px-4"
       >
-        Discover verified Notes, PYQs, Lab Manuals, and Study Material — organized by program and curated by top engineering & degree students.
+        Discover verified Notes, PYQs, Lab Manuals, and Study Material —
+        organised by programme and curated by the student community.
       </motion.p>
 
-      {/* Action CTAs */}
+      {/* ── CTAs ── */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        className="flex flex-wrap items-center justify-center gap-4 mb-8 md:mb-10"
+        transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 flex flex-wrap items-center justify-center gap-3 mb-10"
       >
         <Link
           href="/resources"
-          className="flex h-14 items-center justify-center gap-2.5 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 hover:opacity-95 text-white font-extrabold tracking-wider uppercase text-xs rounded-full px-8 transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-indigo-500/25 border border-indigo-400/30"
+          className="inline-flex items-center gap-2 h-12 px-7
+                     bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600
+                     hover:opacity-90 text-white font-bold text-sm rounded-full
+                     shadow-lg shadow-indigo-500/25 border border-indigo-400/20
+                     transition-all duration-200 hover:scale-[1.02]"
         >
           <Search className="h-4 w-4" />
           Explore Resources
         </Link>
         <Link
           href="/upload"
-          className="flex h-14 items-center justify-center gap-2.5 border border-white/10 bg-[#0F121E] hover:bg-[#161A29] text-white font-extrabold tracking-wider uppercase text-xs rounded-full px-8 transition-all duration-300 hover:scale-[1.02] shadow-lg"
+          className="inline-flex items-center gap-2 h-12 px-7
+                     glass text-white font-bold text-sm rounded-full
+                     hover:bg-[#161B2E] transition-all duration-200 hover:scale-[1.02]"
         >
           <Upload className="h-4 w-4 text-indigo-400" />
           Upload Resource
         </Link>
       </motion.div>
 
-      {/* Large Pill Search Bar */}
-      <HomeClient resources={resources} />
+      {/* ── Search bar ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 w-full max-w-2xl px-4"
+      >
+        <HomeClient resources={resources} />
+      </motion.div>
     </section>
   );
 }
-

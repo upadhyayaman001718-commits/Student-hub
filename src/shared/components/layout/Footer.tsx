@@ -1,116 +1,140 @@
 "use client";
 
 import Link from "next/link";
-import { GraduationCap, Heart, ArrowUpRight, Radio } from "lucide-react";
+import { GraduationCap, Heart, Radio, ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#07080D] text-slate-100 pt-12 md:pt-14 pb-8 mt-auto relative z-10 w-full border-t border-white/10">
-      <div className="mx-auto max-w-[1280px] px-6 sm:px-10 lg:px-12 flex flex-col gap-10 md:gap-12">
-        {/* Top Hero Footer Row */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-8 border-b border-white/10">
-          <div className="space-y-4 max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 px-3.5 py-1 text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-indigo-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+    <footer className="mt-auto w-full border-t border-white/[0.06] bg-[#080A12]">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+
+        {/* ── Top row: brand + CTAs ── */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between
+                        gap-8 pb-8 border-b border-white/[0.06]">
+          <div className="space-y-3 max-w-lg">
+            {/* Live badge */}
+            <div className="inline-flex items-center gap-2 rounded-full
+                            bg-emerald-500/8 border border-emerald-500/15
+                            px-3 py-1 label-mono text-emerald-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 dot-pulse" />
               Centralized Academic Repository
             </div>
-            <h3 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Study smarter with <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-300 to-cyan-400">Student Hub</span>
+
+            <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-snug">
+              Study smarter with{" "}
+              <span className="text-gradient-vivid">Student Hub</span>
             </h3>
-            <p className="text-slate-400 text-base leading-relaxed">
-              Discover verified lecture notes, previous year question papers, and laboratory manuals uploaded by top students.
+            <p className="text-slate-500 text-sm leading-relaxed">
+              Discover verified lecture notes, previous year questions, and lab manuals
+              uploaded by top students — free, forever.
             </p>
           </div>
 
-          <div className="flex items-center gap-4 shrink-0">
+          <div className="flex items-center gap-3 shrink-0">
             <Link
               href="/upload"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 hover:opacity-95 text-white font-extrabold rounded-full px-6 py-3.5 text-sm transition-all shadow-lg shadow-indigo-500/20 border border-indigo-400/30 hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 h-10 px-5 rounded-full
+                         bg-gradient-to-r from-indigo-600 to-purple-600
+                         hover:from-indigo-500 hover:to-purple-500
+                         text-white text-sm font-bold transition-all duration-200
+                         shadow-md shadow-indigo-500/20 border border-indigo-400/20
+                         hover:scale-[1.02]"
             >
               Upload Material
-              <ArrowUpRight className="h-4 w-4" />
+              <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
             <Link
               href="/programs"
-              className="inline-flex items-center gap-2 border border-white/10 bg-[#0F121E] hover:bg-[#161A29] text-white font-bold rounded-full px-6 py-3.5 text-sm transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 h-10 px-5 rounded-full
+                         glass text-white text-sm font-bold transition-all duration-150
+                         hover:bg-[#161B2E] hover:scale-[1.02]"
             >
               Browse Catalog
             </Link>
           </div>
         </div>
 
-        {/* Content Navigation Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand Column */}
-          <div className="md:col-span-2 flex flex-col gap-4">
-            <Link href="/" className="flex items-center gap-3 group w-fit">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 via-purple-600 to-cyan-500 text-white shadow-lg shadow-indigo-500/20">
-                <GraduationCap className="h-5 w-5 text-white" />
+        {/* ── Links grid ── */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 py-8 border-b border-white/[0.06]">
+          {/* Brand column */}
+          <div className="md:col-span-2 flex flex-col gap-3">
+            <Link href="/" className="flex items-center gap-2 group w-fit">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg
+                              bg-gradient-to-br from-indigo-500 via-purple-600 to-cyan-500
+                              text-white shadow-sm">
+                <GraduationCap className="h-4 w-4" />
               </div>
-              <span className="text-2xl font-extrabold tracking-tight text-white">
-                Student<span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Hub</span>
+              <span className="text-base font-extrabold tracking-tight text-white
+                               group-hover:text-indigo-300 transition-colors">
+                Student<span className="text-gradient-vivid">Hub</span>
               </span>
             </Link>
-            <p className="text-sm text-slate-400 max-w-md leading-relaxed font-normal">
-              Built for students, by students. Supporting computer science, engineering, business, and foundational academic coursework.
+            <p className="text-sm text-slate-500 max-w-xs leading-relaxed">
+              Built for students, by students. Supporting CS, ECE, Mechanical, Business
+              and foundational coursework.
             </p>
-            <div className="flex items-center gap-2 pt-2 text-xs font-mono text-emerald-400">
-              <Radio className="h-3.5 w-3.5 animate-pulse" />
-              <span>All Systems Operational &bull; Verified Academic Engine</span>
+            <div className="flex items-center gap-2 text-xs text-emerald-400 label-mono">
+              <Radio className="h-3 w-3" style={{ animation: "dotPulse 2s ease-in-out infinite" }} />
+              All Systems Operational
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="flex flex-col gap-3">
-            <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-[0.2em] mb-1">
-              Navigation
-            </h4>
-            <Link href="/" className="text-sm text-slate-300 hover:text-indigo-400 transition-colors w-fit">
-              Home
-            </Link>
-            <Link href="/programs" className="text-sm text-slate-300 hover:text-indigo-400 transition-colors w-fit">
-              Browse Catalog
-            </Link>
-            <Link href="/upload" className="text-sm text-slate-300 hover:text-indigo-400 transition-colors w-fit">
-              Upload Material
-            </Link>
-            <Link href="/login" className="text-sm text-slate-300 hover:text-indigo-400 transition-colors w-fit">
-              Account / Login
-            </Link>
+          {/* Navigation */}
+          <div className="flex flex-col gap-2.5">
+            <h4 className="label-mono text-slate-500 mb-1">Navigation</h4>
+            {[
+              { label: "Home",           href: "/"          },
+              { label: "Browse Catalog", href: "/programs"  },
+              { label: "Upload Material",href: "/upload"    },
+              { label: "Login / Account",href: "/login"     },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-slate-400 hover:text-indigo-400
+                           transition-colors duration-150 w-fit"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Community & Info */}
-          <div className="flex flex-col gap-3">
-            <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-[0.2em] mb-1">
-              Platform
-            </h4>
-            <span className="text-sm text-slate-300 hover:text-indigo-400 cursor-pointer transition-colors w-fit">
-              Privacy Policy
-            </span>
-            <span className="text-sm text-slate-300 hover:text-indigo-400 cursor-pointer transition-colors w-fit">
-              Terms of Service
-            </span>
-            <span className="text-sm text-slate-300 hover:text-indigo-400 cursor-pointer transition-colors w-fit">
-              Academic Support
-            </span>
+          {/* Platform */}
+          <div className="flex flex-col gap-2.5">
+            <h4 className="label-mono text-slate-500 mb-1">Platform</h4>
+            {["Privacy Policy", "Terms of Service", "Academic Support"].map((item) => (
+              <span
+                key={item}
+                className="text-sm text-slate-400 hover:text-indigo-400
+                           transition-colors duration-150 cursor-pointer w-fit"
+              >
+                {item}
+              </span>
+            ))}
           </div>
         </div>
 
-        {/* Bottom Legal Copyright Bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-medium">
-          <p className="flex items-center gap-1.5 font-mono">
-            &copy; {new Date().getFullYear()} Student Hub. Crafted with{" "}
-            <Heart className="h-3.5 w-3.5 text-indigo-400 inline fill-indigo-400" /> for students.
+        {/* ── Copyright bar ── */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between
+                        gap-3 text-xs text-slate-600">
+          <p className="flex items-center gap-1.5 label-mono">
+            © {new Date().getFullYear()} Student Hub. Crafted with{" "}
+            <Heart className="h-3 w-3 text-indigo-400 fill-indigo-400 inline" />{" "}
+            for students.
           </p>
-          <div className="flex gap-6 text-slate-400 font-semibold">
-            <span className="hover:text-indigo-400 cursor-pointer transition-colors">Privacy</span>
-            <span className="hover:text-indigo-400 cursor-pointer transition-colors">Terms</span>
-            <span className="hover:text-indigo-400 cursor-pointer transition-colors">Support</span>
+          <div className="flex gap-5 label-mono">
+            {["Privacy", "Terms", "Support"].map((item) => (
+              <span
+                key={item}
+                className="text-slate-600 hover:text-indigo-400 cursor-pointer transition-colors"
+              >
+                {item}
+              </span>
+            ))}
           </div>
         </div>
+
       </div>
     </footer>
   );
 }
-
-

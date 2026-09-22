@@ -9,39 +9,32 @@ interface RecentlyUploadedSectionProps {
   resources: Resource[];
 }
 
-export default function RecentlyUploadedSection({
-  resources,
-}: RecentlyUploadedSectionProps) {
+export default function RecentlyUploadedSection({ resources }: RecentlyUploadedSectionProps) {
   return (
-    <section
-      aria-labelledby="recently-uploaded-heading"
-      className="py-16 border-b border-white/10"
-    >
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+    <section aria-labelledby="recently-uploaded-heading" className="py-12 md:py-16 border-b border-white/[0.06]">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <div className="text-[11px] font-mono font-extrabold uppercase tracking-[0.2em] text-indigo-400 mb-2 flex items-center gap-2">
-            <span className="text-slate-400 font-mono">[03]</span>
-            Resource Discovery & Catalog
-          </div>
-
+          <p className="section-label mb-2">
+            <span className="text-slate-500">[03]</span>
+            Resource Discovery &amp; Catalog
+          </p>
           <h2
             id="recently-uploaded-heading"
-            className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight"
+            className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white"
           >
             Explore Resources
           </h2>
-
-          <p className="mt-3 text-slate-400 max-w-2xl text-base font-normal leading-relaxed">
-            Browse, search, and filter verified study materials uploaded by members of our student community across semesters and programs.
+          <p className="mt-1.5 text-slate-500 text-sm max-w-md leading-relaxed">
+            Browse, search and filter verified study materials uploaded by the student community.
           </p>
         </div>
-
         <Link
           href="/resources"
-          className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-slate-300 hover:text-indigo-400 transition-colors group"
+          className="inline-flex items-center gap-1.5 text-xs font-bold
+                     text-slate-400 hover:text-indigo-400 transition-colors group shrink-0"
         >
-          Browse Full Catalog
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 text-indigo-400" />
+          Full Catalog
+          <ArrowRight className="h-3.5 w-3.5 text-indigo-400 group-hover:translate-x-1 transition-transform duration-200" />
         </Link>
       </div>
 

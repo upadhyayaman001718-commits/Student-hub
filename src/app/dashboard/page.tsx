@@ -6,29 +6,17 @@ import Navbar from "@/shared/components/layout/Navbar";
 import Footer from "@/shared/components/layout/Footer";
 import { useAuth } from "@/shared/context/AuthContext";
 import { getMyResources, deleteResource, Resource } from "@/lib/api";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
-  FolderCheck,
-  FileText,
-  Trash2,
-  Eye,
-  PlusCircle,
-  Loader2,
-  AlertCircle,
-  UserCheck,
-  LogIn,
-  Layers,
-  BookOpen,
-  Sparkles,
-  ArrowUpRight,
-  ShieldCheck,
+  FolderCheck, FileText, Trash2, Eye, PlusCircle,
+  Loader2, AlertCircle, UserCheck, LogIn, Layers,
+  BookOpen, Sparkles, ArrowUpRight, ShieldCheck, RotateCcw,
 } from "lucide-react";
 
 export default function DashboardPage() {
   const { isAuthenticated, isLoading: authLoading, user } = useAuth();
   const [resources, setResources] = useState<Resource[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<number | null>(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
@@ -38,11 +26,8 @@ export default function DashboardPage() {
       setLoading(true);
       setError(null);
       const res = await getMyResources();
-      if (res.success && res.data) {
-        setResources(res.data);
-      }
+      if (res.success && res.data) setResources(res.data);
     } catch (err: any) {
-      console.error("Error fetching my resources:", err);
       setError(err?.message || "Failed to load your resources.");
     } finally {
       setLoading(false);
@@ -50,11 +35,8 @@ export default function DashboardPage() {
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
-      fetchUserResources();
-    } else if (!authLoading) {
-      setLoading(false);
-    }
+    if (isAuthenticated) fetchUserResources();
+    else if (!authLoading) setLoading(false);
   }, [isAuthenticated, authLoading]);
 
   const handleDelete = async (id: number) => {
@@ -68,281 +50,289 @@ export default function DashboardPage() {
         alert("Failed to delete resource.");
       }
     } catch (err: any) {
-      console.error("Failed to delete resource:", err);
       alert(err?.message || "Delete operation failed.");
     } finally {
       setDeletingId(null);
     }
   };
 
+  const pageShell = (children: React.ReactNode) => (
+    <div className="min-h-screen flex flex-col bg-[#080A12] text-slate-100
+                    selection:bg-indigo-500/25 selection:text-indigo-200 relative">
+      <div aria-hidden="true" className="fixed inset-0 bg-grid pointer-events-none -z-10" />
+      <div aria-hidden="true" className="fixed top-0 inset-x-0 h-[400px] glow-mesh pointer-events-none -z-10" />
+      <Navbar />
+      {children}
+      <Footer />
+    </div>
+  );
+
   if (authLoading) {
-    return (
-      <div className="min-h-screen flex flex-col bg-[#07080D] text-slate-100">
-        <Navbar />
-        <main className="flex-grow max-w-[1280px] mx-auto w-full px-6 py-20 flex flex-col items-center justify-center gap-3">
-          <Loader2 className="h-8 w-8 animate-spin text-indigo-400" />
-          <p className="text-sm font-extrabold text-white">Verifying session state...</p>
-        </main>
-        <Footer />
-      </div>
+    return pageShell(
+      <main className="flex-grow flex items-center justify-center gap-3">
+        <Loader2 className="h-6 w-6 animate-spin text-indigo-400" />
+        <p className="text-sm font-semibold text-slate-400">Verifying session…</p>
+      </main>
     );
   }
 
   if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen flex flex-col bg-[#07080D] text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-300 relative overflow-hidden">
-        {/* Background ambient lighting */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] glow-mesh opacity-50 pointer-events-none -z-0" />
-        <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none -z-0" />
-
-        <Navbar />
-        <main className="flex-grow max-w-[1280px] mx-auto w-full px-6 sm:px-10 lg:px-12 py-16 sm:py-24 flex items-center justify-center relative z-10">
-          <div className="max-w-md w-full bg-[#0F121E]/80 border border-white/10 backdrop-blur-xl p-8 sm:p-10 rounded-3xl text-center space-y-6 shadow-2xl">
-            <div className="h-16 w-16 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mx-auto shadow-inner">
-              <ShieldCheck className="h-8 w-8" />
-            </div>
-            <div className="space-y-2">
-              <h2 className="text-2xl font-extrabold text-white">Authentication Required</h2>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Please log in to access your personal resource dashboard and manage your uploaded materials.
-              </p>
-            </div>
-            <Link href="/login" className="block w-full">
-              <Button className="w-full h-12 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 hover:from-indigo-500 hover:via-purple-500 hover:to-indigo-400 text-white rounded-full font-extrabold text-xs uppercase tracking-wider gap-2 shadow-lg shadow-indigo-500/25 border border-indigo-400/30 cursor-pointer">
-                <LogIn className="h-4 w-4" />
-                Sign In to Dashboard
-              </Button>
-            </Link>
+    return pageShell(
+      <main className="flex-grow flex items-center justify-center px-4 py-20 z-10 relative">
+        <div className="max-w-sm w-full glass-light rounded-2xl p-8 text-center space-y-5 border border-white/[0.07]">
+          <div className="h-12 w-12 rounded-2xl bg-amber-500/10 border border-amber-500/20
+                          flex items-center justify-center text-amber-400 mx-auto">
+            <ShieldCheck className="h-6 w-6" />
           </div>
-        </main>
-        <Footer />
-      </div>
+          <div className="space-y-1.5">
+            <h2 className="text-xl font-extrabold text-white">Authentication Required</h2>
+            <p className="text-sm text-slate-500 leading-relaxed">
+              Please log in to access your dashboard and manage your uploaded materials.
+            </p>
+          </div>
+          <Link
+            href="/login"
+            className="flex items-center justify-center gap-2 h-11 w-full rounded-full
+                       bg-gradient-to-r from-indigo-600 to-purple-600
+                       text-white font-bold text-xs shadow-md shadow-indigo-500/20
+                       border border-indigo-400/20 hover:from-indigo-500 hover:to-purple-500 transition-all"
+          >
+            <LogIn className="h-4 w-4" />
+            Sign In to Dashboard
+          </Link>
+        </div>
+      </main>
     );
   }
 
-  return (
-    <div className="min-h-screen flex flex-col bg-[#07080D] text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-300 relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] glow-mesh opacity-50 pointer-events-none -z-0" />
-      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none -z-0" />
+  return pageShell(
+    <main className="flex-grow max-w-[1280px] mx-auto w-full px-4 sm:px-6 lg:px-8
+                     py-10 sm:py-14 space-y-6 relative z-10">
 
-      <Navbar />
-
-      <main className="flex-grow max-w-[1280px] mx-auto w-full px-6 sm:px-10 lg:px-12 py-10 sm:py-16 space-y-8 relative z-10">
-        {/* Header Banner */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-[#0F121E]/80 border border-white/10 backdrop-blur-xl p-8 rounded-3xl shadow-2xl">
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 px-3.5 py-1 text-[11px] font-mono font-extrabold uppercase tracking-widest text-indigo-400">
-              <UserCheck className="h-3.5 w-3.5 text-indigo-400" />
-              Authenticated Contributor
-            </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Welcome back, <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-sky-400 bg-clip-text text-transparent">{user?.name || "Student"}</span>
-            </h1>
-            <p className="text-sm text-slate-400">
-              Manage and track all academic resources uploaded under your account.
-            </p>
+      {/* ── Welcome banner ── */}
+      <div className="glass-light rounded-2xl p-6 border border-white/[0.07]
+                      flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-1.5">
+          <div className="inline-flex items-center gap-2 rounded-full
+                          bg-indigo-500/8 border border-indigo-500/15
+                          px-3 py-0.5 label-mono text-indigo-400">
+            <UserCheck className="h-3 w-3" />
+            Authenticated Contributor
           </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            Welcome back,{" "}
+            <span className="text-gradient-vivid">{user?.name || "Student"}</span>
+          </h1>
+          <p className="text-sm text-slate-500">
+            Manage and track all academic resources uploaded under your account.
+          </p>
+        </div>
+        <Link
+          href="/upload"
+          className="shrink-0 inline-flex items-center gap-2 h-10 px-5 rounded-full
+                     bg-gradient-to-r from-indigo-600 to-purple-600
+                     hover:from-indigo-500 hover:to-purple-500
+                     text-white font-bold text-xs shadow-md shadow-indigo-500/20
+                     border border-indigo-400/20 transition-all"
+        >
+          <PlusCircle className="h-4 w-4" />
+          Upload New Resource
+        </Link>
+      </div>
 
-          <Link href="/upload">
-            <Button
-              className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 hover:from-indigo-500 hover:via-purple-500 hover:to-indigo-400 text-white rounded-full h-12 px-6 font-extrabold text-xs uppercase tracking-wider gap-2 shadow-lg shadow-indigo-500/25 border border-indigo-400/30 shrink-0 cursor-pointer"
+      {/* ── Metrics ── */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {[
+          {
+            label: "Total Uploads", value: resources.length, sub: "Resources in community catalog",
+            icon: FolderCheck, color: "text-indigo-400", border: "hover:border-indigo-500/25",
+          },
+          {
+            label: "Account Role", value: "Student Author", sub: "Verified repository contributor",
+            icon: Sparkles, color: "text-purple-400", border: "hover:border-purple-500/25",
+          },
+          {
+            label: "Security Status", value: "JWT Auth", sub: "Protected identity token",
+            icon: ShieldCheck, color: "text-sky-400", border: "hover:border-sky-500/25",
+          },
+        ].map(({ label, value, sub, icon: Icon, color, border }) => (
+          <div key={label}
+               className={`glass-light rounded-2xl p-5 border border-white/[0.07] ${border}
+                           transition-colors duration-150 space-y-3`}>
+            <div className="flex items-center justify-between">
+              <span className="label-mono text-slate-500">{label}</span>
+              <div className={`h-8 w-8 rounded-xl bg-white/5 flex items-center justify-center ${color}`}>
+                <Icon className="h-4 w-4" />
+              </div>
+            </div>
+            <p className="text-xl font-extrabold text-white tracking-tight">{value}</p>
+            <p className="text-xs text-slate-500">{sub}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Resource table ── */}
+      <div className="glass-light rounded-2xl border border-white/[0.07] overflow-hidden">
+        {/* Table header */}
+        <div className="px-5 py-4 border-b border-white/[0.06]
+                        flex items-center justify-between">
+          <div>
+            <h2 className="text-sm font-bold text-white">My Uploaded Resources</h2>
+            <p className="text-xs text-slate-500">View, manage, or delete your contributions.</p>
+          </div>
+          <Badge className="rounded-full px-3 py-0.5 label-mono border-white/[0.08]
+                            bg-[#111525] text-indigo-400 shadow-none">
+            {resources.length} Items
+          </Badge>
+        </div>
+
+        {loading ? (
+          <div className="py-16 flex flex-col items-center gap-2.5 text-slate-400">
+            <Loader2 className="h-6 w-6 animate-spin text-indigo-400" />
+            <p className="text-sm text-slate-500">Loading your resources…</p>
+          </div>
+        ) : error ? (
+          <div className="m-5 p-4 rounded-xl bg-rose-500/8 border border-rose-500/20
+                          text-rose-300 text-xs flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <AlertCircle className="h-4 w-4 text-rose-400 shrink-0" />
+              <span>{error}</span>
+            </div>
+            <button
+              onClick={fetchUserResources}
+              className="flex items-center gap-1.5 px-3 py-1 rounded-md glass
+                         border border-rose-500/20 text-rose-200 text-xs font-semibold cursor-pointer"
             >
-              <PlusCircle className="h-4 w-4" />
-              Upload New Resource
-            </Button>
-          </Link>
-        </div>
-
-        {/* Metrics Summary Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="bg-[#0F121E]/80 border border-white/10 backdrop-blur-xl p-6 rounded-2xl shadow-xl space-y-2 hover:border-indigo-500/30 transition-all duration-300">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-extrabold uppercase tracking-wider text-slate-400">
-                Total Uploads
-              </span>
-              <div className="h-9 w-9 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-                <FolderCheck className="h-5 w-5" />
-              </div>
-            </div>
-            <p className="text-3xl font-extrabold text-white tracking-tight">{resources.length}</p>
-            <p className="text-[11px] text-slate-400 font-medium">Resources live in community catalog</p>
+              <RotateCcw className="h-3 w-3" />
+              Retry
+            </button>
           </div>
-
-          <div className="bg-[#0F121E]/80 border border-white/10 backdrop-blur-xl p-6 rounded-2xl shadow-xl space-y-2 hover:border-purple-500/30 transition-all duration-300">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-extrabold uppercase tracking-wider text-slate-400">
-                Account Role
-              </span>
-              <div className="h-9 w-9 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
-                <Sparkles className="h-5 w-5" />
-              </div>
+        ) : resources.length === 0 ? (
+          <div className="py-16 text-center space-y-4 max-w-sm mx-auto px-4">
+            <div className="h-12 w-12 rounded-2xl bg-[#111525] border border-white/[0.07]
+                            flex items-center justify-center text-indigo-400 mx-auto">
+              <FileText className="h-5 w-5" />
             </div>
-            <p className="text-xl font-extrabold text-white capitalize tracking-tight">Student Author</p>
-            <p className="text-[11px] text-slate-400 font-medium">Verified repository contributor</p>
-          </div>
-
-          <div className="bg-[#0F121E]/80 border border-white/10 backdrop-blur-xl p-6 rounded-2xl shadow-xl space-y-2 hover:border-sky-500/30 transition-all duration-300">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-extrabold uppercase tracking-wider text-slate-400">
-                Security Status
-              </span>
-              <div className="h-9 w-9 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
-                <ShieldCheck className="h-5 w-5" />
-              </div>
-            </div>
-            <p className="text-xl font-extrabold text-white tracking-tight">JWT Authenticated</p>
-            <p className="text-[11px] text-slate-400 font-medium">Protected user identity token</p>
-          </div>
-        </div>
-
-        {/* Resources Table / List Section */}
-        <div className="bg-[#0F121E]/80 border border-white/10 backdrop-blur-xl rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
-          <div className="flex items-center justify-between border-b border-white/10 pb-4">
-            <div>
-              <h2 className="text-xl font-extrabold text-white">My Uploaded Resources</h2>
-              <p className="text-xs text-slate-400">
-                View, manage, or delete items contributed to Student Hub.
+            <div className="space-y-1">
+              <h3 className="text-base font-bold text-white">No Uploads Yet</h3>
+              <p className="text-xs text-slate-500">
+                Share notes or PYQs to help fellow students.
               </p>
             </div>
-            <Badge className="rounded-full px-3.5 py-1 text-xs font-mono font-extrabold border-white/10 bg-[#161A29] text-indigo-400 shadow-none">
-              {resources.length} Items
-            </Badge>
+            <Link
+              href="/upload"
+              className="inline-flex items-center gap-2 h-9 px-5 rounded-full
+                         bg-gradient-to-r from-indigo-600 to-purple-600
+                         text-white text-xs font-bold shadow-md shadow-indigo-500/20
+                         border border-indigo-400/20 hover:from-indigo-500 hover:to-purple-500"
+            >
+              <PlusCircle className="h-3.5 w-3.5" />
+              Upload First Resource
+            </Link>
           </div>
-
-          {loading ? (
-            <div className="py-16 flex flex-col items-center justify-center gap-3 text-slate-400">
-              <Loader2 className="h-7 w-7 animate-spin text-indigo-400" />
-              <p className="text-sm font-extrabold text-white">Loading your resources...</p>
-            </div>
-          ) : error ? (
-            <div className="p-6 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs font-semibold flex items-center justify-between backdrop-blur-md">
-              <div className="flex items-center gap-2">
-                <AlertCircle className="h-4 w-4 text-rose-400 shrink-0" />
-                <span>{error}</span>
-              </div>
-              <Button size="sm" variant="outline" onClick={fetchUserResources} className="rounded-full text-xs font-bold border-rose-500/30 text-rose-200 cursor-pointer">
-                Retry
-              </Button>
-            </div>
-          ) : resources.length === 0 ? (
-            <div className="py-16 text-center space-y-4 max-w-sm mx-auto">
-              <div className="h-16 w-16 rounded-full bg-[#161A29] border border-white/10 flex items-center justify-center text-indigo-400 mx-auto shadow-inner">
-                <FileText className="h-8 w-8" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-lg font-extrabold text-white">No Uploaded Resources Yet</h3>
-                <p className="text-xs text-slate-400">
-                  You haven&apos;t uploaded any study materials yet. Start sharing notes or PYQs to help fellow students!
-                </p>
-              </div>
-              <Link href="/upload" className="inline-block pt-2">
-                <Button className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 hover:from-indigo-500 text-white rounded-full font-extrabold text-xs uppercase tracking-wider px-6 h-11 gap-2 shadow-lg shadow-indigo-500/25 border border-indigo-400/30">
-                  <PlusCircle className="h-4 w-4" />
-                  Upload First Resource
-                </Button>
-              </Link>
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse min-w-[640px]">
-                <thead>
-                  <tr className="border-b border-white/10 text-[11px] font-mono font-extrabold uppercase tracking-wider text-slate-400">
-                    <th className="py-3.5 px-4">Title & Subject</th>
-                    <th className="py-3.5 px-4">Course & Semester</th>
-                    <th className="py-3.5 px-4">Format / Type</th>
-                    <th className="py-3.5 px-4 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/5 text-sm">
-                  {resources.map((item) => (
-                    <tr key={item.id} className="hover:bg-[#161A29]/50 transition-colors">
-                      <td className="py-4 px-4 font-semibold text-white">
-                        <div className="space-y-0.5">
-                          <Link href={`/resources/${item.id}`} className="font-extrabold text-white hover:text-indigo-400 transition-colors flex items-center gap-1.5 group">
-                            <span>{item.title}</span>
-                            <ArrowUpRight className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-indigo-400" />
-                          </Link>
-                          {item.subject && (
-                            <p className="text-xs text-slate-400 font-normal flex items-center gap-1">
-                              <BookOpen className="h-3 w-3 text-indigo-400" />
-                              {item.subject}
-                            </p>
-                          )}
-                        </div>
-                      </td>
-                      <td className="py-4 px-4 text-xs font-medium text-slate-400">
-                        <div className="space-y-0.5">
-                          <span className="font-extrabold text-white block">{item.course || item.program || "General"}</span>
-                          {item.semester && (
-                            <span className="inline-flex items-center gap-1 text-[11px] text-slate-400 font-mono">
-                              <Layers className="h-3 w-3 text-indigo-400" />
-                              Semester {item.semester}
-                            </span>
-                          )}
-                        </div>
-                      </td>
-                      <td className="py-4 px-4 text-xs font-semibold">
-                        <Badge className="rounded-full px-3 py-1 border-white/10 bg-[#161A29] font-mono text-[10px] text-indigo-400 uppercase tracking-wider shadow-none">
-                          {item.resourceType || item.type || "Document"}
-                        </Badge>
-                      </td>
-                      <td className="py-4 px-4 text-right">
-                        <div className="flex items-center justify-end gap-2">
-                          <Link href={`/resources/${item.id}`}>
-                            <Button size="sm" variant="outline" className="h-9 px-3.5 rounded-full border-white/10 bg-[#161A29] hover:bg-[#1E2235] hover:border-indigo-500/30 text-xs font-extrabold gap-1.5 text-slate-200 cursor-pointer transition-colors">
-                              <Eye className="h-3.5 w-3.5 text-indigo-400" />
-                              View
-                            </Button>
-                          </Link>
-
-                          {confirmDeleteId === item.id ? (
-                            <div className="flex items-center gap-1.5 animate-in fade-in">
-                              <Button
-                                size="sm"
-                                variant="destructive"
-                                onClick={() => handleDelete(item.id)}
-                                disabled={deletingId === item.id}
-                                className="h-9 px-3 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold gap-1 cursor-pointer"
-                              >
-                                {deletingId === item.id ? (
-                                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                                ) : (
-                                  "Confirm"
-                                )}
-                              </Button>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => setConfirmDeleteId(null)}
-                                className="h-9 px-2.5 rounded-full border-white/10 bg-[#161A29] text-xs font-extrabold text-slate-300 cursor-pointer"
-                              >
-                                Cancel
-                              </Button>
-                            </div>
-                          ) : (
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              onClick={() => setConfirmDeleteId(item.id)}
-                              className="h-9 px-3 rounded-full text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 text-xs font-extrabold gap-1 cursor-pointer transition-colors"
-                            >
-                              <Trash2 className="h-3.5 w-3.5" />
-                              Delete
-                            </Button>
-                          )}
-                        </div>
-                      </td>
-                    </tr>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse min-w-[600px]">
+              <thead>
+                <tr className="border-b border-white/[0.06]">
+                  {["Title & Subject", "Course & Semester", "Type", "Actions"].map((h, i) => (
+                    <th key={h} className={`py-3 px-4 label-mono text-slate-600 ${i === 3 ? "text-right" : ""}`}>
+                      {h}
+                    </th>
                   ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      </main>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/[0.04] text-sm">
+                {resources.map((item) => (
+                  <tr key={item.id} className="hover:bg-[#111525]/60 transition-colors duration-100">
+                    <td className="py-3.5 px-4">
+                      <Link
+                        href={`/resources/${item.id}`}
+                        className="font-semibold text-white hover:text-indigo-400
+                                   transition-colors flex items-center gap-1.5 group text-xs"
+                      >
+                        {item.title}
+                        <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100
+                                                  transition-opacity text-indigo-400" />
+                      </Link>
+                      {item.subject && (
+                        <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
+                          <BookOpen className="h-2.5 w-2.5 text-indigo-400" />
+                          {item.subject}
+                        </p>
+                      )}
+                    </td>
+                    <td className="py-3.5 px-4">
+                      <span className="text-xs font-medium text-white block">
+                        {item.course || item.program || "General"}
+                      </span>
+                      {item.semester && (
+                        <span className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
+                          <Layers className="h-2.5 w-2.5 text-indigo-400" />
+                          Sem {item.semester}
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-3.5 px-4">
+                      <Badge className="label-mono rounded-full px-2.5 py-0.5
+                                        border-white/[0.08] bg-[#111525] text-indigo-400 shadow-none">
+                        {item.resourceType || item.type || "Doc"}
+                      </Badge>
+                    </td>
+                    <td className="py-3.5 px-4 text-right">
+                      <div className="flex items-center justify-end gap-1.5">
+                        <Link href={`/resources/${item.id}`}>
+                          <button className="flex items-center gap-1 h-7 px-3 rounded-md
+                                             glass border border-white/[0.08] text-xs font-medium
+                                             text-slate-300 hover:text-white hover:border-indigo-500/25
+                                             transition-colors cursor-pointer">
+                            <Eye className="h-3 w-3 text-indigo-400" />
+                            View
+                          </button>
+                        </Link>
 
-      <Footer />
-    </div>
+                        {confirmDeleteId === item.id ? (
+                          <div className="flex items-center gap-1">
+                            <button
+                              onClick={() => handleDelete(item.id)}
+                              disabled={deletingId === item.id}
+                              className="h-7 px-2.5 rounded-md bg-rose-600 hover:bg-rose-700
+                                         text-white text-xs font-semibold cursor-pointer
+                                         disabled:opacity-60 flex items-center gap-1"
+                            >
+                              {deletingId === item.id
+                                ? <Loader2 className="h-3 w-3 animate-spin" />
+                                : "Confirm"
+                              }
+                            </button>
+                            <button
+                              onClick={() => setConfirmDeleteId(null)}
+                              className="h-7 px-2 rounded-md glass border border-white/[0.08]
+                                         text-xs text-slate-400 hover:text-white cursor-pointer"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            onClick={() => setConfirmDeleteId(item.id)}
+                            className="flex items-center gap-1 h-7 px-2.5 rounded-md
+                                       text-rose-400 hover:bg-rose-500/10 hover:text-rose-300
+                                       text-xs font-medium transition-colors cursor-pointer"
+                          >
+                            <Trash2 className="h-3 w-3" />
+                            Delete
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </main>
   );
 }

@@ -8,18 +8,9 @@ import { subjectsByCourseSemester } from "@/features/upload/data/subjects";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 import {
-  UploadCloud,
-  FileCheck,
-  Send,
-  Loader2,
-  AlertCircle,
-  CheckCircle2,
-  X,
-  ExternalLink,
-  RotateCcw,
-  LogIn,
+  UploadCloud, FileCheck, Send, Loader2, AlertCircle,
+  CheckCircle2, X, ExternalLink, RotateCcw, LogIn,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { uploadResource } from "@/lib/api";
 import { useAuth } from "@/shared/context/AuthContext";
 import { Resource } from "@/shared/data/resources";
@@ -37,7 +28,6 @@ const ALLOWED_MIME_TYPES = [
 export default function UploadForm() {
   const { isAuthenticated } = useAuth();
 
-  // Form State
   const [program, setProgram] = useState("");
   const [course, setCourse] = useState("");
   const [semester, setSemester] = useState("");
@@ -46,15 +36,12 @@ export default function UploadForm() {
   const [description, setDescription] = useState("");
   const [resourceType, setResourceType] = useState("");
   const [file, setFile] = useState<File | null>(null);
-
-  // UI / Action State
   const [dragActive, setDragActive] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
   const [uploadedResource, setUploadedResource] = useState<Resource | null>(null);
 
-  // Validate File Helper
   const validateAndSetFile = (selectedFile: File) => {
     setFileError(null);
     setSubmitError(null);
@@ -64,14 +51,14 @@ export default function UploadForm() {
     const isValidMime = ALLOWED_MIME_TYPES.includes(selectedFile.type);
 
     if (!isValidExt && !isValidMime) {
-      setFileError(`Invalid file format. Please upload a PDF, DOC, DOCX, PPT, or PPTX file.`);
+      setFileError(`Invalid file format. Please upload PDF, DOC, DOCX, PPT, or PPTX.`);
       setFile(null);
       return false;
     }
 
     if (selectedFile.size > MAX_FILE_SIZE_BYTES) {
       const sizeMB = (selectedFile.size / (1024 * 1024)).toFixed(1);
-      setFileError(`File size (${sizeMB}MB) exceeds maximum limit of 50MB.`);
+      setFileError(`File size (${sizeMB}MB) exceeds 50MB limit.`);
       setFile(null);
       return false;
     }
@@ -80,7 +67,6 @@ export default function UploadForm() {
     return true;
   };
 
-  // Drag and Drop Handlers
   const handleDrag = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -95,13 +81,11 @@ export default function UploadForm() {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       validateAndSetFile(e.dataTransfer.files[0]);
     }
   };
 
-  // Reset Form for Uploading Another Resource
   const handleResetForm = () => {
     setProgram("");
     setCourse("");
@@ -116,95 +100,92 @@ export default function UploadForm() {
     setUploadedResource(null);
   };
 
-  // Form Validation Check
   const isFormValid = Boolean(
-    program &&
-    course &&
-    semester &&
-    subject &&
-    title.trim() &&
-    resourceType &&
-    file &&
-    !fileError
+    program && course && semester && subject && title.trim() &&
+    resourceType && file && !fileError
   );
 
-  // Success Screen
+  // Success screen
   if (uploadedResource) {
     return (
-      <div className="flex flex-col items-center justify-center p-8 sm:p-12 text-center space-y-6 animate-in fade-in duration-300">
-        <div className="h-16 w-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shadow-inner">
-          <CheckCircle2 className="h-8 w-8 text-emerald-400" />
+      <div className="flex flex-col items-center justify-center p-8 text-center space-y-5">
+        <div className="h-12 w-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20
+                        flex items-center justify-center text-emerald-400">
+          <CheckCircle2 className="h-6 w-6" />
         </div>
 
-        <div className="space-y-2">
-          <span className="text-xs font-mono uppercase font-bold tracking-widest text-indigo-400">
-            Upload Successful
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+        <div className="space-y-1.5">
+          <span className="label-mono text-emerald-400">Upload Successful</span>
+          <h2 className="text-xl font-extrabold text-white tracking-tight">
             Resource Shared with Community!
           </h2>
-          <p className="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-            &quot;<span className="font-bold text-white">{uploadedResource.title}</span>&quot; has been processed and is now live in the repository.
+          <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
+            &ldquo;<span className="text-white font-semibold">{uploadedResource.title}</span>&rdquo; is now live.
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md pt-4">
+        <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-sm pt-2">
           <Link href={`/resources/${uploadedResource.id}`} className="w-full">
-            <Button className="w-full h-12 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 hover:from-indigo-500 hover:to-purple-500 text-white rounded-full font-extrabold text-xs uppercase tracking-wider gap-2 shadow-lg shadow-indigo-500/25 border border-indigo-400/30">
-              <ExternalLink className="h-4 w-4" />
-              View Uploaded Resource
-            </Button>
+            <button className="w-full h-10 bg-gradient-to-r from-indigo-600 to-purple-600
+                              text-white rounded-full font-bold text-xs
+                              shadow-md shadow-indigo-500/20 border border-indigo-400/20
+                              flex items-center justify-center gap-2">
+              <ExternalLink className="h-3.5 w-3.5" />
+              View Resource
+            </button>
           </Link>
-          <Button
-            variant="outline"
+          <button
             onClick={handleResetForm}
-            className="w-full h-12 border-white/10 bg-[#161A29] hover:bg-[#1E2235] text-slate-200 rounded-full font-extrabold text-xs uppercase tracking-wider gap-2 cursor-pointer transition-colors"
+            className="w-full h-10 glass border border-white/[0.08] text-slate-300
+                       rounded-full font-semibold text-xs flex items-center justify-center gap-2
+                       hover:text-white hover:bg-[#161B2E] transition-colors cursor-pointer"
           >
-            <RotateCcw className="h-4 w-4 text-indigo-400" />
-            Upload Another Resource
-          </Button>
+            <RotateCcw className="h-3.5 w-3.5 text-indigo-400" />
+            Upload Another
+          </button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      {/* Authentication Alert if user is not logged in */}
+    <div className="space-y-5">
+      {/* Auth warning */}
       {!isAuthenticated && (
-        <div className="flex items-center justify-between gap-4 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-200 text-xs font-semibold backdrop-blur-md">
-          <div className="flex items-center gap-2.5">
+        <div className="flex items-center justify-between gap-3 p-3 rounded-xl
+                        bg-amber-500/8 border border-amber-500/20 text-amber-300 text-xs">
+          <div className="flex items-center gap-2">
             <AlertCircle className="h-4 w-4 text-amber-400 shrink-0" />
-            <span>You must be logged in to share study resources.</span>
+            <span>You must be logged in to upload resources.</span>
           </div>
-          <Link href="/login">
-            <Button size="sm" variant="outline" className="h-8 rounded-full border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-200 font-bold gap-1 text-[11px] cursor-pointer">
-              <LogIn className="h-3.5 w-3.5 text-amber-300" />
-              Log In
-            </Button>
+          <Link href="/login" className="glass px-3 py-1 rounded-md border border-amber-500/20
+                                         text-amber-200 font-semibold hover:bg-amber-500/10
+                                         transition-colors flex items-center gap-1">
+            <LogIn className="h-3 w-3" />
+            Log In
           </Link>
         </div>
       )}
 
-      {/* Submit Error Banner */}
+      {/* Submit error */}
       {submitError && (
-        <div className="flex items-center justify-between gap-3 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-200 text-xs font-semibold backdrop-blur-md">
+        <div className="flex items-center justify-between gap-3 p-3 rounded-xl
+                        bg-rose-500/8 border border-rose-500/20 text-rose-300 text-xs">
           <div className="flex items-center gap-2">
             <AlertCircle className="h-4 w-4 text-rose-400 shrink-0" />
             <span>{submitError}</span>
           </div>
           <button
             onClick={() => setSubmitError(null)}
-            className="text-rose-400 hover:text-white p-1 cursor-pointer transition-colors"
-            aria-label="Dismiss error"
+            className="text-rose-400 hover:text-white p-0.5 transition-colors cursor-pointer"
           >
-            <X className="h-4 w-4" />
+            <X className="h-3.5 w-3.5" />
           </button>
         </div>
       )}
 
       <form
-        className="space-y-6"
+        className="space-y-4"
         onSubmit={async (e) => {
           e.preventDefault();
           if (!file || !isFormValid || uploading) return;
@@ -220,15 +201,10 @@ export default function UploadForm() {
             formData.append("program", program);
             formData.append("course", course);
             formData.append("resourceType", resourceType);
-
-            if (description.trim()) {
-              formData.append("description", description.trim());
-            }
-
+            if (description.trim()) formData.append("description", description.trim());
             formData.append("file", file);
 
             const result = await uploadResource(formData);
-
             if (result.success && result.data) {
               setUploadedResource(result.data);
             } else {
@@ -236,17 +212,16 @@ export default function UploadForm() {
             }
           } catch (error: any) {
             console.error("Upload Error:", error);
-            const message = error?.message || "Failed to upload resource. Please check network connection and try again.";
-            setSubmitError(message);
+            setSubmitError(error?.message || "Upload failed. Please try again.");
           } finally {
             setUploading(false);
           }
         }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Program Selection */}
+        {/* Programme & Course */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <FormSelect
-            label="Program"
+            label="Programme"
             value={program}
             onChange={(e) => {
               setProgram(e.target.value);
@@ -254,7 +229,7 @@ export default function UploadForm() {
               setSemester("");
               setSubject("");
             }}
-            placeholder="Select Program"
+            placeholder="Select Programme"
             disabled={uploading}
             required
           >
@@ -265,7 +240,6 @@ export default function UploadForm() {
             ))}
           </FormSelect>
 
-          {/* Course Selection */}
           <FormSelect
             label="Course / Branch"
             value={course}
@@ -275,7 +249,7 @@ export default function UploadForm() {
               setSubject("");
             }}
             disabled={!program || uploading}
-            placeholder={program ? "Select Course" : "Select Program First"}
+            placeholder={program ? "Select Course" : "Select Programme First"}
             required
           >
             {(coursesByProgram[program] || []).map((courseName) => (
@@ -286,8 +260,8 @@ export default function UploadForm() {
           </FormSelect>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Semester Selection */}
+        {/* Semester & Subject */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <FormSelect
             label="Semester"
             value={semester}
@@ -306,7 +280,6 @@ export default function UploadForm() {
             ))}
           </FormSelect>
 
-          {/* Subject Selection */}
           <FormSelect
             label="Subject"
             value={subject}
@@ -323,7 +296,7 @@ export default function UploadForm() {
           </FormSelect>
         </div>
 
-        {/* Resource Title */}
+        {/* Title */}
         <FormInput
           label="Resource Title"
           type="text"
@@ -334,18 +307,22 @@ export default function UploadForm() {
           required
         />
 
-        {/* Description Textarea */}
-        <div className="w-full space-y-2">
-          <label className="block text-xs font-mono font-extrabold uppercase tracking-[0.12em] text-slate-300">
-            Description <span className="text-slate-500 text-[10px] font-normal lowercase">(optional)</span>
+        {/* Description */}
+        <div className="space-y-1.5">
+          <label className="block label-mono text-slate-400">
+            Description <span className="text-slate-600">(optional)</span>
           </label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             disabled={uploading}
-            placeholder="Write a short description about topics covered in this file..."
+            placeholder="Brief description of topics covered…"
             rows={3}
-            className="w-full bg-[#161A29] text-slate-100 placeholder:text-slate-500 border border-white/10 rounded-2xl px-5 py-3.5 text-sm transition-all duration-300 focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 resize-none disabled:opacity-40"
+            className="w-full bg-[#111525] text-white placeholder:text-slate-500
+                       border border-white/[0.08] rounded-xl px-4 py-3 text-xs
+                       transition-all duration-150 resize-none outline-none
+                       focus:border-indigo-500/40 focus:ring-2 focus:ring-indigo-500/15
+                       disabled:opacity-40"
           />
         </div>
 
@@ -358,16 +335,16 @@ export default function UploadForm() {
           placeholder="Select Resource Format"
           required
         >
-          <option value="Notes" className="bg-[#0F121E] text-slate-100">Notes (Classroom & Handwritten)</option>
-          <option value="PYQ" className="bg-[#0F121E] text-slate-100">Previous Year Question Paper (PYQ)</option>
-          <option value="Lab Manual" className="bg-[#0F121E] text-slate-100">Lab Manual & Code Reference</option>
-          <option value="Study Material" className="bg-[#0F121E] text-slate-100">Study Guide & Syllabus Roadmap</option>
+          <option value="Notes">Notes (Classroom &amp; Handwritten)</option>
+          <option value="PYQ">Previous Year Question Paper (PYQ)</option>
+          <option value="Lab Manual">Lab Manual &amp; Code Reference</option>
+          <option value="Study Material">Study Guide &amp; Syllabus Roadmap</option>
         </FormSelect>
 
-        {/* Drag and Drop File Upload Area */}
-        <div className="w-full space-y-2">
-          <label className="block text-xs font-mono font-extrabold uppercase tracking-[0.12em] text-slate-300">
-            Upload Document File <span className="text-indigo-400 ml-0.5">*</span>
+        {/* File upload */}
+        <div className="space-y-1.5">
+          <label className="block label-mono text-slate-400">
+            Upload Document File <span className="text-indigo-400">*</span>
           </label>
 
           <div
@@ -375,13 +352,14 @@ export default function UploadForm() {
             onDragLeave={handleDrag}
             onDragOver={handleDrag}
             onDrop={handleDrop}
-            className={`relative flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-3xl transition-all duration-300 cursor-pointer overflow-hidden ${
-              dragActive
-                ? "border-indigo-500 bg-indigo-500/10 shadow-lg shadow-indigo-500/10"
-                : fileError
-                ? "border-rose-500/50 bg-rose-500/10"
-                : "border-white/10 bg-[#161A29]/50 hover:bg-[#161A29] hover:border-indigo-500/40"
-            }`}
+            className={`relative flex flex-col items-center justify-center w-full h-40
+                        border-2 border-dashed rounded-2xl transition-all duration-200 cursor-pointer
+                        ${dragActive
+                          ? "border-indigo-500/60 bg-indigo-500/5"
+                          : fileError
+                          ? "border-rose-500/40 bg-rose-500/5"
+                          : "border-white/[0.08] bg-[#111525]/50 hover:bg-[#111525] hover:border-indigo-500/30"
+                        }`}
           >
             <input
               type="file"
@@ -392,30 +370,34 @@ export default function UploadForm() {
                 }
               }}
               disabled={uploading}
-              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed z-10"
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed"
               required
             />
-            <div className="flex flex-col items-center justify-center text-center px-4 pointer-events-none">
+            <div className="flex flex-col items-center text-center px-4 pointer-events-none">
               {file ? (
                 <>
-                  <div className="h-12 w-12 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-2 shadow-inner">
-                    <FileCheck className="h-6 w-6" />
+                  <div className="h-10 w-10 rounded-2xl bg-indigo-500/10 border border-indigo-500/20
+                                  flex items-center justify-center text-indigo-400 mb-2">
+                    <FileCheck className="h-5 w-5" />
                   </div>
-                  <p className="text-sm font-extrabold text-white mb-1 truncate max-w-xs">{file.name}</p>
-                  <p className="text-xs text-slate-400 font-mono">
-                    {(file.size / (1024 * 1024)).toFixed(2)} MB • Click or drag to replace
+                  <p className="text-sm font-semibold text-white mb-0.5 truncate max-w-xs">
+                    {file.name}
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    {(file.size / (1024 * 1024)).toFixed(2)} MB • Click to replace
                   </p>
                 </>
               ) : (
                 <>
-                  <div className="h-12 w-12 rounded-full bg-[#161A29] border border-white/10 flex items-center justify-center text-indigo-400 mb-2 shadow-md">
-                    <UploadCloud className="h-6 w-6 text-indigo-400" />
+                  <div className="h-10 w-10 rounded-2xl bg-[#111525] border border-white/[0.08]
+                                  flex items-center justify-center text-indigo-400 mb-2">
+                    <UploadCloud className="h-5 w-5" />
                   </div>
-                  <p className="text-sm font-extrabold text-white mb-1">
+                  <p className="text-sm font-semibold text-white mb-0.5">
                     Click to browse or drag file here
                   </p>
-                  <p className="text-xs text-slate-400">
-                    Supports PDF, DOC, DOCX, PPT, PPTX (Up to 50MB)
+                  <p className="text-xs text-slate-500">
+                    PDF, DOC, DOCX, PPT, PPTX (Up to 50MB)
                   </p>
                 </>
               )}
@@ -423,32 +405,37 @@ export default function UploadForm() {
           </div>
 
           {fileError && (
-            <p className="text-xs font-semibold text-rose-400 mt-1 flex items-center gap-1">
-              <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+            <p className="text-xs text-rose-400 flex items-center gap-1">
+              <AlertCircle className="h-3 w-3 shrink-0" />
               {fileError}
             </p>
           )}
         </div>
 
-        {/* Submit Button */}
-        <Button
+        {/* Submit */}
+        <button
           type="submit"
           disabled={!isFormValid || uploading || !isAuthenticated}
-          aria-label="Submit and Share Resource"
-          className="w-full h-14 flex items-center justify-center gap-2.5 mt-8 bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 hover:from-indigo-500 hover:via-purple-500 hover:to-indigo-400 disabled:opacity-40 text-white rounded-full px-8 text-xs font-extrabold uppercase tracking-wider transition-all duration-300 shadow-lg shadow-indigo-500/25 border border-indigo-400/30 cursor-pointer disabled:cursor-not-allowed hover:scale-[1.01] active:scale-[0.99]"
+          className="w-full h-12 flex items-center justify-center gap-2
+                     bg-gradient-to-r from-indigo-600 to-purple-600
+                     hover:from-indigo-500 hover:to-purple-500
+                     disabled:opacity-40 text-white rounded-full text-xs font-bold
+                     transition-all duration-200 shadow-md shadow-indigo-500/20
+                     border border-indigo-400/20 cursor-pointer disabled:cursor-not-allowed
+                     hover:scale-[1.01] active:scale-[0.99]"
         >
           {uploading ? (
             <>
-              <Loader2 className="h-4.5 w-4.5 animate-spin" />
-              Uploading & Processing File...
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Uploading & Processing…
             </>
           ) : (
             <>
-              <Send className="h-4.5 w-4.5" />
-              Submit & Share Resource
+              <Send className="h-4 w-4" />
+              Submit &amp; Share Resource
             </>
           )}
-        </Button>
+        </button>
       </form>
     </div>
   );

@@ -6,48 +6,30 @@ interface ResourceStatsProps {
   rating: number;
 }
 
-export default function ResourceStats({
-  downloads,
-  pages,
-  rating,
-}: ResourceStatsProps) {
+export default function ResourceStats({ downloads, pages, rating }: ResourceStatsProps) {
+  const stats = [
+    { icon: Download, label: "Downloads", value: downloads, color: "text-indigo-400" },
+    { icon: FileText, label: "Pages",     value: pages,     color: "text-purple-400" },
+    { icon: Star,     label: "Rating",    value: rating,    color: "text-amber-400"  },
+  ];
+
   return (
-    <section className="pt-6 border-t border-white/10 space-y-3">
-      <h2 className="text-[11px] font-mono font-extrabold uppercase tracking-[0.15em] text-indigo-400">
-        Resource Analytics
-      </h2>
-
-      <div className="grid grid-cols-3 gap-3">
-        <div className="rounded-2xl border border-white/10 bg-[#161A29]/60 backdrop-blur-sm p-3.5 text-center flex flex-col items-center justify-center transition-all duration-300 hover:border-indigo-500/30 hover:bg-[#161A29]/90">
-          <Download className="h-4 w-4 text-indigo-400 mb-1" />
-          <h3 className="text-base font-extrabold text-white tracking-tight">
-            {downloads}
-          </h3>
-          <p className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider mt-0.5">
-            Downloads
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-white/10 bg-[#161A29]/60 backdrop-blur-sm p-3.5 text-center flex flex-col items-center justify-center transition-all duration-300 hover:border-purple-500/30 hover:bg-[#161A29]/90">
-          <FileText className="h-4 w-4 text-purple-400 mb-1" />
-          <h3 className="text-base font-extrabold text-white tracking-tight">
-            {pages}
-          </h3>
-          <p className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider mt-0.5">
-            Pages
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-white/10 bg-[#161A29]/60 backdrop-blur-sm p-3.5 text-center flex flex-col items-center justify-center transition-all duration-300 hover:border-amber-500/30 hover:bg-[#161A29]/90">
-          <Star className="h-4 w-4 text-amber-400 fill-amber-400/20 mb-1" />
-          <h3 className="text-base font-extrabold text-white tracking-tight">
-            {rating}
-          </h3>
-          <p className="text-[10px] font-mono font-semibold text-slate-400 uppercase tracking-wider mt-0.5">
-            Rating
-          </p>
-        </div>
+    <div className="pt-4 border-t border-white/[0.06] space-y-2.5">
+      <h2 className="label-mono text-indigo-400">Resource Analytics</h2>
+      <div className="grid grid-cols-3 gap-2">
+        {stats.map(({ icon: Icon, label, value, color }) => (
+          <div
+            key={label}
+            className="rounded-xl border border-white/[0.07] bg-[#111525]/60 p-3
+                       text-center flex flex-col items-center
+                       hover:border-indigo-500/20 transition-colors duration-150"
+          >
+            <Icon className={`h-3.5 w-3.5 ${color} mb-1`} />
+            <span className="text-sm font-bold text-white tracking-tight">{value}</span>
+            <span className="label-mono text-slate-600 mt-0.5">{label}</span>
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }

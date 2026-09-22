@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Code, Cpu, Wrench, Briefcase, GraduationCap, ArrowRight } from "lucide-react";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 interface ProgramCardProps {
@@ -11,68 +10,81 @@ interface ProgramCardProps {
 }
 
 function ProgramCard({ course, program, slug, resourceCount = "0 resources" }: ProgramCardProps) {
-  const getCourseConfig = (slug: string) => {
-    switch (slug) {
-      case "computer-science":
-        return {
-          icon: Code,
-          iconBg: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
-        };
-      case "electronics-comm":
-        return {
-          icon: Cpu,
-          iconBg: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-        };
-      case "mechanical-engg":
-        return {
-          icon: Wrench,
-          iconBg: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
-        };
-      case "business-admin":
-        return {
-          icon: Briefcase,
-          iconBg: "bg-amber-500/10 text-amber-400 border-amber-500/20",
-        };
-      default:
-        return {
-          icon: GraduationCap,
-          iconBg: "bg-slate-500/10 text-slate-300 border-slate-500/20",
-        };
-    }
+  const configs: Record<string, { icon: typeof Code; iconColor: string; iconBg: string; accentColor: string }> = {
+    "computer-science": {
+      icon: Code,
+      iconColor: "text-indigo-400",
+      iconBg: "bg-indigo-500/10 border-indigo-500/20",
+      accentColor: "text-indigo-400",
+    },
+    "electronics-comm": {
+      icon: Cpu,
+      iconColor: "text-purple-400",
+      iconBg: "bg-purple-500/10 border-purple-500/20",
+      accentColor: "text-purple-400",
+    },
+    "mechanical-engg": {
+      icon: Wrench,
+      iconColor: "text-cyan-400",
+      iconBg: "bg-cyan-500/10 border-cyan-500/20",
+      accentColor: "text-cyan-400",
+    },
+    "business-admin": {
+      icon: Briefcase,
+      iconColor: "text-amber-400",
+      iconBg: "bg-amber-500/10 border-amber-500/20",
+      accentColor: "text-amber-400",
+    },
   };
 
-  const config = getCourseConfig(slug);
-  const Icon = config.icon;
+  const cfg = configs[slug] ?? {
+    icon: GraduationCap,
+    iconColor: "text-slate-400",
+    iconBg: "bg-slate-500/10 border-slate-500/20",
+    accentColor: "text-slate-400",
+  };
+  const Icon = cfg.icon;
 
   return (
-    <Link href={`/programs/${slug}`} className="group block h-full">
-      <Card className="relative flex flex-col justify-between h-full min-h-[190px] bg-[#0F121E]/80 backdrop-blur-md border border-white/10 rounded-[28px] p-6 shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo-500/40 hover:shadow-indigo-950/40">
-        <div className="space-y-3.5">
+    <Link href={`/programs/${slug}`} className="group block">
+      <div className="glass-light rounded-2xl p-5 card-hover h-full
+                      flex flex-col justify-between min-h-[155px]">
+        {/* Top */}
+        <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <div className={`h-11 w-11 rounded-2xl border ${config.iconBg} flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform duration-300`}>
-              <Icon className="h-5 w-5" />
+            <div className={`h-10 w-10 rounded-xl border ${cfg.iconBg}
+                             flex items-center justify-center ${cfg.iconColor}
+                             group-hover:scale-110 transition-transform duration-200 shrink-0`}>
+              <Icon className="h-4.5 w-4.5" />
             </div>
-            <Badge variant="outline" className="text-[10px] uppercase font-mono font-bold tracking-[0.15em] text-slate-400 border-white/10 bg-[#161A29]">
+            <Badge
+              variant="outline"
+              className="label-mono text-slate-500 border-white/[0.08] bg-[#111525] px-2 py-0.5"
+            >
               {program}
             </Badge>
           </div>
 
-          <div>
-            <h3 className="text-xl font-bold text-white tracking-tight leading-snug group-hover:text-indigo-300 transition-colors duration-300">
-              {course}
-            </h3>
-          </div>
+          <h3 className="text-sm font-bold text-white tracking-tight leading-snug
+                          group-hover:text-indigo-300 transition-colors duration-200">
+            {course}
+          </h3>
         </div>
 
-        <div className="mt-6 pt-3.5 border-t border-white/10 flex items-center justify-between">
-          <span className="text-xs font-semibold text-slate-400 group-hover:text-slate-200 transition-colors">
+        {/* Bottom */}
+        <div className="mt-4 pt-3 border-t border-white/[0.06]
+                        flex items-center justify-between">
+          <span className="text-xs text-slate-500 group-hover:text-slate-300
+                           transition-colors duration-200">
             {resourceCount}
           </span>
-          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-400 group-hover:translate-x-1 transition-transform duration-300">
-            Browse <ArrowRight className="h-3.5 w-3.5" />
+          <span className={`inline-flex items-center gap-1 text-xs font-semibold
+                            ${cfg.accentColor}
+                            group-hover:translate-x-0.5 transition-transform duration-200`}>
+            Browse <ArrowRight className="h-3 w-3" />
           </span>
         </div>
-      </Card>
+      </div>
     </Link>
   );
 }

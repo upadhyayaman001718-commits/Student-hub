@@ -11,13 +11,26 @@ interface SearchBarProps {
 export default function SearchBar({
   value,
   onChange,
-  placeholder = "Search study resources, notes, subjects, PYQs...",
+  placeholder = "Search notes, PYQs, subjects, lab manuals…",
 }: SearchBarProps) {
   return (
-    <div className="relative w-full max-w-[720px] mx-auto group">
+    <div className="relative w-full max-w-2xl mx-auto group">
+      {/* Glow halo on focus */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 rounded-full opacity-0 group-focus-within:opacity-100
+                   bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10
+                   blur-xl transition-opacity duration-300 pointer-events-none scale-110"
+      />
+
       <div className="relative flex items-center w-full">
-        <span className="absolute left-6 text-slate-400 group-focus-within:text-indigo-400 transition-colors duration-300 pointer-events-none">
-          <Search className="h-5 w-5" />
+        {/* Search icon */}
+        <span
+          className="absolute left-5 pointer-events-none
+                     text-slate-500 group-focus-within:text-indigo-400
+                     transition-colors duration-200"
+        >
+          <Search className="h-4.5 w-4.5" />
         </span>
 
         <input
@@ -25,22 +38,36 @@ export default function SearchBar({
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full h-15 bg-[#0F121E]/90 backdrop-blur-xl border border-white/10 text-white placeholder:text-slate-400/70 pl-15 pr-24 rounded-full focus:outline-none focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/20 transition-all duration-300 shadow-xl shadow-indigo-950/20 text-base font-medium"
+          aria-label="Search resources"
+          className="w-full h-13 glass text-white placeholder:text-slate-500
+                     pl-12 pr-28 rounded-full
+                     focus:outline-none focus:border-indigo-500/40
+                     focus:ring-2 focus:ring-indigo-500/20
+                     transition-all duration-200
+                     text-sm font-medium tracking-tight"
         />
 
-        <div className="absolute right-5 flex items-center gap-2">
+        {/* Right side: clear or kbd hint */}
+        <div className="absolute right-4 flex items-center gap-2">
           {value ? (
             <button
               type="button"
               onClick={() => onChange("")}
-              className="p-1.5 text-slate-400 hover:text-white rounded-full hover:bg-white/10 transition-colors duration-200 cursor-pointer"
+              className="p-1 rounded-full text-slate-500 hover:text-white
+                         hover:bg-white/8 transition-colors duration-150 cursor-pointer"
               aria-label="Clear search"
             >
-              <X className="h-4 w-4" />
+              <X className="h-3.5 w-3.5" />
             </button>
           ) : (
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/10 bg-[#161A29] text-[11px] font-mono font-semibold text-slate-300">
-              <Sparkles className="h-3 w-3 text-indigo-400" /> ⌘K Search
+            <span
+              className="hidden sm:inline-flex items-center gap-1.5
+                         px-2.5 py-1 rounded-md
+                         bg-[#111525] border border-white/8
+                         label-mono text-slate-500"
+            >
+              <Sparkles className="h-2.5 w-2.5 text-indigo-400/70" />
+              ⌘K
             </span>
           )}
         </div>
@@ -48,5 +75,3 @@ export default function SearchBar({
     </div>
   );
 }
-
-

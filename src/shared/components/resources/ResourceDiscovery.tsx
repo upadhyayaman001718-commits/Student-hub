@@ -6,7 +6,7 @@ import ResourceSearch from "./ResourceSearch";
 import ResourceFilters from "./ResourceFilters";
 import ResourceList from "./ResourceList";
 import EmptyState from "@/shared/components/programs/EmptyState";
-import { Sparkles, Layers } from "lucide-react";
+import { Layers } from "lucide-react";
 
 interface ResourceDiscoveryProps {
   resources: Resource[];
@@ -14,103 +14,63 @@ interface ResourceDiscoveryProps {
   description?: string;
 }
 
-export default function ResourceDiscovery({
-  resources = [],
-  title = "Resource Discovery",
-  description = "Search, filter, and explore all verified academic study materials across programs and semesters.",
-}: ResourceDiscoveryProps) {
-  // Client state for search and active filters
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
+export default function ResourceDiscovery({ resources = [] }: ResourceDiscoveryProps) {
+  const [searchQuery, setSearchQuery]       = useState("");
+  const [selectedProgram, setSelectedProgram]   = useState<string | null>(null);
   const [selectedSemester, setSelectedSemester] = useState<number | null>(null);
-  const [selectedType, setSelectedType] = useState<string | null>(null);
-  const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
+  const [selectedType, setSelectedType]         = useState<string | null>(null);
+  const [selectedSubject, setSelectedSubject]   = useState<string | null>(null);
 
-  // Dynamically extract filter options from available resources
   const availablePrograms = useMemo(() => {
-    const set = new Set<string>();
-    resources.forEach((r) => {
-      if (r.program) set.add(r.program);
-    });
-    return Array.from(set).sort();
+    const s = new Set<string>();
+    resources.forEach((r) => { if (r.program) s.add(r.program); });
+    return Array.from(s).sort();
   }, [resources]);
 
   const availableSemesters = useMemo(() => {
-    const set = new Set<number>();
-    resources.forEach((r) => {
-      if (r.semester) set.add(r.semester);
-    });
-    return Array.from(set).sort((a, b) => a - b);
+    const s = new Set<number>();
+    resources.forEach((r) => { if (r.semester) s.add(r.semester); });
+    return Array.from(s).sort((a, b) => a - b);
   }, [resources]);
 
   const availableTypes = useMemo(() => {
-    const set = new Set<string>();
-    resources.forEach((r) => {
-      const typeVal = r.resourceType || r.type;
-      if (typeVal) set.add(typeVal);
-    });
-    return Array.from(set).sort();
+    const s = new Set<string>();
+    resources.forEach((r) => { const t = r.resourceType || r.type; if (t) s.add(t); });
+    return Array.from(s).sort();
   }, [resources]);
 
   const availableSubjects = useMemo(() => {
-    const set = new Set<string>();
-    resources.forEach((r) => {
-      if (r.subject) set.add(r.subject);
-    });
-    return Array.from(set).sort();
+    const s = new Set<string>();
+    resources.forEach((r) => { if (r.subject) s.add(r.subject); });
+    return Array.from(s).sort();
   }, [resources]);
 
-  // Combined client-side search and filtering logic
   const filteredResources = useMemo(() => {
-    const query = searchQuery.trim().toLowerCase();
-
-    return resources.filter((resource) => {
-      // 1. Search Query Check across title, subject, course, program, resourceType/type
-      if (query) {
-        const matchesTitle = resource.title?.toLowerCase().includes(query) ?? false;
-        const matchesSubject = resource.subject?.toLowerCase().includes(query) ?? false;
-        const matchesCourse = resource.course?.toLowerCase().includes(query) ?? false;
-        const matchesProgram = resource.program?.toLowerCase().includes(query) ?? false;
-        const resType = (resource.resourceType || resource.type || "").toLowerCase();
-        const matchesType = resType.includes(query);
-
-        if (!matchesTitle && !matchesSubject && !matchesCourse && !matchesProgram && !matchesType) {
-          return false;
-        }
+    const q = searchQuery.trim().toLowerCase();
+    return resources.filter((r) => {
+      if (q) {
+        const resType = (r.resourceType || r.type || "").toLowerCase();
+        const hits =
+          r.title?.toLowerCase().includes(q) ||
+          r.subject?.toLowerCase().includes(q) ||
+          r.course?.toLowerCase().includes(q) ||
+          r.program?.toLowerCase().includes(q) ||
+          resType.includes(q);
+        if (!hits) return false;
       }
-
-      // 2. Program Filter Check
-      if (selectedProgram !== null && resource.program !== selectedProgram) {
-        return false;
-      }
-
-      // 3. Semester Filter Check
-      if (selectedSemester !== null && resource.semester !== selectedSemester) {
-        return false;
-      }
-
-      // 4. Resource Type Filter Check
-      if (selectedType !== null) {
-        const resType = resource.resourceType || resource.type;
-        if (resType !== selectedType) {
-          return false;
-        }
-      }
-
-      // 5. Subject Filter Check
-      if (selectedSubject !== null && resource.subject !== selectedSubject) {
-        return false;
-      }
-
+      if (selectedProgram  !== null && r.program !== selectedProgram)          return false;
+      if (selectedSemester !== null && r.semester !== selectedSemester)        return false;
+      if (selectedType     !== null && (r.resourceType || r.type) !== selectedType) return false;
+      if (selectedSubject  !== null && r.subject !== selectedSubject)          return false;
       return true;
     });
   }, [resources, searchQuery, selectedProgram, selectedSemester, selectedType, selectedSubject]);
 
   const activeFilterCount =
-    (selectedProgram ? 1 : 0) +
+    (selectedProgram  ? 1 : 0) +
     (selectedSemester !== null ? 1 : 0) +
-    (selectedType ? 1 : 0) +
-    (selectedSubject ? 1 : 0);
+    (selectedType     ? 1 : 0) +
+    (selectedSubject  ? 1 : 0);
 
   const handleResetFilters = () => {
     setSearchQuery("");
@@ -124,7 +84,7 @@ export default function ResourceDiscovery({
     return (
       <EmptyState
         title="No resources available"
-        description="There are currently no resources available in the library. Be the first to upload study material!"
+        description="There are currently no resources in the library. Be the first to upload study material!"
         actionLabel="Upload Resource"
         actionHref="/upload"
       />
@@ -132,19 +92,17 @@ export default function ResourceDiscovery({
   }
 
   return (
-    <section className="w-full space-y-8">
-      {/* Search Header */}
-      <div className="space-y-4 text-center max-w-3xl mx-auto">
-        <ResourceSearch
-          value={searchQuery}
-          onChange={setSearchQuery}
-          totalResults={filteredResources.length}
-        />
-      </div>
+    <section className="w-full space-y-6">
+      {/* Search bar */}
+      <ResourceSearch
+        value={searchQuery}
+        onChange={setSearchQuery}
+        totalResults={filteredResources.length}
+      />
 
-      {/* Main Layout: Filters Sidebar + Results Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-        {/* Left Column: Filters */}
+      {/* Layout: Filters + Results */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 items-start">
+        {/* Filters sidebar */}
         <div className="lg:col-span-1">
           <ResourceFilters
             selectedProgram={selectedProgram}
@@ -164,17 +122,21 @@ export default function ResourceDiscovery({
           />
         </div>
 
-        {/* Right Column: Resource Listing */}
-        <div className="lg:col-span-3 space-y-6 w-full">
-          {/* Active Filter Summary / Status */}
-          <div className="flex items-center justify-between px-2">
-            <div className="flex items-center gap-2 text-sm font-extrabold text-white">
-              <Layers className="h-4 w-4 text-indigo-400" />
-              Showing {filteredResources.length} of {resources.length} resources
+        {/* Results */}
+        <div className="lg:col-span-3 space-y-4">
+          {/* Status bar */}
+          <div className="flex items-center justify-between px-1">
+            <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
+              <Layers className="h-3.5 w-3.5 text-indigo-400" />
+              Showing{" "}
+              <span className="text-white font-bold">{filteredResources.length}</span>
+              {" "}of{" "}
+              <span className="text-white font-bold">{resources.length}</span>
+              {" "}resources
             </div>
             {activeFilterCount > 0 && (
-              <span className="text-xs font-mono font-extrabold text-indigo-400">
-                {activeFilterCount} {activeFilterCount === 1 ? "filter" : "filters"} applied
+              <span className="label-mono text-indigo-400">
+                {activeFilterCount} {activeFilterCount === 1 ? "filter" : "filters"} active
               </span>
             )}
           </div>
@@ -183,8 +145,8 @@ export default function ResourceDiscovery({
             <ResourceList resources={filteredResources} />
           ) : (
             <EmptyState
-              title="No matching resources found"
-              description="No study materials match your active search and filter criteria. Try adjusting keywords or clearing applied filters."
+              title="No matching resources"
+              description="No study materials match your search and filter criteria. Try adjusting keywords or clearing filters."
               onReset={handleResetFilters}
               actionLabel="Upload Material"
               actionHref="/upload"

@@ -3,17 +3,13 @@ interface AuthHeaderProps {
   subtitle: string;
 }
 
-export default function AuthHeader({
-  title,
-  subtitle,
-}: AuthHeaderProps) {
+export default function AuthHeader({ title, subtitle }: AuthHeaderProps) {
   return (
-    <div className="mb-8 space-y-2 text-center">
-      <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-snug">
+    <div className="mb-6 space-y-1.5 text-center">
+      <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-snug">
         {title}
       </h1>
-
-      <p className="text-xs sm:text-sm leading-relaxed text-slate-400 font-normal max-w-xs mx-auto">
+      <p className="text-xs text-slate-500 leading-relaxed max-w-xs mx-auto">
         {subtitle}
       </p>
     </div>

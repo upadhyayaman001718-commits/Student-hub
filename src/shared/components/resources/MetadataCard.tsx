@@ -6,23 +6,17 @@ interface MetadataCardProps {
   value: string;
 }
 
-export default function MetadataCard({
-  icon: Icon,
-  label,
-  value,
-}: MetadataCardProps) {
+export default function MetadataCard({ icon: Icon, label, value }: MetadataCardProps) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-[#161A29]/80 backdrop-blur-sm p-3.5 transition-all duration-300 hover:border-indigo-500/40 hover:bg-[#1E2235]/90 hover:shadow-lg hover:shadow-indigo-500/10 group">
-      <div className="flex items-center gap-1.5 text-indigo-400">
-        <Icon className="h-3.5 w-3.5 text-indigo-400 shrink-0 group-hover:scale-110 transition-transform" />
-        <span className="text-[10px] font-mono font-extrabold uppercase tracking-[0.12em] text-slate-400 truncate">
-          {label}
-        </span>
+    <div className="rounded-xl border border-white/[0.07] bg-[#111525]/80 p-3
+                    hover:border-indigo-500/25 hover:bg-[#161B2E]/80
+                    transition-all duration-150 group">
+      <div className="flex items-center gap-1.5 mb-1">
+        <Icon className="h-3 w-3 text-indigo-400 shrink-0
+                         group-hover:scale-110 transition-transform duration-150" />
+        <span className="label-mono text-slate-500 truncate">{label}</span>
       </div>
-
-      <p className="mt-1.5 font-extrabold text-white text-xs sm:text-sm truncate tracking-tight" title={value}>
-        {value}
-      </p>
+      <p className="text-xs font-semibold text-white truncate" title={value}>{value}</p>
     </div>
   );
 }

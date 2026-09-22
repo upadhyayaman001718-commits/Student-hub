@@ -23,18 +23,15 @@ export default function CourseResourcesClient({
   programName,
   resources,
 }: CourseResourcesClientProps) {
-  // States for search and filter controls
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery]       = useState("");
   const [selectedSemester, setSelectedSemester] = useState<number | null>(null);
-  const [selectedType, setSelectedType] = useState<"Notes" | "PYQ" | "Lab Manual" | null>(null);
+  const [selectedType, setSelectedType]     = useState<"Notes" | "PYQ" | "Lab Manual" | null>(null);
 
-  // Filter backend resources by comparing resource.course against actual course name (programObj.course / courseName) or slug
   const courseResources = resources.filter((resource) => {
     if (!resource.course) return false;
-    const resCourse = resource.course.trim().toLowerCase();
+    const resCourse   = resource.course.trim().toLowerCase();
     const targetCourse = courseName.trim().toLowerCase();
-    const targetSlug = slug.trim().toLowerCase();
-
+    const targetSlug  = slug.trim().toLowerCase();
     return (
       resCourse === targetCourse ||
       resCourse === targetSlug ||
@@ -43,13 +40,14 @@ export default function CourseResourcesClient({
     );
   });
 
-  // Apply stateful search/filter constraints on course resources
   const filteredResources = courseResources.filter((resource) => {
     const matchesSearch = searchQuery
       ? resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         resource.subject.toLowerCase().includes(searchQuery.toLowerCase())
       : true;
-    const matchesSemester = selectedSemester !== null ? resource.semester === selectedSemester : true;
+    const matchesSemester = selectedSemester !== null
+      ? resource.semester === selectedSemester
+      : true;
     const matchesType = selectedType !== null
       ? (resource.resourceType === selectedType || resource.type === selectedType)
       : true;
@@ -57,22 +55,23 @@ export default function CourseResourcesClient({
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#07080D] text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-300 relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] glow-mesh opacity-50 pointer-events-none -z-0" />
-      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none -z-0" />
+    <div className="min-h-screen flex flex-col bg-[#080A12] text-slate-100
+                    selection:bg-indigo-500/25 selection:text-indigo-200 relative overflow-hidden">
+      <div aria-hidden="true" className="fixed inset-0 bg-grid pointer-events-none -z-10" />
+      <div aria-hidden="true" className="fixed top-0 inset-x-0 h-[400px] glow-mesh pointer-events-none -z-10" />
 
       <Navbar />
 
-      <main className="flex-grow max-w-[1280px] mx-auto px-6 sm:px-10 lg:px-12 py-10 sm:py-16 w-full relative z-10">
+      <main className="flex-grow max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8
+                       py-10 sm:py-14 w-full relative z-10">
         <CourseHeader
           courseName={courseName}
           programName={programName}
           resourceCount={courseResources.length}
         />
 
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
-          {/* Left panel: Filters */}
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-4 gap-5 items-start">
+          {/* Filters */}
           <div className="lg:col-span-1">
             <FilterBar
               selectedSemester={selectedSemester}
@@ -82,8 +81,8 @@ export default function CourseResourcesClient({
             />
           </div>
 
-          {/* Right panel: Search and Grid */}
-          <div className="lg:col-span-3 space-y-8 w-full">
+          {/* Search + Grid */}
+          <div className="lg:col-span-3 space-y-5 w-full">
             <SearchBar value={searchQuery} onChange={setSearchQuery} />
 
             {filteredResources.length > 0 ? (
@@ -91,7 +90,7 @@ export default function CourseResourcesClient({
             ) : (
               <EmptyState
                 title="No resources match filters"
-                description="Try clearing your search keyword, selecting a different semester, or adjusting your filter controls."
+                description="Try clearing your search, selecting a different semester, or adjusting your filters."
                 onReset={() => {
                   setSearchQuery("");
                   setSelectedSemester(null);
@@ -109,4 +108,3 @@ export default function CourseResourcesClient({
     </div>
   );
 }
-

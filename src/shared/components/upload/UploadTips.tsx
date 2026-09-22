@@ -1,72 +1,72 @@
 "use client";
 
 import { CheckCircle2, AlertTriangle, Info, HelpCircle } from "lucide-react";
-import { Card } from "@/components/ui/card";
 
 export default function UploadTips() {
   const tips = [
     {
       title: "Legibility Matters",
-      description: "Ensure notes and manuals are clearly scanned and readable for other students.",
+      description: "Ensure notes and manuals are clearly scanned and readable.",
       icon: Info,
-      color: "text-indigo-400 bg-indigo-500/10 border-indigo-500/20",
+      color: "text-indigo-400 bg-indigo-500/8 border-indigo-500/20",
     },
     {
-      title: "Allowed File Formats",
-      description: "We accept PDF, DOC, DOCX, PPT, and PPTX formats up to 50MB.",
+      title: "Allowed Formats",
+      description: "PDF, DOC, DOCX, PPT, PPTX — up to 50MB per file.",
       icon: CheckCircle2,
-      color: "text-purple-400 bg-purple-500/10 border-purple-500/20",
+      color: "text-emerald-400 bg-emerald-500/8 border-emerald-500/20",
     },
     {
       title: "Copyright Rules",
-      description: "Do not upload commercial textbooks or copyrighted content without authorization.",
+      description: "Do not upload commercial textbooks or copyrighted content without authorisation.",
       icon: AlertTriangle,
-      color: "text-amber-400 bg-amber-500/10 border-amber-500/20",
+      color: "text-amber-400 bg-amber-500/8 border-amber-500/20",
     },
   ];
 
   return (
-    <Card className="bg-[#0F121E]/80 border border-white/10 backdrop-blur-xl rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+    <div className="glass-light rounded-2xl p-5 sm:p-6 space-y-5 border border-white/[0.07]">
+      {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="h-10 w-10 rounded-full bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shadow-inner">
-          <HelpCircle className="h-5 w-5" />
+        <div className="h-9 w-9 rounded-xl bg-indigo-500/8 border border-indigo-500/20
+                        flex items-center justify-center text-indigo-400 shrink-0">
+          <HelpCircle className="h-4.5 w-4.5" />
         </div>
         <div>
-          <h3 className="text-lg font-extrabold text-white tracking-tight">Upload Guidelines</h3>
-          <p className="text-xs text-slate-400 font-medium">Keep these in mind before submitting</p>
+          <h3 className="text-sm font-bold text-white">Upload Guidelines</h3>
+          <p className="text-xs text-slate-500">Keep these in mind before submitting</p>
         </div>
       </div>
 
-      <div className="space-y-4">
+      {/* Tips */}
+      <div className="space-y-3">
         {tips.map((tip, i) => {
           const Icon = tip.icon;
           return (
             <div
               key={i}
-              className="flex gap-4 p-4.5 rounded-2xl bg-[#161A29]/80 border border-white/10 hover:border-indigo-500/40 hover:bg-[#1E2235]/90 transition-all duration-300 group"
+              className={`flex gap-3 p-3.5 rounded-xl border ${tip.color}
+                          hover:border-opacity-50 transition-colors duration-150`}
             >
-              <div className={`h-9 w-9 rounded-full flex items-center justify-center shrink-0 border ${tip.color}`}>
-                <Icon className="h-4.5 w-4.5" />
+              <div className={`h-8 w-8 rounded-lg flex items-center justify-center shrink-0
+                               border ${tip.color}`}>
+                <Icon className="h-3.5 w-3.5" />
               </div>
-              <div className="space-y-1">
-                <h4 className="text-sm font-extrabold text-white group-hover:text-indigo-400 transition-colors duration-200">
-                  {tip.title}
-                </h4>
-                <p className="text-xs text-slate-400 leading-relaxed font-normal">
-                  {tip.description}
-                </p>
+              <div className="space-y-0.5">
+                <h4 className="text-xs font-bold text-white">{tip.title}</h4>
+                <p className="text-xs text-slate-500 leading-relaxed">{tip.description}</p>
               </div>
             </div>
           );
         })}
       </div>
 
-      <div className="rounded-2xl bg-[#161A29]/60 border border-white/10 p-4 text-center">
-        <p className="text-xs text-slate-400 font-medium leading-relaxed">
-          Uploaded resources will be reviewed by administrators to ensure community quality standards.
+      {/* Note */}
+      <div className="rounded-xl bg-[#111525]/60 border border-white/[0.06] px-4 py-3 text-center">
+        <p className="text-xs text-slate-500 leading-relaxed">
+          Uploaded resources are reviewed by administrators to ensure quality standards.
         </p>
       </div>
-    </Card>
+    </div>
   );
 }
-

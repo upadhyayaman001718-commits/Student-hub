@@ -1,7 +1,6 @@
 "use client";
 
 import { Minus, Plus, RefreshCw, Download, Maximize } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 interface PDFToolbarProps {
   zoom: number;
@@ -20,74 +19,48 @@ export default function PDFToolbar({
   onDownload,
   onFullscreen,
 }: PDFToolbarProps) {
-  return (
-    <div className="h-14 border-b border-white/10 bg-[#0F121E]/90 backdrop-blur-md flex items-center justify-between px-4 text-slate-200">
+  const iconBtn = `h-7 w-7 flex items-center justify-center rounded-lg
+                   text-slate-400 hover:text-white hover:bg-white/8
+                   transition-colors duration-150 cursor-pointer`;
 
+  return (
+    <div className="h-11 border-b border-white/[0.06] bg-[#0C0F1C]/90 backdrop-blur-md
+                    flex items-center justify-between px-4">
       {/* Zoom controls */}
       <div className="flex items-center gap-1.5">
-        <Button
-          variant="ghost"
-          size="icon"
+        <button
           onClick={onZoomOut}
           disabled={zoom <= 50}
-          className="h-8 w-8 rounded-full hover:bg-indigo-500/10 hover:text-indigo-400 text-slate-300 disabled:opacity-30 cursor-pointer"
+          className={iconBtn + " disabled:opacity-30 disabled:cursor-not-allowed"}
           aria-label="Zoom out"
         >
-          <Minus className="h-4 w-4" />
-        </Button>
-
-        <span className="text-xs font-mono font-extrabold text-indigo-400 bg-[#161A29] px-3 py-1 rounded-full border border-white/10 min-w-[60px] text-center shadow-inner">
+          <Minus className="h-3.5 w-3.5" />
+        </button>
+        <span className="label-mono text-indigo-400 bg-[#111525] px-2.5 py-0.5 rounded-md
+                         border border-white/[0.07] min-w-[52px] text-center">
           {zoom}%
         </span>
-
-        <Button
-          variant="ghost"
-          size="icon"
+        <button
           onClick={onZoomIn}
           disabled={zoom >= 200}
-          className="h-8 w-8 rounded-full hover:bg-indigo-500/10 hover:text-indigo-400 text-slate-300 disabled:opacity-30 cursor-pointer"
+          className={iconBtn + " disabled:opacity-30 disabled:cursor-not-allowed"}
           aria-label="Zoom in"
         >
-          <Plus className="h-4 w-4" />
-        </Button>
+          <Plus className="h-3.5 w-3.5" />
+        </button>
       </div>
 
       {/* Action controls */}
       <div className="flex items-center gap-1">
-
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onRefresh}
-          className="h-8 w-8 rounded-full hover:bg-indigo-500/10 hover:text-indigo-400 text-slate-300 transition-colors cursor-pointer"
-          aria-label="Reload preview"
-          title="Reload preview"
-        >
-          <RefreshCw className="h-4 w-4" />
-        </Button>
-
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onDownload}
-          className="h-8 w-8 rounded-full hover:bg-indigo-500/10 hover:text-indigo-400 text-slate-300 transition-colors cursor-pointer"
-          aria-label="Open original file"
-          title="Open original file"
-        >
-          <Download className="h-4 w-4" />
-        </Button>
-
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onFullscreen}
-          className="h-8 w-8 rounded-full hover:bg-indigo-500/10 hover:text-indigo-400 text-slate-300 transition-colors cursor-pointer"
-          aria-label="Toggle Fullscreen"
-          title="Toggle Fullscreen"
-        >
-          <Maximize className="h-4 w-4" />
-        </Button>
-
+        <button onClick={onRefresh}    className={iconBtn} aria-label="Reload preview"    title="Reload">
+          <RefreshCw className="h-3.5 w-3.5" />
+        </button>
+        <button onClick={onDownload}   className={iconBtn} aria-label="Open file"         title="Download">
+          <Download  className="h-3.5 w-3.5" />
+        </button>
+        <button onClick={onFullscreen} className={iconBtn} aria-label="Toggle fullscreen" title="Fullscreen">
+          <Maximize  className="h-3.5 w-3.5" />
+        </button>
       </div>
     </div>
   );
