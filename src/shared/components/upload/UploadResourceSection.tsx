@@ -5,23 +5,23 @@ import { Upload, ArrowRight } from "lucide-react";
 
 export default function UploadResourceSection() {
   return (
-    <section className="relative overflow-hidden my-10 md:my-12
-                        glass-light rounded-2xl p-6 sm:p-8 md:p-10
-                        border border-white/[0.07] shadow-xl">
+    <div className="relative overflow-hidden
+                    glass-light rounded-2xl p-8 sm:p-10 md:p-12
+                    border border-white/[0.07] shadow-xl">
       {/* Glow accent */}
       <div
         aria-hidden="true"
-        className="absolute -right-16 -top-16 w-80 h-80
+        className="absolute -right-16 -top-16 w-72 h-72
                    bg-gradient-to-tr from-indigo-600/15 to-purple-600/10
                    rounded-full blur-3xl pointer-events-none"
       />
 
       <div className="relative z-10 flex flex-col md:flex-row md:items-center
-                      justify-between gap-6">
+                      justify-between gap-8">
         {/* Copy */}
-        <div className="space-y-2 max-w-xl">
+        <div className="space-y-3 max-w-xl">
           <p className="section-label">Community Knowledge</p>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-snug">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-snug">
             Have something useful to share?{" "}
             <span className="text-gradient-vivid">
               Help a classmate today.
@@ -36,7 +36,7 @@ export default function UploadResourceSection() {
         {/* CTA */}
         <Link
           href="/upload"
-          className="shrink-0 inline-flex items-center gap-2.5 h-12 px-7
+          className="shrink-0 inline-flex items-center gap-2.5 h-12 px-8
                      bg-gradient-to-r from-indigo-600 to-purple-600
                      hover:from-indigo-500 hover:to-purple-500
                      text-white font-bold text-sm rounded-full
@@ -48,6 +48,6 @@ export default function UploadResourceSection() {
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </div>
-    </section>
+    </div>
   );
 }

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Resource } from "@/shared/data/resources";
 import Navbar from "@/shared/components/layout/Navbar";
 import Footer from "@/shared/components/layout/Footer";
+import Container from "@/shared/components/layout/Container";
 import CourseHeader from "@/shared/components/programs/CourseHeader";
 import SearchBar from "@/shared/components/navigation/SearchBar";
 import FilterBar from "@/shared/components/navigation/FilterBar";
@@ -29,9 +30,9 @@ export default function CourseResourcesClient({
 
   const courseResources = resources.filter((resource) => {
     if (!resource.course) return false;
-    const resCourse   = resource.course.trim().toLowerCase();
+    const resCourse    = resource.course.trim().toLowerCase();
     const targetCourse = courseName.trim().toLowerCase();
-    const targetSlug  = slug.trim().toLowerCase();
+    const targetSlug   = slug.trim().toLowerCase();
     return (
       resCourse === targetCourse ||
       resCourse === targetSlug ||
@@ -46,8 +47,7 @@ export default function CourseResourcesClient({
         resource.subject.toLowerCase().includes(searchQuery.toLowerCase())
       : true;
     const matchesSemester = selectedSemester !== null
-      ? resource.semester === selectedSemester
-      : true;
+      ? resource.semester === selectedSemester : true;
     const matchesType = selectedType !== null
       ? (resource.resourceType === selectedType || resource.type === selectedType)
       : true;
@@ -55,53 +55,54 @@ export default function CourseResourcesClient({
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#080A12] text-slate-100
-                    selection:bg-indigo-500/25 selection:text-indigo-200 relative overflow-hidden">
+    <div className="flex flex-col bg-[#080A12] text-slate-100
+                    selection:bg-indigo-500/25 selection:text-indigo-200">
       <div aria-hidden="true" className="fixed inset-0 bg-grid pointer-events-none -z-10" />
       <div aria-hidden="true" className="fixed top-0 inset-x-0 h-[400px] glow-mesh pointer-events-none -z-10" />
 
       <Navbar />
 
-      <main className="flex-grow max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8
-                       py-10 sm:py-14 w-full relative z-10">
-        <CourseHeader
-          courseName={courseName}
-          programName={programName}
-          resourceCount={courseResources.length}
-        />
+      <main className="flex-1 py-12 md:py-16">
+        <Container>
+          <CourseHeader
+            courseName={courseName}
+            programName={programName}
+            resourceCount={courseResources.length}
+          />
 
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-4 gap-5 items-start">
-          {/* Filters */}
-          <div className="lg:col-span-1">
-            <FilterBar
-              selectedSemester={selectedSemester}
-              onSemesterChange={setSelectedSemester}
-              selectedType={selectedType}
-              onTypeChange={setSelectedType}
-            />
-          </div>
-
-          {/* Search + Grid */}
-          <div className="lg:col-span-3 space-y-5 w-full">
-            <SearchBar value={searchQuery} onChange={setSearchQuery} />
-
-            {filteredResources.length > 0 ? (
-              <ResourceGrid resources={filteredResources} />
-            ) : (
-              <EmptyState
-                title="No resources match filters"
-                description="Try clearing your search, selecting a different semester, or adjusting your filters."
-                onReset={() => {
-                  setSearchQuery("");
-                  setSelectedSemester(null);
-                  setSelectedType(null);
-                }}
-                actionLabel="Upload a Resource"
-                actionHref="/upload"
+          <div className="mt-10 grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
+            {/* Filters */}
+            <div className="lg:col-span-1">
+              <FilterBar
+                selectedSemester={selectedSemester}
+                onSemesterChange={setSelectedSemester}
+                selectedType={selectedType}
+                onTypeChange={setSelectedType}
               />
-            )}
+            </div>
+
+            {/* Search + Grid */}
+            <div className="lg:col-span-3 space-y-6">
+              <SearchBar value={searchQuery} onChange={setSearchQuery} />
+
+              {filteredResources.length > 0 ? (
+                <ResourceGrid resources={filteredResources} />
+              ) : (
+                <EmptyState
+                  title="No resources match filters"
+                  description="Try clearing your search, selecting a different semester, or adjusting your filters."
+                  onReset={() => {
+                    setSearchQuery("");
+                    setSelectedSemester(null);
+                    setSelectedType(null);
+                  }}
+                  actionLabel="Upload a Resource"
+                  actionHref="/upload"
+                />
+              )}
+            </div>
           </div>
-        </div>
+        </Container>
       </main>
 
       <Footer />
